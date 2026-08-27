@@ -243,7 +243,11 @@
   .badge{background:none;border:1px solid var(--line);color:#fff;letter-spacing:.06em}
 
   /* 分頁：選中只用紅框紅字＋左側紅條 */
-  .tabs{gap:1px}
+  .tabs{gap:8px}
+  .tabs button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px}
+  .emb{width:62px;height:62px;object-fit:contain;filter:drop-shadow(0 3px 10px rgba(0,0,0,.7));
+    transition:.2s;opacity:.62}
+  .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 14px rgba(255,59,36,.45))}
   .tabs button{border:1px solid var(--line);background:rgba(8,8,9,.8);letter-spacing:.14em;font-size:12px}
   .tabs button.on{background:rgba(255,59,36,.07) !important;color:var(--gold) !important;
     border-color:var(--gold) !important;box-shadow:inset 3px 0 0 var(--gold) !important;font-weight:700}
@@ -337,8 +341,8 @@
 <div class="imgnote" id="imgNote"></div>
 
 <div class="tabs">
-  <button class="on" data-mode="star" id="tabStar"></button>
-  <button data-mode="lp" id="tabLp"></button>
+  <button class="on" data-mode="star"><img class="emb" src="emblem-ranked.png" alt=""><span id="tabStar"></span></button>
+  <button data-mode="lp"><img class="emb" src="emblem-legend.png" alt=""><span id="tabLp"></span></button>
 </div>
 
 <div class="stats">
