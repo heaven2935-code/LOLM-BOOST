@@ -30,7 +30,7 @@
 <style>
   :root{
     color-scheme:dark;
-    --bg:transparent; --card:rgba(16,16,16,.62); --card-2:rgba(20,20,20,.70); --field:rgba(26,26,26,.72);
+    --bg:transparent; --card:rgba(14,14,14,.50); --card-2:rgba(18,18,18,.58); --field:rgba(24,24,24,.62);
     --line:#262626; --line-2:#1E1E1E;
     --text:#F2F0EC; --text-2:#B8B3AA; --muted:#7A756C;
     --gold:#C9A46B; --gold-lite:#E4C894; --gold-dim:#6B5836;
@@ -42,7 +42,7 @@
     background-image:var(--pagebg,none);background-size:cover;background-position:center top;
     opacity:var(--bgop,.38)}
   body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(10,10,10,.25),rgba(10,10,10,.45) 45%,rgba(10,10,10,.66))}
+    background:linear-gradient(180deg,rgba(10,10,10,.10),rgba(10,10,10,.30) 45%,rgba(10,10,10,.52))}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
   .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
@@ -70,13 +70,13 @@
      font-size:27px;line-height:1.06;letter-spacing:.03em;color:var(--text)}
   .quote{color:var(--text-2);font-size:12px;margin-top:8px;letter-spacing:.03em}
 
-  .imgbar{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
+  .imgbar{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
   .imgbar .pick{display:block;border:1px dashed var(--line);border-radius:10px;background:var(--card);
     padding:11px 10px;cursor:pointer;font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:11.5px;letter-spacing:.06em;color:var(--muted);text-align:center;transition:.16s}
   .imgbar .pick:active{border-color:var(--gold-dim);color:var(--gold-lite)}
   .imgbar input{display:none}
-  .imgnote{font-size:10.5px;color:var(--muted);margin:0 0 14px;line-height:1.6}
+  .imgnote{display:none;font-size:10.5px;color:var(--muted);margin:0 0 14px;line-height:1.6}
 
   .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
   .tabs button{padding:12px 6px;font-size:12.5px;font-family:"Oswald","Noto Sans TC",sans-serif;
@@ -86,7 +86,7 @@
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 8px;
-    text-align:center;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    text-align:center;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
   .stat .k{font-family:"Oswald",sans-serif;font-size:9.5px;letter-spacing:.14em;
     color:var(--muted);text-transform:uppercase;margin-bottom:8px}
   .stat .v{font-family:"Oswald",sans-serif;font-size:22px;font-weight:600;color:var(--text);line-height:1}
@@ -95,7 +95,7 @@
   .stat.hero-stat .v{color:var(--gold-lite);font-size:24px}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;
-    margin-bottom:10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    margin-bottom:10px;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
   .card-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .card-head h2{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:13px;
     font-weight:600;letter-spacing:.12em;color:var(--text)}
@@ -139,7 +139,7 @@
 
   .quote-card{background:linear-gradient(165deg,rgba(24,20,16,.92),rgba(24,24,24,.9));
     border:1px solid var(--gold-dim);border-radius:14px;padding:17px 16px;margin-bottom:10px;
-    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
   .qlabel{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
   .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite)}
   .money .cur{font-family:"Oswald",sans-serif;font-size:14px;color:var(--gold);opacity:.85}
@@ -162,7 +162,7 @@
   .actions button:active{transform:translateY(1px)}
 
   details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px;
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
   summary{cursor:pointer;color:var(--text-2);font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:12.5px;padding:14px 0;list-style:none;display:flex;align-items:center;letter-spacing:.12em}
   summary::-webkit-details-marker{display:none}
@@ -176,12 +176,12 @@
 
   .strip{display:flex;align-items:center;gap:9px;margin-top:12px;padding:14px 15px;
     background:var(--card);border:1px solid var(--line);border-radius:14px;
-    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
     font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--text-2)}
   .strip .crown{color:var(--gold)}
   .strip .end{margin-left:auto;color:var(--gold-lite)}
   .seo{margin-top:22px;padding:18px 16px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--muted);font-size:12px;line-height:1.85}
+    border-radius:14px;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:var(--muted);font-size:12px;line-height:1.85}
   .seo h2{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:14px;color:var(--text);
     margin:0 0 10px;letter-spacing:.08em}
   .seo h3{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;color:var(--gold);
@@ -354,7 +354,7 @@
 const LOGO_URL = '';
 const HERO_URL = 'cover.jpg';
 /* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
-const BG_OPACITY = 0.85;
+const BG_OPACITY = 1;
 /* 要不要顯示「更換標誌／更換封面圖」那兩顆按鈕：改成 true 就會出現 */
 const SHOW_PICKER = false;
 
@@ -770,9 +770,9 @@ $('heroFile').addEventListener('change',e=>{
 });
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
-if(!SHOW_PICKER){
-  document.querySelector('.imgbar').hidden = true;
-  $('imgNote').hidden = true;
+if(SHOW_PICKER){
+  document.querySelector('.imgbar').style.display = 'grid';
+  $('imgNote').style.display = 'block';
 }
 if(HERO_URL){
   setHero(HERO_URL);
