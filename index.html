@@ -89,6 +89,7 @@
     text-shadow:0 0 16px rgba(255,75,69,.5),0 2px 10px rgba(0,0,0,.9)}
   @media (max-width:380px){
     .ctc .c1{font-size:16px} .ctc .c2{font-size:18px} .stamp{width:56px;height:56px}
+    .emb{width:104px;height:104px}
   }
   .quote{color:var(--text-2);font-size:12px;margin-top:8px;letter-spacing:.03em}
 
@@ -243,11 +244,21 @@
   .badge{background:none;border:1px solid var(--line);color:#fff;letter-spacing:.06em}
 
   /* 分頁：選中只用紅框紅字＋左側紅條 */
-  .tabs{gap:8px}
-  .tabs button{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 6px 12px}
-  .emb{width:62px;height:62px;object-fit:contain;filter:drop-shadow(0 3px 10px rgba(0,0,0,.7));
-    transition:.2s;opacity:.62}
-  .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 14px rgba(255,59,36,.45))}
+  /* 分頁橫幅：整條共用一張底圖 */
+  .tabs{gap:0;padding:0;border:1px solid var(--line);
+    background:linear-gradient(rgba(6,6,10,.42),rgba(6,6,10,.62)),
+      url("tabs-bg.jpg") center/cover no-repeat}
+  .tabs button{display:flex;flex-direction:column;align-items:center;gap:10px;
+    padding:20px 6px 16px;background:transparent !important;border:0 !important;
+    box-shadow:none !important;position:relative}
+  .tabs button:first-child::after{content:'';position:absolute;right:0;top:16%;bottom:16%;
+    width:1px;background:rgba(255,255,255,.14)}
+  .emb{width:124px;height:124px;object-fit:contain;transition:.22s;
+    opacity:.5;filter:grayscale(.5) drop-shadow(0 4px 12px rgba(0,0,0,.75))}
+  .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 16px rgba(255,59,36,.5));
+    transform:scale(1.06)}
+  .tabs button.on{color:#fff !important;font-weight:700}
+  .tabs button.on span{color:var(--gold)}
   .tabs button{border:1px solid var(--line);background:rgba(8,8,9,.8);letter-spacing:.14em;font-size:12px}
   .tabs button.on{background:rgba(255,59,36,.07) !important;color:var(--gold) !important;
     border-color:var(--gold) !important;box-shadow:inset 3px 0 0 var(--gold) !important;font-weight:700}
