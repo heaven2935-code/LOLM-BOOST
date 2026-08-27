@@ -30,8 +30,8 @@
 <style>
   :root{
     color-scheme:dark;
-    --bg:transparent; --card:rgba(14,14,14,.50); --card-2:rgba(18,18,18,.58); --field:rgba(24,24,24,.62);
-    --line:#262626; --line-2:#1E1E1E;
+    --bg:transparent; --card:rgba(9,9,11,.72); --card-2:rgba(14,14,16,.78); --field:rgba(20,20,22,.80);
+    --line:#3A3A3A; --line-2:#2A2A2A;
     --text:#F2F0EC; --text-2:#B8B3AA; --muted:#7A756C;
     --gold:#C9A46B; --gold-lite:#E4C894; --gold-dim:#6B5836;
   }
@@ -39,10 +39,10 @@
   html{background:#0A0A0A}
   body{margin:0;background:transparent}
   body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
-    background-image:var(--pagebg,none);background-size:cover;background-position:center top;
-    opacity:var(--bgop,.38)}
+    background-image:var(--pagebg,none);background-size:cover;background-position:center 12%;
+    background-attachment:scroll;opacity:var(--bgop,.38);filter:saturate(1.18) contrast(1.08)}
   body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(10,10,10,.10),rgba(10,10,10,.30) 45%,rgba(10,10,10,.52))}
+    background:linear-gradient(180deg,rgba(10,10,10,.06),rgba(10,10,10,.20) 45%,rgba(10,10,10,.40))}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
   .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
@@ -53,7 +53,7 @@
   .lang button.on{border-color:var(--gold-dim);background:#171208;color:var(--gold-lite)}
 
   .hero{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    margin-bottom:12px;background:#101010;min-height:210px;display:flex;align-items:flex-end}
+    margin-bottom:12px;background:#101010;min-height:300px;display:flex;align-items:flex-end}
   .hero .bg{position:absolute;inset:0;background-size:cover;background-position:72% 18%;
     opacity:.92;filter:saturate(1.05) contrast(1.02)}
   .hero .veil{position:absolute;inset:0;background:
@@ -86,7 +86,7 @@
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
   .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 8px;
-    text-align:center;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+    text-align:center;}
   .stat .k{font-family:"Oswald",sans-serif;font-size:9.5px;letter-spacing:.14em;
     color:var(--muted);text-transform:uppercase;margin-bottom:8px}
   .stat .v{font-family:"Oswald",sans-serif;font-size:22px;font-weight:600;color:var(--text);line-height:1}
@@ -95,7 +95,7 @@
   .stat.hero-stat .v{color:var(--gold-lite);font-size:24px}
 
   .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;
-    margin-bottom:10px;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+    margin-bottom:10px;}
   .card-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .card-head h2{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:13px;
     font-weight:600;letter-spacing:.12em;color:var(--text)}
@@ -139,7 +139,7 @@
 
   .quote-card{background:linear-gradient(165deg,rgba(24,20,16,.92),rgba(24,24,24,.9));
     border:1px solid var(--gold-dim);border-radius:14px;padding:17px 16px;margin-bottom:10px;
-    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+    }
   .qlabel{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
   .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite)}
   .money .cur{font-family:"Oswald",sans-serif;font-size:14px;color:var(--gold);opacity:.85}
@@ -161,8 +161,7 @@
     color:#171207;border-color:var(--gold-lite);font-weight:700}
   .actions button:active{transform:translateY(1px)}
 
-  details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px;
-    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+  details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px}
   summary{cursor:pointer;color:var(--text-2);font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:12.5px;padding:14px 0;list-style:none;display:flex;align-items:center;letter-spacing:.12em}
   summary::-webkit-details-marker{display:none}
@@ -176,12 +175,12 @@
 
   .strip{display:flex;align-items:center;gap:9px;margin-top:12px;padding:14px 15px;
     background:var(--card);border:1px solid var(--line);border-radius:14px;
-    backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);
+    
     font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--text-2)}
   .strip .crown{color:var(--gold)}
   .strip .end{margin-left:auto;color:var(--gold-lite)}
   .seo{margin-top:22px;padding:18px 16px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px);color:var(--muted);font-size:12px;line-height:1.85}
+    border-radius:14px;color:var(--muted);font-size:12px;line-height:1.85}
   .seo h2{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:14px;color:var(--text);
     margin:0 0 10px;letter-spacing:.08em}
   .seo h3{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;color:var(--gold);
