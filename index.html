@@ -14,7 +14,7 @@
 <meta property="og:title" content="LOLM 大雞雞代練｜激鬥峽谷上分計價">
 <meta property="og:description" content="輸入段位即時報價，黑鐵到至尊全段位、傳奇積分同步計價，單次滿額最高 8 折。">
 <meta property="og:url" content="https://heaven2935-code.github.io/LOLM-BOOST/">
-<meta property="og:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png">
+<meta property="og:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=5?v=5?v=5">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_TW">
@@ -22,26 +22,29 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="LOLM 大雞雞代練｜激鬥峽谷上分計價">
 <meta name="twitter:description" content="輸入段位即時報價，傳奇積分同步計價，單次滿額最高 8 折。">
-<meta name="twitter:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png">
-<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/og.png">
+<meta name="twitter:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=5?v=5?v=5">
+<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=5?v=5?v=5">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme:dark;
-    --bg:#0A0A0A; --card:#131313; --card-2:#181818; --field:#1C1C1C;
+    --bg:transparent; --card:rgba(19,19,19,.80); --card-2:rgba(24,24,24,.86); --field:rgba(28,28,28,.88);
     --line:#262626; --line-2:#1E1E1E;
     --text:#F2F0EC; --text-2:#B8B3AA; --muted:#7A756C;
     --gold:#C9A46B; --gold-lite:#E4C894; --gold-dim:#6B5836;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;background:#0A0A0A}
-  body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  html{background:#0A0A0A}
+  body{margin:0;background:transparent}
+  body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
     background-image:var(--pagebg,none);background-size:cover;background-position:center top;
-    opacity:.07;filter:grayscale(.2)}
+    opacity:var(--bgop,.38)}
+  body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+    background:linear-gradient(180deg,rgba(10,10,10,.55),rgba(10,10,10,.82) 45%,rgba(10,10,10,.95))}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
-  .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:var(--bg)}
+  .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
   .lang{display:flex;gap:6px;justify-content:flex-end;margin-bottom:12px}
   .lang button{padding:6px 12px;font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.12em;
@@ -82,7 +85,8 @@
   .tabs button.on{background:linear-gradient(160deg,#221C11,#151208);border-color:var(--gold-dim);color:var(--gold-lite)}
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 8px;text-align:center}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 8px;
+    text-align:center;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   .stat .k{font-family:"Oswald",sans-serif;font-size:9.5px;letter-spacing:.14em;
     color:var(--muted);text-transform:uppercase;margin-bottom:8px}
   .stat .v{font-family:"Oswald",sans-serif;font-size:22px;font-weight:600;color:var(--text);line-height:1}
@@ -90,7 +94,8 @@
   .stat.hero-stat{border-color:var(--gold-dim);background:linear-gradient(165deg,#181410,#131313)}
   .stat.hero-stat .v{color:var(--gold-lite);font-size:24px}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;margin-bottom:10px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;
+    margin-bottom:10px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   .card-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .card-head h2{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:13px;
     font-weight:600;letter-spacing:.12em;color:var(--text)}
@@ -132,8 +137,9 @@
   select:focus-visible,input:focus-visible,button:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
   .hint{font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em}
 
-  .quote-card{background:linear-gradient(165deg,#181410,var(--card-2));
-    border:1px solid var(--gold-dim);border-radius:14px;padding:17px 16px;margin-bottom:10px}
+  .quote-card{background:linear-gradient(165deg,rgba(24,20,16,.92),rgba(24,24,24,.9));
+    border:1px solid var(--gold-dim);border-radius:14px;padding:17px 16px;margin-bottom:10px;
+    backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
   .qlabel{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
   .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite)}
   .money .cur{font-family:"Oswald",sans-serif;font-size:14px;color:var(--gold);opacity:.85}
@@ -155,7 +161,8 @@
     color:#171207;border-color:var(--gold-lite);font-weight:700}
   .actions button:active{transform:translateY(1px)}
 
-  details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px}
+  details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
   summary{cursor:pointer;color:var(--text-2);font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:12.5px;padding:14px 0;list-style:none;display:flex;align-items:center;letter-spacing:.12em}
   summary::-webkit-details-marker{display:none}
@@ -169,11 +176,12 @@
 
   .strip{display:flex;align-items:center;gap:9px;margin-top:12px;padding:14px 15px;
     background:var(--card);border:1px solid var(--line);border-radius:14px;
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
     font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--text-2)}
   .strip .crown{color:var(--gold)}
   .strip .end{margin-left:auto;color:var(--gold-lite)}
   .seo{margin-top:22px;padding:18px 16px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;color:var(--muted);font-size:12px;line-height:1.85}
+    border-radius:14px;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--muted);font-size:12px;line-height:1.85}
   .seo h2{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:14px;color:var(--text);
     margin:0 0 10px;letter-spacing:.08em}
   .seo h3{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;color:var(--gold);
@@ -345,6 +353,8 @@
    再把檔名填進下面兩行，例如 'logo.png' / 'cover.jpg' ===== */
 const LOGO_URL = '';
 const HERO_URL = 'cover.jpg';
+/* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
+const BG_OPACITY = 0.38;
 
 const $ = id => document.getElementById(id);
 let lang = 'zh';
@@ -757,6 +767,7 @@ $('heroFile').addEventListener('change',e=>{
          document.documentElement.style.setProperty('--pagebg','url("'+u+'")'); }
 });
 if(LOGO_URL) setLogo(LOGO_URL);
+document.documentElement.style.setProperty('--bgop', BG_OPACITY);
 if(HERO_URL){
   setHero(HERO_URL);
   document.documentElement.style.setProperty('--pagebg','url("'+HERO_URL+'")');
