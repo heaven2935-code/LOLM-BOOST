@@ -257,11 +257,11 @@
     opacity:.5;filter:grayscale(.5) drop-shadow(0 4px 12px rgba(0,0,0,.75))}
   .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 16px rgba(255,59,36,.5));
     transform:scale(1.06)}
-  .tabs button.on{color:#fff !important;font-weight:700}
-  .tabs button.on span{color:var(--gold)}
   .tabs button{border:1px solid var(--line);background:rgba(8,8,9,.8);letter-spacing:.14em;font-size:12px}
-  .tabs button.on{background:transparent !important;color:var(--gold) !important;
-    border:0 !important;box-shadow:inset 0 -3px 0 var(--gold) !important;font-weight:700}
+  .tabs button{color:#fff !important;font-weight:700 !important;font-size:13.5px}
+  .tabs button.on{background:transparent !important;border:0 !important;
+    box-shadow:inset 0 -3px 0 var(--gold) !important}
+  .tabs button span{color:#fff !important;text-shadow:0 2px 8px rgba(0,0,0,.85)}
   .lang button.on{background:none;border-color:var(--gold);color:var(--gold)}
 
   /* 數值：白字為主，標籤紅字 */
@@ -352,8 +352,8 @@
 <div class="imgnote" id="imgNote"></div>
 
 <div class="tabs">
-  <button class="on" data-mode="star"><img class="emb" src="emblem-legend.png" alt=""><span id="tabStar"></span></button>
-  <button data-mode="lp"><img class="emb" src="emblem-ranked.png" alt=""><span id="tabLp"></span></button>
+  <button class="on" data-mode="star"><img class="emb" src="emblem-star.png" alt=""><span id="tabStar"></span></button>
+  <button data-mode="lp"><img class="emb" src="emblem-lp.png" alt=""><span id="tabLp"></span></button>
 </div>
 
 <div class="stats">
