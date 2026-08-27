@@ -4,74 +4,91 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="dark">
-<title>LOLM 大雞雞代練｜激鬥峽谷上分計價・即時報價</title>
+<title>激鬥峽谷 LOLM｜加賴帶你飛 0867473723#0000｜上分計價・即時報價</title>
 <meta name="description" content="LOLM 激鬥峽谷代練上分計價工具。輸入目前段位與目標段位，立即算出需打星數與價格；傳奇積分同步計價，單次滿額最高 8 折。支援繁體中文、English、Tiếng Việt。">
 <meta name="keywords" content="LOLM,激鬥峽谷,英雄聯盟手遊,代練,上分,陪打,陪玩,Wild Rift,傳奇積分,段位計價,報價">
 <link rel="canonical" href="https://heaven2935-code.github.io/LOLM-BOOST/">
 
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="LOLM 大雞雞代練">
-<meta property="og:title" content="LOLM 大雞雞代練｜激鬥峽谷上分計價">
+<meta property="og:site_name" content="激鬥峽谷 LOLM">
+<meta property="og:title" content="激鬥峽谷 LOLM｜加賴帶你飛 0867473723#0000">
 <meta property="og:description" content="輸入段位即時報價，黑鐵到至尊全段位、傳奇積分同步計價，單次滿額最高 8 折。">
 <meta property="og:url" content="https://heaven2935-code.github.io/LOLM-BOOST/">
-<meta property="og:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=8">
+<meta property="og:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=10">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="zh_TW">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LOLM 大雞雞代練｜激鬥峽谷上分計價">
+<meta name="twitter:title" content="激鬥峽谷 LOLM｜加賴帶你飛 0867473723#0000">
 <meta name="twitter:description" content="輸入段位即時報價，傳奇積分同步計價，單次滿額最高 8 折。">
-<meta name="twitter:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=8">
-<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=8">
+<meta name="twitter:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=10">
+<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=10">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
   :root{
     color-scheme:dark;
-    --bg:transparent; --card:rgba(9,9,11,.72); --card-2:rgba(14,14,16,.78); --field:rgba(20,20,22,.80);
-    --line:#3A3A3A; --line-2:#2A2A2A;
-    --text:#F2F0EC; --text-2:#B8B3AA; --muted:#7A756C;
-    --gold:#C9A46B; --gold-lite:#E4C894; --gold-dim:#6B5836;
+    --bg:transparent; --card:rgba(8,6,6,.76); --card-2:rgba(12,10,10,.82); --field:rgba(18,15,15,.84);
+    --line:#3A2E2E; --line-2:#261E1E;
+    --text:#F2EEEA; --text-2:#ABA5A2; --muted:#6E6764;
+    --gold:#E01F2D; --gold-lite:#FF4B45; --gold-dim:#5A1014;
   }
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html{background:#0A0A0A}
+  html{background:#070505}
   body{margin:0;background:transparent}
   body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
     background-image:var(--pagebg,none);background-size:cover;background-position:center 12%;
     background-attachment:scroll;opacity:var(--bgop,.38);filter:saturate(1.18) contrast(1.08)}
   body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(10,10,10,.06),rgba(10,10,10,.20) 45%,rgba(10,10,10,.40))}
+    background:linear-gradient(180deg,rgba(7,5,5,.06),rgba(7,5,5,.24) 45%,rgba(7,5,5,.48))}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
   .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
   .lang{display:flex;gap:6px;justify-content:flex-end;margin-bottom:12px}
   .lang button{padding:6px 12px;font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.12em;
-    border:1px solid var(--line);border-radius:999px;background:var(--card);
+    border:1px solid var(--line);border-radius:2px;background:rgba(9,9,11,.78);
     color:var(--muted);cursor:pointer;transition:.16s}
-  .lang button.on{border-color:var(--gold-dim);background:#171208;color:var(--gold-lite)}
+  .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .hero{position:relative;border:1px solid var(--line);border-radius:16px;overflow:hidden;
-    margin-bottom:12px;background:#101010;min-height:300px;display:flex;align-items:flex-end}
-  .hero .bg{position:absolute;inset:0;background-size:cover;background-position:72% 18%;
-    opacity:.92;filter:saturate(1.05) contrast(1.02)}
+  .hero{position:relative;border:0;border-radius:0;overflow:hidden;
+    margin-bottom:14px;background:transparent;min-height:340px;display:flex;align-items:flex-start}
+  .hero .bg{display:none}
   .hero .veil{position:absolute;inset:0;background:
-    linear-gradient(95deg,rgba(8,8,8,.97) 26%,rgba(8,8,8,.78) 52%,rgba(8,8,8,.28) 78%,rgba(8,8,8,.1)),
-    linear-gradient(0deg,rgba(8,8,8,.9),rgba(8,8,8,0) 55%)}
-  header{position:relative;z-index:2;display:flex;gap:13px;align-items:flex-start;padding:16px}
-  .mark{flex:0 0 auto;width:44px;height:44px;border:1px solid var(--gold-dim);border-radius:10px;
+    linear-gradient(180deg,rgba(8,8,8,.90),rgba(8,8,8,.42) 42%,rgba(8,8,8,0) 74%)}
+  header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
+  header{position:relative;z-index:2;display:block;padding:4px 2px 0}
+  .mark{flex:0 0 auto;width:44px;height:44px;border:1px solid var(--gold-dim);border-radius:3px;
     display:grid;place-items:center;color:var(--gold);font-family:"Oswald",sans-serif;
     font-size:19px;font-weight:700;background:linear-gradient(160deg,#1A160E,#101010);overflow:hidden}
   .mark img{width:100%;height:100%;object-fit:cover;display:block}
   .eyebrow{font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.3em;
     color:var(--gold);text-transform:uppercase;margin-bottom:4px}
   h1{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;
-     font-size:27px;line-height:1.06;letter-spacing:.03em;color:var(--text)}
+     font-size:36px;line-height:1.04;letter-spacing:.05em;color:var(--text);
+     transform:skewX(-9deg);transform-origin:left bottom;display:inline-block;
+     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 22px rgba(224,31,45,.45)}
+  h1 .bar{display:block;width:78px;height:3px;margin-top:9px;
+    background:linear-gradient(90deg,var(--gold),var(--gold-lite) 62%,transparent)}
+  h1 em{font-style:normal;color:var(--gold-lite);
+    text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
+  .brandbar{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:2px}
+  .stamp{width:64px;height:64px;flex:0 0 auto;border-radius:3px;
+    filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))}
+  .ctc{display:flex;align-items:baseline;gap:9px;white-space:nowrap;line-height:1.1;
+    font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;
+    transform:skewX(-9deg);text-shadow:0 2px 10px rgba(0,0,0,.9)}
+  .ctc .c1{font-size:19px;letter-spacing:.06em;color:var(--text)}
+  .ctc .c2{font-size:21px;letter-spacing:.01em;color:var(--gold-lite);
+    text-shadow:0 0 16px rgba(255,75,69,.5),0 2px 10px rgba(0,0,0,.9)}
+  @media (max-width:380px){
+    .ctc .c1{font-size:16px} .ctc .c2{font-size:18px} .stamp{width:56px;height:56px}
+  }
   .quote{color:var(--text-2);font-size:12px;margin-top:8px;letter-spacing:.03em}
 
   .imgbar{display:none;grid-template-columns:1fr 1fr;gap:9px;margin-bottom:10px}
-  .imgbar .pick{display:block;border:1px dashed var(--line);border-radius:10px;background:var(--card);
+  .imgbar .pick{display:block;border:1px dashed var(--line);border-radius:3px;background:var(--card);
     padding:11px 10px;cursor:pointer;font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:11.5px;letter-spacing:.06em;color:var(--muted);text-align:center;transition:.16s}
   .imgbar .pick:active{border-color:var(--gold-dim);color:var(--gold-lite)}
@@ -80,21 +97,23 @@
 
   .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
   .tabs button{padding:12px 6px;font-size:12.5px;font-family:"Oswald","Noto Sans TC",sans-serif;
-    letter-spacing:.08em;border:1px solid var(--line);border-radius:10px;
+    letter-spacing:.08em;border:1px solid var(--line);border-radius:3px;
     background:var(--card);color:var(--muted);cursor:pointer;transition:.18s}
-  .tabs button.on{background:linear-gradient(160deg,#221C11,#151208);border-color:var(--gold-dim);color:var(--gold-lite)}
+  .tabs button.on{background:rgba(224,31,45,.14);border-color:var(--gold);
+    color:var(--gold);box-shadow:inset 0 0 0 1px rgba(224,31,45,.35)}
 
   .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 8px;
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:12px 8px;
     text-align:center;}
   .stat .k{font-family:"Oswald",sans-serif;font-size:9.5px;letter-spacing:.14em;
     color:var(--muted);text-transform:uppercase;margin-bottom:8px}
   .stat .v{font-family:"Oswald",sans-serif;font-size:22px;font-weight:600;color:var(--text);line-height:1}
   .stat .v small{font-size:10.5px;color:var(--muted);margin-left:3px;font-weight:400}
-  .stat.hero-stat{border-color:var(--gold-dim);background:linear-gradient(165deg,#181410,#131313)}
-  .stat.hero-stat .v{color:var(--gold-lite);font-size:24px}
+  .stat.hero-stat{border-color:var(--gold);background:linear-gradient(165deg,rgba(30,8,10,.85),rgba(9,9,14,.85));
+    box-shadow:0 0 22px -10px var(--gold)}
+  .stat.hero-stat .v{color:var(--gold-lite);font-size:24px;text-shadow:0 0 18px rgba(255,75,69,.45)}
 
-  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;
+  .card{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:15px;
     margin-bottom:10px;}
   .card-head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
   .card-head h2{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:13px;
@@ -102,7 +121,7 @@
   .idx{font-family:"Oswald",sans-serif;font-size:10.5px;color:var(--gold);
     border:1px solid var(--gold-dim);border-radius:5px;padding:2px 7px;letter-spacing:.08em}
   .badge{margin-left:auto;font-family:"Oswald",sans-serif;font-size:12px;letter-spacing:.04em;
-    color:var(--gold-lite);background:#171208;border:1px solid var(--gold-dim);padding:4px 10px;border-radius:999px}
+    color:var(--gold-lite);background:#1A0A0A;border:1px solid var(--gold-dim);padding:4px 10px;border-radius:2px}
 
   .track-bar{display:flex;gap:2px;height:9px}
   .seg{position:relative;flex:0 0 auto;overflow:hidden;background:#202020;border-radius:2px}
@@ -112,7 +131,7 @@
     font-family:"Oswald",sans-serif;font-size:9px;letter-spacing:.06em;color:var(--muted)}
   .goal{margin-top:14px;padding-top:13px;border-top:1px solid var(--line-2)}
   .goal .bar{height:4px;background:#202020;border-radius:2px;overflow:hidden}
-  .goal .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold-dim),var(--gold-lite));transition:width .35s}
+  .goal .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-lite));transition:width .35s}
   .goal .t{font-size:10.5px;color:var(--muted);margin-top:8px;letter-spacing:.05em;
     font-family:"Oswald","Noto Sans TC",sans-serif}
 
@@ -124,9 +143,9 @@
     border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
     transform:translateY(-70%) rotate(45deg);pointer-events:none}
   select{width:100%;padding:13px 32px 13px 12px;font-size:16px;font-family:inherit;font-weight:500;
-    color:var(--text);background:var(--field);border:1px solid var(--line);border-radius:10px;appearance:none}
+    color:var(--text);background:var(--field);border:1px solid var(--line);border-radius:3px;appearance:none}
   select option{background:#151515;color:#F2F0EC}
-  .stepper{display:flex;align-items:center;background:var(--field);border:1px solid var(--line);border-radius:10px}
+  .stepper{display:flex;align-items:center;background:var(--field);border:1px solid var(--line);border-radius:3px}
   .stepper button{width:38px;height:46px;border:0;background:transparent;color:var(--gold);
     font-size:18px;font-family:"Oswald",sans-serif;cursor:pointer}
   .stepper button:active{background:#242424}
@@ -138,10 +157,11 @@
   .hint{font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em}
 
   .quote-card{background:linear-gradient(165deg,rgba(24,20,16,.92),rgba(24,24,24,.9));
-    border:1px solid var(--gold-dim);border-radius:14px;padding:17px 16px;margin-bottom:10px;
+    border:1px solid var(--gold-dim);border-radius:4px;padding:17px 16px;margin-bottom:10px;
     }
   .qlabel{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
-  .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite)}
+  .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite);
+    text-shadow:0 0 26px rgba(255,75,69,.40)}
   .money .cur{font-family:"Oswald",sans-serif;font-size:14px;color:var(--gold);opacity:.85}
   .money .val{font-family:"Oswald",sans-serif;font-size:46px;font-weight:700;line-height:.95}
   .breakdown,.discount{margin-top:13px;padding-top:11px;border-top:1px solid var(--line)}
@@ -154,14 +174,14 @@
   .brow .strike{color:var(--muted);text-decoration:line-through}
 
   .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-  .actions button{padding:13px;border-radius:10px;font-family:"Oswald","Noto Sans TC",sans-serif;
+  .actions button{padding:13px;border-radius:3px;font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:13px;letter-spacing:.08em;cursor:pointer;border:1px solid var(--line);
     background:var(--field);color:var(--text-2)}
-  .actions .primary{background:linear-gradient(160deg,var(--gold-lite),var(--gold));
-    color:#171207;border-color:var(--gold-lite);font-weight:700}
+  .actions .primary{background:var(--gold);
+    color:#180203;border-color:transparent;font-weight:700;letter-spacing:.14em}
   .actions button:active{transform:translateY(1px)}
 
-  details{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:0 15px}
+  details{border:1px solid var(--line);border-radius:4px;background:var(--card);padding:0 15px}
   summary{cursor:pointer;color:var(--text-2);font-family:"Oswald","Noto Sans TC",sans-serif;
     font-size:12.5px;padding:14px 0;list-style:none;display:flex;align-items:center;letter-spacing:.12em}
   summary::-webkit-details-marker{display:none}
@@ -174,13 +194,13 @@
     letter-spacing:.2em;padding-top:15px;border:0}
 
   .strip{display:flex;align-items:center;gap:9px;margin-top:12px;padding:14px 15px;
-    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    background:var(--card);border:1px solid var(--line);border-radius:4px;
     
     font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12px;letter-spacing:.06em;color:var(--text-2)}
   .strip .crown{color:var(--gold)}
   .strip .end{margin-left:auto;color:var(--gold-lite)}
   .seo{margin-top:22px;padding:18px 16px;background:var(--card);border:1px solid var(--line);
-    border-radius:14px;color:var(--muted);font-size:12px;line-height:1.85}
+    border-radius:4px;color:var(--muted);font-size:12px;line-height:1.85}
   .seo h2{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:14px;color:var(--text);
     margin:0 0 10px;letter-spacing:.08em}
   .seo h3{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;color:var(--gold);
@@ -189,6 +209,89 @@
   .seo strong{color:var(--text-2);font-weight:600}
   footer{margin-top:16px;text-align:center;color:var(--muted);
     font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.18em}
+
+  /* ===== 技術藍圖風 ===== */
+  :root{
+    --gold:#FF3B24; --gold-lite:#FF6A4D; --gold-dim:#5A1A10;
+    --text:#F2F3F4; --text-2:#B4B8BC; --muted:#6A6E74;
+    --line:#2A2C30; --line-2:#1C1E21;
+    --card:rgba(8,8,9,.78); --card-2:rgba(11,11,12,.84); --field:rgba(16,17,18,.86);
+  }
+  html{background:#050506}
+  *{border-radius:0 !important}
+
+  /* 細線角標 */
+  .card,.quote-card,.stat,details,.strip{position:relative}
+  .card::before,.card::after,.quote-card::before,.quote-card::after{
+    content:'';position:absolute;width:11px;height:11px;border:1.5px solid var(--gold);z-index:1}
+  .card::before,.quote-card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .card::after,.quote-card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+  /* 標題：白字 + 紅方塊，虛線分隔 */
+  .card-head{border-bottom:1px dashed var(--line);padding-bottom:10px}
+  .card-head h2{background:none !important;color:#fff !important;padding:0 !important;
+    font-size:13px;letter-spacing:.22em;font-weight:700}
+  .card-head h2::before{content:'';display:inline-block;width:9px;height:9px;
+    background:var(--gold);margin-right:10px;vertical-align:1px}
+  .card-head .idx{color:var(--gold);border:1px solid var(--gold-dim);background:none;
+    font-size:10px;letter-spacing:.14em}
+  .badge{background:none;border:1px solid var(--line);color:#fff;letter-spacing:.06em}
+
+  /* 分頁：選中只用紅框紅字＋左側紅條 */
+  .tabs{gap:1px}
+  .tabs button{border:1px solid var(--line);background:rgba(8,8,9,.8);letter-spacing:.14em;font-size:12px}
+  .tabs button.on{background:rgba(255,59,36,.07) !important;color:var(--gold) !important;
+    border-color:var(--gold) !important;box-shadow:inset 3px 0 0 var(--gold) !important;font-weight:700}
+  .lang button.on{background:none;border-color:var(--gold);color:var(--gold)}
+
+  /* 數值：白字為主，標籤紅字 */
+  .stat .k{color:var(--gold);letter-spacing:.2em}
+  .stat .v{color:#fff}
+  .stat.hero-stat{border-color:var(--gold) !important;background:rgba(255,59,36,.06) !important;
+    box-shadow:none !important}
+  .stat.hero-stat .v{color:#fff !important;text-shadow:none !important}
+  .qlabel{color:var(--gold);letter-spacing:.24em}
+  .money{color:#fff !important;text-shadow:none !important}
+  .money .cur{color:var(--gold);opacity:1}
+  .brow .amt{color:#fff}
+  .brow.disc-on .amt{color:var(--gold-lite)}
+  .breakdown,.discount{border-top:1px dashed var(--line)}
+
+  /* 標題 */
+  h1{text-shadow:0 2px 12px rgba(0,0,0,.9) !important}
+  h1 em{color:var(--gold) !important}
+  h1 .bar{width:110px;height:1px;background:var(--gold);
+    box-shadow:0 4px 0 -2px rgba(255,59,36,.35)}
+  .eyebrow{color:var(--gold)}
+  .ctc .c2{color:var(--gold) !important;text-shadow:0 2px 10px rgba(0,0,0,.9) !important}
+
+  /* 按鈕 */
+  .actions .primary{background:var(--gold) !important;color:#0A0505 !important;
+    border:1px solid var(--gold) !important;letter-spacing:.22em}
+  .actions button{border:1px solid var(--line);letter-spacing:.18em;background:none}
+  .stepper button{color:var(--gold)}
+  .stepper,select{border:1px solid var(--line)}
+
+  /* 線條元素 */
+  .goal{border-top:1px dashed var(--line)}
+  .goal .bar{background:#141517;border:0;height:2px}
+  .goal .bar i{background:var(--gold)}
+  .goal .t{color:var(--muted);letter-spacing:.12em}
+  .seg{background:#17181A}
+  .track-legend{color:var(--muted);letter-spacing:.14em}
+
+  /* 底部條：左側紅條，不用斜紋 */
+  .strip{background:rgba(8,8,9,.82) !important;border:1px solid var(--line) !important;
+    border-left:3px solid var(--gold) !important;letter-spacing:.12em}
+  .strip .crown{color:var(--gold)}
+  .strip .end{color:var(--gold-lite)}
+  details summary::after{color:var(--gold)}
+  details{border:1px solid var(--line)}
+  td{border-top:1px dashed var(--line-2)}
+  td:last-child{color:#fff}
+  .grp td{color:var(--gold);letter-spacing:.24em}
+  .seo h3{color:var(--gold)}
+  footer{color:var(--muted);letter-spacing:.24em}
 </style>
 </head>
 <body>
@@ -204,13 +307,22 @@
   <div class="bg" id="heroBg"></div>
   <div class="veil"></div>
   <header>
-    <div class="mark" id="markBox">大</div>
+    <div class="mark" id="markBox" hidden>大</div>
     <div>
       <div class="eyebrow" id="eyebrow"></div>
-      <h1>LOLM 大雞雞代練</h1>
+      <h1>激鬥峽谷 <em>LOLM</em><span class="bar"></span></h1>
+
       <div class="quote" id="tagline"></div>
     </div>
   </header>
+</div>
+
+<div class="brandbar">
+  <img class="stamp" src="logo.png" alt="logo">
+  <div class="ctc">
+    <span class="c1">加賴帶你飛</span>
+    <span class="c2">0867473723#0000</span>
+  </div>
 </div>
 
 <div class="imgbar">
@@ -332,7 +444,7 @@
 </div>
 
 <section class="seo">
-  <h2>關於 LOLM 大雞雞代練</h2>
+  <h2>關於 激鬥峽谷 LOLM</h2>
   <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代練上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
   <h3>計價方式</h3>
   <p>積分對戰以「星」為單位計價，鑽石 I 以下每星 120 元，大師區依累積星數分為 150、200、250、300、350、400 元六個級距。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、不朽 15 元，傳奇段可自訂單價。</p>
