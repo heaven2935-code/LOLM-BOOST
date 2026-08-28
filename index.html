@@ -296,6 +296,36 @@
   .seg{background:#17181A}
   .track-legend{color:var(--muted);letter-spacing:.14em}
 
+  /* 報價單彈窗 */
+  .modal{position:fixed;inset:0;z-index:50;background:rgba(3,3,4,.86);
+    display:flex;align-items:flex-start;justify-content:center;padding:18px 12px;overflow:auto}
+  .modal[hidden]{display:none}
+  .sheet{width:100%;max-width:460px;background:#0B0B0D;border:1px solid var(--gold-dim);
+    padding:16px;box-shadow:0 20px 60px -20px #000}
+  .sheet-head{display:flex;align-items:center;gap:11px;padding-bottom:12px;
+    border-bottom:1px dashed var(--line)}
+  .sheet-head img{width:44px;height:44px}
+  .sh-title{font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;font-size:18px;
+    letter-spacing:.16em;color:#fff}
+  .sh-sub{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+  .sheet-x{margin-left:auto;background:none;border:1px solid var(--line);color:var(--text-2);
+    width:34px;height:34px;font-size:15px;cursor:pointer;flex:0 0 auto}
+  .sheet-body{padding:14px 0 4px}
+  .srow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:13px;
+    border-bottom:1px dashed var(--line-2)}
+  .srow .k{color:var(--muted)}
+  .srow .v{color:#fff;font-family:"Oswald",sans-serif}
+  .srow.acc .v{color:var(--gold)}
+  .stotal{display:flex;align-items:baseline;justify-content:space-between;margin-top:14px;
+    padding-top:12px;border-top:1px solid var(--gold-dim)}
+  .stotal .k{font-family:"Oswald",sans-serif;letter-spacing:.2em;color:var(--gold);font-size:12px}
+  .stotal .v{font-family:"Oswald",sans-serif;font-size:34px;font-weight:700;color:#fff}
+  .snote{font-size:11px;color:var(--muted);margin-top:10px;line-height:1.7}
+  .sheet-copy{width:100%;margin-top:9px;padding:12px;background:none;color:var(--text-2);
+    border:1px solid var(--line);font-family:"Oswald","Noto Sans TC",sans-serif;
+    font-size:13px;letter-spacing:.18em;cursor:pointer}
+  .sheet .cta{margin-top:14px}
+
   /* 行動按鈕 */
   .cta{display:flex;align-items:center;justify-content:center;gap:10px;
     margin-top:16px;padding:17px 14px;background:#06C755;color:#04210F;
@@ -452,11 +482,12 @@
   <a class="cta" id="orderBtn" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
   <div class="actions">
     <button id="resetBtn"></button>
+    <button id="previewBtn"></button>
     <button class="primary" id="copyBtn"></button>
   </div>
 </div>
 
-<details>
+<details open>
   <summary id="rateSummary"></summary>
   <table id="rateTable"></table>
 </details>
@@ -478,6 +509,22 @@
   <strong>支援哪些語言？</strong>繁體中文、English、Tiếng Việt 三語切換。<br>
   <strong>怎麼下單？</strong>算好金額後按「複製報價」，把內容私訊給我們即可。</p>
 </section>
+
+<div class="modal" id="modal" hidden>
+  <div class="sheet">
+    <div class="sheet-head">
+      <img src="logo.png" alt="">
+      <div>
+        <div class="sh-title" id="shTitle"></div>
+        <div class="sh-sub">激鬥峽谷 LOLM · 加賴帶你飛 0867473723#0000</div>
+      </div>
+      <button class="sheet-x" id="closeBtn">✕</button>
+    </div>
+    <div class="sheet-body" id="sheetBody"></div>
+    <a class="cta" id="sheetCta" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
+    <button class="sheet-copy" id="sheetCopy"></button>
+  </div>
+</div>
 
 <footer id="foot"></footer>
 
@@ -525,6 +572,9 @@ const L = {
     over:m=>'滿 '+m,
     stripMain:'單次滿 20,000 直接 8 折', stripEnd:'加賴帶你飛 ›',
     cta:'加賴下單 · 帶你飛',
+    preview:'預覽報價單', sheetTitle:'報 價 單', close:'關閉',
+    prompt:'請選擇起點與目標段位', sheetNote:'本報價依段位級距自動計算，滿額優惠已含。價格如有調整以實際確認為準。',
+    sItem:'項目', sQty:'數量', sAmt:'金額', sTotal:'應付總額',
     ctcLabel:'加賴帶你飛',
     copyTitle:'報價', copyFrom:'起點', copyTo:'目標',
     copyQty:s=>s?'需打星數':'需打積分', copyAmt:'金額', copyDisc:l=>'（已折 '+l+'）'
@@ -557,6 +607,9 @@ const L = {
     over:m=>'Over '+m,
     stripMain:'20% off on orders over 20,000', stripEnd:'Add on LINE ›',
     cta:'ADD LINE TO ORDER',
+    preview:'PREVIEW QUOTE', sheetTitle:'QUOTATION', close:'Close',
+    prompt:'Select a start and target rank', sheetNote:'Calculated by rank brackets; order discount included. Final price subject to confirmation.',
+    sItem:'Item', sQty:'Qty', sAmt:'Amount', sTotal:'TOTAL',
     ctcLabel:'ADD LINE',
     copyTitle:'Quote', copyFrom:'From', copyTo:'To',
     copyQty:s=>s?'Marks needed':'Points needed', copyAmt:'Total', copyDisc:l=>' ('+l+' applied)'
@@ -589,6 +642,9 @@ const L = {
     over:m=>'Từ '+m,
     stripMain:'Đơn từ 20.000 giảm ngay 20%', stripEnd:'Thêm LINE ›',
     cta:'THÊM LINE ĐỂ ĐẶT',
+    preview:'XEM BÁO GIÁ', sheetTitle:'BÁO GIÁ', close:'Đóng',
+    prompt:'Chọn bậc bắt đầu và mục tiêu', sheetNote:'Tính theo bậc; đã gồm ưu đãi theo đơn. Giá cuối theo xác nhận thực tế.',
+    sItem:'Hạng mục', sQty:'SL', sAmt:'Số tiền', sTotal:'TỔNG CỘNG',
     ctcLabel:'THÊM LINE',
     copyTitle:'Báo giá', copyFrom:'Bắt đầu', copyTo:'Mục tiêu',
     copyQty:s=>s?'Số sao cần':'Số điểm cần', copyAmt:'Thành tiền', copyDisc:l=>'（'+l+'）'
@@ -758,14 +814,17 @@ function calcLP(){
     return {total, rows};
   }, t().errLp);
 }
+let LAST = null;
 function render(qty, compute, errMsg){
   const bd=$('breakdown'), dz=$('discount');
   if(qty<=0){
-    $('qty').textContent='0'; $('total').textContent='0';
+    LAST=null;
+    $('qty').textContent='0'; $('total').textContent='—';
     $('heroVal').textContent='—'; $('discLabel').textContent='—';
     $('goalBar').style.width='0%'; $('goalText').textContent='—';
     dz.innerHTML='';
-    bd.innerHTML='<div class="brow"><span class="tag" style="color:#C9705F">'+errMsg+'</span><span></span></div>';
+    const msg = qty===0 ? t().prompt : errMsg;
+    bd.innerHTML='<div class="brow"><span class="tag">'+msg+'</span><span></span></div>';
     return;
   }
   const r = compute();
@@ -786,6 +845,11 @@ function render(qty, compute, errMsg){
     html += '<div class="brow"><span class="tag">'+t().before+'</span><span class="amt strike">'+total.toLocaleString('en-US')+'</span></div>';
   }
   dz.innerHTML=html;
+
+  LAST = {qty, rows, total, final, star:(mode==='star'),
+          disc: d.key ? t()[d.key] : null, discMin: d.min,
+          from: mode==='star' ? $('fromBadge').textContent : $('lpFromBadge').textContent,
+          to:   mode==='star' ? $('toBadge').textContent   : $('lpToBadge').textContent};
 
   const n = nextTier(total);
   if(n){
@@ -836,6 +900,7 @@ function applyLang(){
   $('qLabel').textContent=x.qLabel;
   $('resetBtn').textContent=x.reset;
   $('copyBtn').textContent=x.copy;
+  $('previewBtn').textContent=x.preview;
   $('rateSummary').textContent=x.rateSummary;
   $('stripMain').textContent=x.stripMain;
   $('stripEnd').textContent=x.stripEnd;
@@ -873,15 +938,14 @@ document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('clic
 ['fromDiv','toDiv','fromStar','toStar','lpFrom','lpTo','legendRate'].forEach(id=>{
   $(id).addEventListener('input',run); $(id).addEventListener('change',run);
 });
-$('resetBtn').addEventListener('click',()=>{
-  if(mode==='star'){
-    fromDiv.value=OPTIONS.findIndex(o=>o.n.en==='Emerald'&&o.div==='IV'); fromStar.value=0;
-    toDiv.value=OPTIONS.findIndex(o=>o.n.en==='Diamond'&&o.div==='I');    toStar.value=5;
-  }else{
-    $('lpFrom').value=800; $('lpTo').value=4000; $('legendRate').value=15;
-  }
+const DEF_IDX = OPTIONS.findIndex(o=>o.n.en==='Iron'&&o.div==='IV');
+function resetAll(){
+  fromDiv.value=DEF_IDX; fromStar.value=0;
+  toDiv.value=DEF_IDX;   toStar.value=0;
+  $('lpFrom').value=0; $('lpTo').value=0; $('legendRate').value=15;
   run();
-});
+}
+$('resetBtn').addEventListener('click',resetAll);
 $('copyBtn').addEventListener('click',()=>{
   const x=t(), star = mode==='star';
   const disc = $('discLabel').textContent;
@@ -919,10 +983,43 @@ if(HERO_URL){
   document.documentElement.style.setProperty('--pagebg','url("'+HERO_URL+'")');
 }
 
+/* 報價單 */
+function openSheet(){
+  const x=t();
+  if(!LAST){ alert(x.prompt); return; }
+  const unit = LAST.star ? x.starWord : x.ptWord;
+  let html = '<div class="srow"><span class="k">'+x.copyFrom+'</span><span class="v">'+LAST.from+'</span></div>'
+           + '<div class="srow"><span class="k">'+x.copyTo+'</span><span class="v">'+LAST.to+'</span></div>'
+           + '<div class="srow"><span class="k">'+x.copyQty(LAST.star)+'</span><span class="v">'+LAST.qty.toLocaleString('en-US')+' '+unit+'</span></div>';
+  html += '<div style="height:10px"></div>';
+  LAST.rows.forEach(r=>{
+    html += '<div class="srow"><span class="k">'+r.tag.replace(/<\/?b>/g,'')+'</span>'
+          + '<span class="v">'+r.amt.toLocaleString('en-US')+'</span></div>';
+  });
+  if(LAST.disc){
+    html += '<div class="srow acc"><span class="k">'+x.discRow(LAST.discMin.toLocaleString('en-US'))+LAST.disc+'</span>'
+          + '<span class="v">−'+(LAST.total-LAST.final).toLocaleString('en-US')+'</span></div>';
+    html += '<div class="srow"><span class="k">'+x.before+'</span><span class="v">'+LAST.total.toLocaleString('en-US')+'</span></div>';
+  }
+  html += '<div class="stotal"><span class="k">'+x.sTotal+'</span>'
+        + '<span class="v">NT$ '+LAST.final.toLocaleString('en-US')+'</span></div>'
+        + '<div class="snote">'+x.sheetNote+'</div>';
+  $('sheetBody').innerHTML = html;
+  $('shTitle').textContent = x.sheetTitle;
+  $('sheetCta').textContent = x.cta;
+  $('sheetCopy').textContent = x.copy;
+  $('modal').hidden = false;
+}
+$('previewBtn').addEventListener('click',openSheet);
+$('closeBtn').addEventListener('click',()=>{ $('modal').hidden = true; });
+$('modal').addEventListener('click',e=>{ if(e.target===$('modal')) $('modal').hidden=true; });
+$('sheetCopy').addEventListener('click',()=>$('copyBtn').click());
+
 buildTracks();
 fillSelects();
-fromDiv.value=OPTIONS.findIndex(o=>o.n.en==='Emerald'&&o.div==='IV');
-toDiv.value=OPTIONS.findIndex(o=>o.n.en==='Diamond'&&o.div==='I');
+fromDiv.value=DEF_IDX; toDiv.value=DEF_IDX;
+fromStar.value=0; toStar.value=0;
+$('lpFrom').value=0; $('lpTo').value=0;
 applyLang();
 </script>
 </body>
