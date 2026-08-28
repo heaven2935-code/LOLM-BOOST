@@ -51,25 +51,25 @@
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
   .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
-  .lang{display:flex;gap:6px;justify-content:flex-end;margin-bottom:12px}
+  .lang{display:flex;gap:6px;justify-content:flex-end;margin-bottom:8px}
   .lang button{padding:6px 12px;font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.12em;
     border:1px solid var(--line);border-radius:2px;background:rgba(9,9,11,.78);
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
   .hero{position:relative;border:0;border-radius:0;overflow:hidden;
-    margin-bottom:14px;background:transparent;min-height:340px;display:flex;align-items:flex-start}
+    margin-bottom:14px;background:transparent;min-height:300px;display:flex;align-items:flex-start}
   .hero .bg{display:none}
   .hero .veil{position:absolute;inset:0;background:
     linear-gradient(180deg,rgba(8,8,8,.90),rgba(8,8,8,.42) 42%,rgba(8,8,8,0) 74%)}
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
-  header{position:relative;z-index:2;display:block;padding:4px 2px 0}
+  header{position:relative;z-index:2;display:block;padding:0 2px}
   .mark{flex:0 0 auto;width:44px;height:44px;border:1px solid var(--gold-dim);border-radius:3px;
     display:grid;place-items:center;color:var(--gold);font-family:"Oswald",sans-serif;
     font-size:19px;font-weight:700;background:linear-gradient(160deg,#1A160E,#101010);overflow:hidden}
   .mark img{width:100%;height:100%;object-fit:cover;display:block}
   .eyebrow{font-family:"Oswald",sans-serif;font-size:11px;letter-spacing:.3em;
-    color:var(--gold);text-transform:uppercase;margin-bottom:4px}
+    color:var(--gold);text-transform:uppercase;margin-bottom:6px}
   h1{margin:0;font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;
      font-size:36px;line-height:1.04;letter-spacing:.05em;color:var(--text);
      transform:skewX(-9deg);transform-origin:left bottom;display:inline-block;
@@ -78,13 +78,11 @@
     background:linear-gradient(90deg,var(--gold),var(--gold-lite) 62%,transparent)}
   h1 em{font-style:normal;color:var(--gold-lite);
     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
-  .brandbar{display:flex;align-items:center;gap:14px;margin:0 0 14px;padding:2px}
-  .stamp{width:64px;height:64px;flex:0 0 auto;border-radius:3px;
-    filter:drop-shadow(0 4px 14px rgba(0,0,0,.6))}
-  .ctc{display:flex;align-items:baseline;gap:9px;white-space:nowrap;line-height:1.1;
-    font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;
-    transform:skewX(-9deg);text-shadow:0 2px 10px rgba(0,0,0,.9)}
-  .ctc .c1{font-size:19px;letter-spacing:.06em;color:var(--text)}
+  .brandbar{display:block;margin:2px 0 14px;line-height:0}
+  .brandbar img{width:100%;height:auto;display:block;
+    filter:drop-shadow(0 6px 18px rgba(0,0,0,.75))}
+  .brandbar:active img{transform:translateY(1px)}
+  }
   .ctc .c2{font-size:21px;letter-spacing:.01em;color:var(--gold-lite);
     text-shadow:0 0 16px rgba(255,75,69,.5),0 2px 10px rgba(0,0,0,.9)}
   @media (max-width:380px){
@@ -300,6 +298,18 @@
   .seg{background:#17181A}
   .track-legend{color:var(--muted);letter-spacing:.14em}
 
+  /* 行動按鈕 */
+  .cta{display:flex;align-items:center;justify-content:center;gap:10px;
+    margin-top:16px;padding:17px 14px;background:#06C755;color:#04210F;
+    font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;font-size:16px;
+    letter-spacing:.14em;text-decoration:none;border:1px solid #06C755;
+    box-shadow:0 0 26px -8px #06C755}
+  .cta:active{transform:translateY(1px)}
+  .cta::before{content:'LINE';font-size:11px;letter-spacing:.18em;
+    background:#04210F;color:#06C755;padding:3px 7px}
+  .ctc a.c2{text-decoration:none;border-bottom:2px solid var(--gold)}
+  .strip a.end{text-decoration:none}
+
   /* 底部條：左側紅條，不用斜紋 */
   .strip{background:rgba(8,8,9,.82) !important;border:1px solid var(--line) !important;
     border-left:3px solid var(--gold) !important;letter-spacing:.12em}
@@ -327,23 +337,17 @@
   <div class="bg" id="heroBg"></div>
   <div class="veil"></div>
   <header>
-    <div class="mark" id="markBox" hidden>大</div>
     <div>
       <div class="eyebrow" id="eyebrow"></div>
       <h1>激鬥峽谷 <em>LOLM</em><span class="bar"></span></h1>
 
-      <div class="quote" id="tagline"></div>
     </div>
   </header>
 </div>
 
-<div class="brandbar">
-  <img class="stamp" src="logo.png" alt="logo">
-  <div class="ctc">
-    <span class="c1">加賴帶你飛</span>
-    <span class="c2">0867473723#0000</span>
-  </div>
-</div>
+<a class="brandbar" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener" aria-label="加賴帶你飛">
+  <img src="banner.png" alt="陶智 加賴帶你飛 0867473723#0000">
+</a>
 
 <div class="imgbar">
   <label class="pick"><span id="pickLogo"></span><input type="file" id="logoFile" accept="image/*"></label>
@@ -447,6 +451,7 @@
   <div class="money"><span class="cur">NT$</span><span class="val" id="total">0</span></div>
   <div class="breakdown" id="breakdown"></div>
   <div class="discount" id="discount"></div>
+  <a class="cta" id="orderBtn" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
   <div class="actions">
     <button id="resetBtn"></button>
     <button class="primary" id="copyBtn"></button>
@@ -460,7 +465,7 @@
 
 <div class="strip">
   <span class="crown">&#9819;</span> <span id="stripMain"></span>
-  <span class="end" id="stripEnd"></span>
+  <a class="end" id="stripEnd" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
 </div>
 
 <section class="seo">
@@ -520,7 +525,9 @@ const L = {
     grpRanked:'積分對戰', grpLegend:'傳奇積分', grpDisc:'單次下單優惠',
     perStar:'/ 星', perPt:'/ 分', custom:'可自訂', belowDiamondRow:'鑽石 I 以下（含）',
     over:m=>'滿 '+m,
-    stripMain:'單次滿 20,000 直接 8 折', stripEnd:'下單請私訊 ›',
+    stripMain:'單次滿 20,000 直接 8 折', stripEnd:'加賴帶你飛 ›',
+    cta:'加賴下單 · 帶你飛',
+    ctcLabel:'加賴帶你飛',
     copyTitle:'報價', copyFrom:'起點', copyTo:'目標',
     copyQty:s=>s?'需打星數':'需打積分', copyAmt:'金額', copyDisc:l=>'（已折 '+l+'）'
   },
@@ -550,7 +557,9 @@ const L = {
     grpRanked:'Ranked', grpLegend:'Legendary', grpDisc:'Order discount',
     perStar:'/ mark', perPt:'/ pt', custom:'Custom', belowDiamondRow:'Diamond I and below',
     over:m=>'Over '+m,
-    stripMain:'20% off on orders over 20,000', stripEnd:'DM to order ›',
+    stripMain:'20% off on orders over 20,000', stripEnd:'Add on LINE ›',
+    cta:'ADD LINE TO ORDER',
+    ctcLabel:'ADD LINE',
     copyTitle:'Quote', copyFrom:'From', copyTo:'To',
     copyQty:s=>s?'Marks needed':'Points needed', copyAmt:'Total', copyDisc:l=>' ('+l+' applied)'
   },
@@ -580,7 +589,9 @@ const L = {
     grpRanked:'Xếp hạng', grpLegend:'Huyền thoại', grpDisc:'Ưu đãi theo đơn',
     perStar:'/ sao', perPt:'/ điểm', custom:'Tùy chỉnh', belowDiamondRow:'Kim Cương I trở xuống',
     over:m=>'Từ '+m,
-    stripMain:'Đơn từ 20.000 giảm ngay 20%', stripEnd:'Nhắn tin để đặt ›',
+    stripMain:'Đơn từ 20.000 giảm ngay 20%', stripEnd:'Thêm LINE ›',
+    cta:'THÊM LINE ĐỂ ĐẶT',
+    ctcLabel:'THÊM LINE',
     copyTitle:'Báo giá', copyFrom:'Bắt đầu', copyTo:'Mục tiêu',
     copyQty:s=>s?'Số sao cần':'Số điểm cần', copyAmt:'Thành tiền', copyDisc:l=>'（'+l+'）'
   }
@@ -809,7 +820,6 @@ function applyLang(){
   document.documentElement.lang = lang==='zh' ? 'zh-Hant' : lang;
   const x=t();
   $('eyebrow').textContent = mode==='star' ? x.eyeStar : x.eyeLp;
-  $('tagline').textContent = x.tagline;
   $('tabStar').textContent = x.tabStar;
   $('tabLp').textContent   = x.tabLp;
   $('kQty').textContent=x.kQty; $('kDisc').textContent=x.kDisc; $('kPay').textContent=x.kPay;
@@ -831,6 +841,7 @@ function applyLang(){
   $('rateSummary').textContent=x.rateSummary;
   $('stripMain').textContent=x.stripMain;
   $('stripEnd').textContent=x.stripEnd;
+  $('orderBtn').textContent=x.cta;
   $('foot').textContent = LOW[0].n[lang]+' IV → '+TOP[lang]+' · 208 '+x.starWord;
   $('starLegend').innerHTML = '<span>'+LOW[0].n[lang]+'</span><span>'+LOW[5].n[lang]+'</span>'
     + '<span>'+LOW[6].n[lang]+'</span><span>'+HI[1].n[lang]+'</span><span>'+TOP[lang]+'</span>';
@@ -889,7 +900,7 @@ $('copyBtn').addEventListener('click',()=>{
   });
 });
 
-function setLogo(url){ $('markBox').innerHTML = url ? '<img src="'+url+'" alt="logo">' : '大'; }
+function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img src="'+url+'" alt="logo">' : ''; }
 function setHero(url){ $('heroBg').style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
 $('logoFile').addEventListener('change',e=>{
   const f=e.target.files[0]; if(f) setLogo(URL.createObjectURL(f));
