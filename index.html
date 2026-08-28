@@ -348,6 +348,14 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
+  .rk{width:34px;height:34px;margin-left:auto;object-fit:contain;
+    filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
+  .card-head .badge{margin-left:8px}
+  td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
+  td .ic img{width:19px;height:19px}
+  td .ic1{display:inline-block;vertical-align:middle;margin-right:9px}
+  td .ic1 img{width:26px;height:26px;vertical-align:middle}
+  td .rng{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-top:3px}
   .seo h3{color:var(--gold)}
   footer{color:var(--muted);letter-spacing:.24em}
 </style>
@@ -412,7 +420,7 @@
 
 <section id="panelStar">
   <div class="card">
-    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2><span class="badge" id="fromBadge">—</span></div>
+    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2><img class="rk" id="fromRk" alt=""><span class="badge" id="fromBadge">—</span></div>
     <div class="field">
       <div><label for="fromDiv" id="lRank1"></label><div class="sel"><select id="fromDiv"></select></div></div>
       <div><label for="fromStar" id="lStar1"></label>
@@ -427,7 +435,7 @@
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2><span class="badge" id="toBadge">—</span></div>
+    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2><img class="rk" id="toRk" alt=""><span class="badge" id="toBadge">—</span></div>
     <div class="field">
       <div><label for="toDiv" id="lRank2"></label><div class="sel"><select id="toDiv"></select></div></div>
       <div><label for="toStar" id="lStar2"></label>
@@ -444,7 +452,7 @@
 
 <section id="panelLP" hidden>
   <div class="card">
-    <div class="card-head"><span class="idx">01</span><h2 id="hFrom2"></h2><span class="badge" id="lpFromBadge">—</span></div>
+    <div class="card-head"><span class="idx">01</span><h2 id="hFrom2"></h2><img class="rk" id="lpFromRk" alt=""><span class="badge" id="lpFromBadge">—</span></div>
     <label for="lpFrom" id="lPts1"></label>
     <div class="stepper">
       <button type="button" data-step="-50" data-for="lpFrom">−</button>
@@ -455,7 +463,7 @@
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="idx">02</span><h2 id="hTo2"></h2><span class="badge" id="lpToBadge">—</span></div>
+    <div class="card-head"><span class="idx">02</span><h2 id="hTo2"></h2><img class="rk" id="lpToRk" alt=""><span class="badge" id="lpToBadge">—</span></div>
     <label for="lpTo" id="lPts2"></label>
     <div class="stepper">
       <button type="button" data-step="-50" data-for="lpTo">−</button>
@@ -463,13 +471,6 @@
       <button type="button" data-step="50" data-for="lpTo">+</button>
     </div>
     <div style="margin-top:14px">
-      <label for="legendRate" id="lLegendRate"></label>
-      <div class="stepper">
-        <button type="button" data-step="-1" data-for="legendRate">−</button>
-        <input id="legendRate" type="number" inputmode="numeric" value="15">
-        <button type="button" data-step="1" data-for="legendRate">+</button>
-      </div>
-      <div class="hint" id="legendHint"></div>
     </div>
   </div>
 </section>
@@ -501,7 +502,7 @@
   <h2>關於 激鬥峽谷 LOLM</h2>
   <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代練上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
   <h3>計價方式</h3>
-  <p>積分對戰以「星」為單位計價，鑽石 I 以下每星 120 元，大師區依累積星數分為 150、200、250、300、350、400 元六個級距。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、不朽 15 元，傳奇段可自訂單價。</p>
+  <p>積分對戰以「星」為單位計價，鑽石 I 以下每星 120 元，大師區以每 10 顆星為一階，從 150 元起、每階加 25 元；81–100 星統一 350 元。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元；傳奇為最高牌階，不另計價。</p>
   <h3>優惠方案</h3>
   <p>單次下單金額滿 5,000 享 9 折、滿 10,000 享 8.5 折、滿 20,000 享 8 折，系統會自動套用並顯示折扣前後金額。</p>
   <h3>常見問題</h3>
@@ -551,9 +552,8 @@ const L = {
     kQty:'需打', kDisc:'優惠', kPay:'應付',
     unitStar:'顆星', unitPt:'分',
     hProgress:'進度與優惠', hFrom:'起點', hTo:'目標',
-    lRank:'段位', lStar:'星數', lPts:'積分', lLegendRate:'傳奇段單價 4000+',
+    lRank:'段位', lStar:'星數', lPts:'積分',
     lpStepHint:'200 分一小段，800 分一個牌階',
-    legendHint:'尚未定價，預設沿用 15',
     pickLogo:'＋ 更換標誌', pickHero:'＋ 更換封面圖',
     imgNote:'圖片僅在本次瀏覽有效。要永久套用，把圖檔放進網站資料夾，並修改檔案開頭的 LOGO_URL / HERO_URL。',
     hintDiv:(a,b,n)=>'此小段 '+a+'–'+b+' 星，滿 '+n+' 顆升段',
@@ -572,7 +572,8 @@ const L = {
     over:m=>'滿 '+m,
     stripMain:'單次滿 20,000 直接 8 折', stripEnd:'加賴帶你飛 ›',
     cta:'加賴下單 · 帶你飛',
-    preview:'預覽報價單', sheetTitle:'報 價 單', close:'關閉',
+    preview:'預覽報價單',
+    topRank:'（最高牌階）', sheetTitle:'報 價 單', close:'關閉',
     prompt:'請選擇起點與目標段位', sheetNote:'本報價依段位級距自動計算，滿額優惠已含。價格如有調整以實際確認為準。',
     sItem:'項目', sQty:'數量', sAmt:'金額', sTotal:'應付總額',
     ctcLabel:'加賴帶你飛',
@@ -586,9 +587,8 @@ const L = {
     kQty:'To play', kDisc:'Discount', kPay:'Total',
     unitStar:'marks', unitPt:'pts',
     hProgress:'Progress & Discount', hFrom:'From', hTo:'To',
-    lRank:'Rank', lStar:'Marks', lPts:'Points', lLegendRate:'Legend rate 4000+',
+    lRank:'Rank', lStar:'Marks', lPts:'Points',
     lpStepHint:'200 pts per division, 800 pts per tier',
-    legendHint:'Not priced yet — defaults to 15',
     pickLogo:'+ Replace logo', pickHero:'+ Replace cover',
     imgNote:'Images apply to this session only. To keep them, put the files next to this HTML and set LOGO_URL / HERO_URL at the top of the file.',
     hintDiv:(a,b,n)=>a+'–'+b+' marks in this division, '+n+' to promote',
@@ -607,7 +607,8 @@ const L = {
     over:m=>'Over '+m,
     stripMain:'20% off on orders over 20,000', stripEnd:'Add on LINE ›',
     cta:'ADD LINE TO ORDER',
-    preview:'PREVIEW QUOTE', sheetTitle:'QUOTATION', close:'Close',
+    preview:'PREVIEW QUOTE',
+    topRank:'(Top rank)', sheetTitle:'QUOTATION', close:'Close',
     prompt:'Select a start and target rank', sheetNote:'Calculated by rank brackets; order discount included. Final price subject to confirmation.',
     sItem:'Item', sQty:'Qty', sAmt:'Amount', sTotal:'TOTAL',
     ctcLabel:'ADD LINE',
@@ -621,9 +622,8 @@ const L = {
     kQty:'Cần đánh', kDisc:'Ưu đãi', kPay:'Thanh toán',
     unitStar:'sao', unitPt:'điểm',
     hProgress:'Tiến độ & Ưu đãi', hFrom:'Bắt đầu', hTo:'Mục tiêu',
-    lRank:'Bậc', lStar:'Sao', lPts:'Điểm', lLegendRate:'Giá bậc Huyền Thoại 4000+',
+    lRank:'Bậc', lStar:'Sao', lPts:'Điểm',
     lpStepHint:'200 điểm mỗi bậc nhỏ, 800 điểm mỗi bậc lớn',
-    legendHint:'Chưa định giá — mặc định 15',
     pickLogo:'+ Đổi logo', pickHero:'+ Đổi ảnh bìa',
     imgNote:'Ảnh chỉ áp dụng cho phiên này. Để lưu vĩnh viễn, đặt tệp cạnh HTML và sửa LOGO_URL / HERO_URL ở đầu tệp.',
     hintDiv:(a,b,n)=>'Bậc này '+a+'–'+b+' sao, đủ '+n+' sao thăng bậc',
@@ -642,7 +642,8 @@ const L = {
     over:m=>'Từ '+m,
     stripMain:'Đơn từ 20.000 giảm ngay 20%', stripEnd:'Thêm LINE ›',
     cta:'THÊM LINE ĐỂ ĐẶT',
-    preview:'XEM BÁO GIÁ', sheetTitle:'BÁO GIÁ', close:'Đóng',
+    preview:'XEM BÁO GIÁ',
+    topRank:'(Bậc cao nhất)', sheetTitle:'BÁO GIÁ', close:'Đóng',
     prompt:'Chọn bậc bắt đầu và mục tiêu', sheetNote:'Tính theo bậc; đã gồm ưu đãi theo đơn. Giá cuối theo xác nhận thực tế.',
     sItem:'Hạng mục', sQty:'SL', sAmt:'Số tiền', sTotal:'TỔNG CỘNG',
     ctcLabel:'THÊM LINE',
@@ -653,57 +654,74 @@ const L = {
 const t = () => L[lang];
 
 const LOW = [
-  {n:{zh:'黑鐵',en:'Iron',vi:'Sắt'},         marks:2},
-  {n:{zh:'青銅',en:'Bronze',vi:'Đồng'},      marks:3},
-  {n:{zh:'白銀',en:'Silver',vi:'Bạc'},       marks:3},
-  {n:{zh:'黃金',en:'Gold',vi:'Vàng'},        marks:4},
-  {n:{zh:'白金',en:'Platinum',vi:'Bạch Kim'},marks:4},
-  {n:{zh:'翡翠',en:'Emerald',vi:'Ngọc Lục'}, marks:5},
-  {n:{zh:'鑽石',en:'Diamond',vi:'Kim Cương'},marks:6}
+  {n:{zh:'黑鐵',en:'Iron',vi:'Sắt'},         marks:2, img:'iron'},
+  {n:{zh:'青銅',en:'Bronze',vi:'Đồng'},      marks:3, img:'bronze'},
+  {n:{zh:'白銀',en:'Silver',vi:'Bạc'},       marks:3, img:'silver'},
+  {n:{zh:'黃金',en:'Gold',vi:'Vàng'},        marks:4, img:'gold'},
+  {n:{zh:'白金',en:'Platinum',vi:'Bạch Kim'},marks:4, img:'platinum'},
+  {n:{zh:'翡翠',en:'Emerald',vi:'Ngọc Lục'}, marks:5, img:'emerald'},
+  {n:{zh:'鑽石',en:'Diamond',vi:'Kim Cương'},marks:6, img:'diamond'}
 ];
 const DIVS = ['IV','III','II','I'];
 const HI = [
-  {n:{zh:'大師',en:'Master',vi:'Cao Thủ'},         divs:[[0,9],[10,19],[20,29]]},
-  {n:{zh:'宗師',en:'Grandmaster',vi:'Đại Cao Thủ'},divs:[[30,39],[40,49],[50,59]]},
-  {n:{zh:'菁英',en:'Challenger',vi:'Thách Đấu'},   divs:[[60,69],[70,79],[80,99]]}
+  {n:{zh:'大師',en:'Master',vi:'Cao Thủ'},         divs:[[0,9],[10,19],[20,29]], img:'master'},
+  {n:{zh:'宗師',en:'Grandmaster',vi:'Đại Cao Thủ'},divs:[[30,39],[40,49],[50,59]], img:'grandmaster'},
+  {n:{zh:'菁英',en:'Challenger',vi:'Thách Đấu'},   divs:[[60,69],[70,79],[80,99]], img:'challenger'}
 ];
-const TOP = {zh:'至尊',en:'Sovereign',vi:'Chí Tôn'};
+const TOP = {zh:'至尊',en:'Sovereign',vi:'Chí Tôn', img:'sovereign'};
 const HI_DIVS = ['III','II','I'];
 const LOW_TOTAL = LOW.reduce((s,x)=>s+x.marks*4,0);
 
 const OPTIONS = [];
 LOW.forEach((tier,ti)=>DIVS.forEach((d,di)=>{
   const base = LOW.slice(0,ti).reduce((s,x)=>s+x.marks*4,0) + di*tier.marks;
-  OPTIONS.push({n:tier.n, div:d, base, min:0, max:tier.marks-1});
+  OPTIONS.push({n:tier.n, div:d, base, min:0, max:tier.marks-1, img:tier.img});
 }));
 HI.forEach(tier=>tier.divs.forEach((r,i)=>{
-  OPTIONS.push({n:tier.n, div:HI_DIVS[i], base:LOW_TOTAL, min:r[0], max:r[1], high:true});
+  OPTIONS.push({n:tier.n, div:HI_DIVS[i], base:LOW_TOTAL, min:r[0], max:r[1], high:true, img:tier.img});
 }));
-OPTIONS.push({n:TOP, div:'', base:LOW_TOTAL, min:100, max:100, high:true, fixed:true});
+OPTIONS.push({n:TOP, div:'', base:LOW_TOTAL, min:100, max:100, high:true, fixed:true, img:TOP.img});
 const optLabel = o => (o.n[lang] + ' ' + o.div).trim();
 
 function priceOfStar(n){
   if(n <= LOW_TOTAL) return 120;
-  const s = n - LOW_TOTAL;
-  if(s <= 15) return 150;
-  if(s <= 30) return 200;
-  if(s <= 45) return 250;
-  if(s <= 60) return 300;
-  if(s <= 80) return 350;
-  return 400;
+  const s = n - LOW_TOTAL;            // 大師區累積星數 1..100
+  if(s > 80) return 350;              // 菁英 I 之後統一 350
+  return 150 + 25 * (Math.ceil(s/10) - 1);
 }
-const ZONE = {120:null,150:'1–15',200:'16–30',250:'31–45',300:'46–60',350:'61–80',400:'81–100'};
-const zoneLabel = p => ZONE[p] ? t().masterZone + ' ' + ZONE[p] : t().belowD;
+/* 大師區級距：每 10 顆一階，81–100 統一 350 */
+const TIERS10 = [
+  ...Array.from({length:8}, (_,k)=>({price:150+25*k, lo:k*10+1, hi:k*10+10, base:k*10})),
+  {price:350, lo:81, hi:100, base:80}
+];
+const ZONE = Object.fromEntries(TIERS10.map(z=>[z.price,[z.lo,z.hi]]));
+function hiName(star){
+  if(star>=100) return TOP[lang];
+  for(const tier of HI){
+    for(let i=0;i<tier.divs.length;i++){
+      const [lo,hi]=tier.divs[i];
+      if(star>=lo && star<=hi) return tier.n[lang]+' '+HI_DIVS[i];
+    }
+  }
+  return TOP[lang];
+}
+function zoneRange(p){
+  const z = TIERS10.find(v=>v.price===p); if(!z) return null;
+  const name = z.base>=80 ? hiName(80)+' → '+TOP[lang] : hiName(z.base);
+  const img  = z.base>=80 ? 'challenger' : (z.base<30?'master':(z.base<60?'grandmaster':'challenger'));
+  return {name, lo:z.lo, hi:z.hi, img};
+}
+const zoneLabel = p => { const z=zoneRange(p); return z ? z.name : t().belowD; };
 
 const LP_TIERS = [
   {n:{zh:'戰士',en:'Warrior',vi:'Chiến Binh'},     lo:0,    hi:800,  rate:6},
-  {n:{zh:'指揮官',en:'Commander',vi:'Chỉ Huy'},    lo:800,  hi:1600, rate:8},
-  {n:{zh:'守護者',en:'Guardian',vi:'Hộ Vệ'},       lo:1600, hi:2400, rate:10},
-  {n:{zh:'征服者',en:'Vanquisher',vi:'Chinh Phục'},lo:2400, hi:3200, rate:12},
-  {n:{zh:'不朽',en:'Immortal',vi:'Bất Tử'},        lo:3200, hi:4000, rate:15},
-  {n:{zh:'傳奇',en:'Legend',vi:'Huyền Thoại'},     lo:4000, hi:8000, rate:null}
+  {n:{zh:'指揮官',en:'Commander',vi:'Chỉ Huy'},    lo:800,  hi:1600, rate:8,  img:'commander'},
+  {n:{zh:'守護者',en:'Guardian',vi:'Hộ Vệ'},       lo:1600, hi:2400, rate:10, img:'guardian'},
+  {n:{zh:'征服者',en:'Vanquisher',vi:'Chinh Phục'},lo:2400, hi:3200, rate:12, img:'vanquisher'},
+  {n:{zh:'神話',en:'Mythic',vi:'Thần Thoại'},      lo:3200, hi:4000, rate:15, img:'mythic'},
+  {n:{zh:'傳奇',en:'Legend',vi:'Huyền Thoại'},     lo:4000, hi:4001, rate:null, img:'legend'}
 ];
-const LP_MAX = 8000;
+const LP_MAX = 4000;
 const lpTierOf = p => LP_TIERS.find(x=>p>=x.lo && p<x.hi) || LP_TIERS[LP_TIERS.length-1];
 function lpLabel(p){
   const x = lpTierOf(p);
@@ -733,7 +751,7 @@ function buildTracks(){
   segs.push({start:LOW_TOTAL+59, len:40});
   segs.push({start:LOW_TOTAL+99, len:1});
   buildBar('trackBar', segs);
-  buildBar('lpBar', LP_TIERS.map(x=>({start:x.lo, len:x.hi-x.lo})));
+  buildBar('lpBar', LP_TIERS.filter(x=>x.hi-x.lo>1).map(x=>({start:x.lo, len:x.hi-x.lo})));
 }
 function paint(barId,a,b){
   [...$(barId).children].forEach(el=>{
@@ -769,7 +787,7 @@ function fillSelects(){
     if(keep!=='') sel.value = keep;
   });
 }
-function syncSide(sel, input, hintEl, badgeEl){
+function syncSide(sel, input, hintEl, badgeEl, rkEl){
   const o = OPTIONS[+sel.value];
   input.min=o.min; input.max=o.max; input.disabled=!!o.fixed;
   let s = parseInt(input.value,10);
@@ -778,11 +796,12 @@ function syncSide(sel, input, hintEl, badgeEl){
   hintEl.textContent = o.fixed ? t().hintTop
     : (o.high ? t().hintHigh(o.min,o.max) : t().hintDiv(o.min,o.max,o.max+1));
   badgeEl.textContent = optLabel(o) + ' · ' + s + '★';
+  if(rkEl && o.img) rkEl.src = 'rank-'+o.img+'.png';
   return {o, abs:o.base+s};
 }
 function calcStar(){
-  const A=syncSide(fromDiv,fromStar,$('fromHint'),$('fromBadge'));
-  const B=syncSide(toDiv,toStar,$('toHint'),$('toBadge'));
+  const A=syncSide(fromDiv,fromStar,$('fromHint'),$('fromBadge'),$('fromRk'));
+  const B=syncSide(toDiv,toStar,$('toHint'),$('toBadge'),$('toRk'));
   paint('trackBar', Math.min(A.abs,B.abs), Math.max(A.abs,B.abs));
   $('unit').textContent=t().unitStar;
   render(B.abs-A.abs, function(){
@@ -796,10 +815,13 @@ function calcLP(){
   const cl = v => Math.max(0, Math.min(LP_MAX, isNaN(v)?0:v));
   const a=cl(parseInt($('lpFrom').value,10)), b=cl(parseInt($('lpTo').value,10));
   $('lpFrom').value=a; $('lpTo').value=b;
-  const lr = Math.max(1, parseInt($('legendRate').value,10)||15);
-  $('legendRate').value=lr;
   $('lpFromBadge').textContent=lpLabel(a);
   $('lpToBadge').textContent=lpLabel(b);
+  const ia=lpTierOf(a).img, ib=lpTierOf(b).img;
+  $('lpFromRk').style.visibility = ia ? 'visible':'hidden';
+  $('lpToRk').style.visibility   = ib ? 'visible':'hidden';
+  if(ia) $('lpFromRk').src='lp-'+ia+'.png';
+  if(ib) $('lpToRk').src='lp-'+ib+'.png';
   paint('lpBar', Math.min(a,b), Math.max(a,b));
   $('unit').textContent=t().unitPt;
   render(b-a, function(){
@@ -807,7 +829,8 @@ function calcLP(){
     LP_TIERS.forEach(x=>{
       const lo=Math.max(a,x.lo), hi=Math.min(b,x.hi);
       if(hi<=lo) return;
-      const r = x.rate===null ? lr : x.rate;
+      if(x.rate===null) return;
+      const r = x.rate;
       total += (hi-lo)*r;
       rows.push({tag:x.n[lang]+' <b>'+(hi-lo)+' '+t().ptWord+'</b> × '+r, amt:(hi-lo)*r});
     });
@@ -865,13 +888,21 @@ const run = () => mode==='star' ? calcStar() : calcLP();
 function buildRateTable(){
   const x=t(), rows=[];
   rows.push('<tr class="grp"><td colspan="2">'+x.grpRanked+'</td></tr>');
-  rows.push('<tr><td>'+x.belowDiamondRow+'</td><td>120 '+x.perStar+'</td></tr>');
-  [[150,'1–15'],[200,'16–30'],[250,'31–45'],[300,'46–60'],[350,'61–80'],[400,'81–100']]
-    .forEach(p=>rows.push('<tr><td>'+x.masterZone+' '+p[1]+'</td><td>'+p[0]+' '+x.perStar+'</td></tr>'));
+  rows.push('<tr><td><span class="ic">'
+    + LOW.map(v=>'<img src="rank-'+v.img+'.png" alt="">').join('')
+    + '</span>'+x.belowDiamondRow+'</td><td>120 '+x.perStar+'</td></tr>');
+  TIERS10.map(v=>v.price).forEach(p=>{
+    const z=zoneRange(p);
+    rows.push('<tr><td><span class="ic1"><img src="rank-'+z.img+'.png" alt=""></span>'
+      + z.name+'<span class="rng">'+z.lo+'–'+z.hi+' '+x.starWord+'</span></td>'
+      +'<td>'+p+' '+x.perStar+'</td></tr>');
+  });
   rows.push('<tr class="grp"><td colspan="2">'+x.grpLegend+'</td></tr>');
   LP_TIERS.forEach(v=>rows.push(
-    '<tr><td>'+v.n[lang]+'　'+v.lo.toLocaleString('en-US')+'–'+(v.rate===null?'+':v.hi.toLocaleString('en-US'))+'</td>'
-    + '<td>'+(v.rate===null?x.custom:v.rate+' '+x.perPt)+'</td></tr>'));
+    '<tr><td>'+(v.img?'<span class="ic1"><img src="lp-'+v.img+'.png" alt=""></span>':'')
+    + v.n[lang]+'<span class="rng">'+(v.rate===null? v.lo.toLocaleString('en-US')+' '+x.topRank
+        : v.lo.toLocaleString('en-US')+'–'+v.hi.toLocaleString('en-US')+' '+x.ptWord)+'</span></td>'
+    + '<td>'+(v.rate===null?'—':v.rate+' '+x.perPt)+'</td></tr>'));
   rows.push('<tr class="grp"><td colspan="2">'+x.grpDisc+'</td></tr>');
   [[5000,'d90'],[10000,'d85'],[20000,'d80']].forEach(p=>
     rows.push('<tr><td>'+x.over(p[0].toLocaleString('en-US'))+'</td><td>'+x[p[1]]+'</td></tr>'));
@@ -891,9 +922,7 @@ function applyLang(){
   $('lRank1').textContent=x.lRank; $('lRank2').textContent=x.lRank;
   $('lStar1').textContent=x.lStar; $('lStar2').textContent=x.lStar;
   $('lPts1').textContent=x.lPts;   $('lPts2').textContent=x.lPts;
-  $('lLegendRate').textContent=x.lLegendRate;
   $('lpStepHint').textContent=x.lpStepHint;
-  $('legendHint').textContent=x.legendHint;
   $('pickLogo').textContent=x.pickLogo;
   $('pickHero').textContent=x.pickHero;
   $('imgNote').textContent=x.imgNote;
@@ -935,14 +964,14 @@ document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('clic
   el.value = (parseInt(el.value,10)||0) + (+b.dataset.step);
   run();
 }));
-['fromDiv','toDiv','fromStar','toStar','lpFrom','lpTo','legendRate'].forEach(id=>{
+['fromDiv','toDiv','fromStar','toStar','lpFrom','lpTo'].forEach(id=>{
   $(id).addEventListener('input',run); $(id).addEventListener('change',run);
 });
 const DEF_IDX = OPTIONS.findIndex(o=>o.n.en==='Iron'&&o.div==='IV');
 function resetAll(){
   fromDiv.value=DEF_IDX; fromStar.value=0;
   toDiv.value=DEF_IDX;   toStar.value=0;
-  $('lpFrom').value=0; $('lpTo').value=0; $('legendRate').value=15;
+  $('lpFrom').value=0; $('lpTo').value=0;
   run();
 }
 $('resetBtn').addEventListener('click',resetAll);
