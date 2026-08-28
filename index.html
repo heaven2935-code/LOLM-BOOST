@@ -348,13 +348,13 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rk{width:34px;height:34px;margin-left:auto;object-fit:contain;
+  .rk{width:46px;height:46px;margin-left:auto;object-fit:contain;
     filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
   .card-head .badge{margin-left:8px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
-  td .ic img{width:19px;height:19px}
-  td .ic1{display:inline-block;vertical-align:middle;margin-right:9px}
-  td .ic1 img{width:26px;height:26px;vertical-align:middle}
+  td .ic img{width:26px;height:26px}
+  td .ic1{display:inline-block;vertical-align:middle;margin-right:11px}
+  td .ic1 img{width:42px;height:42px;vertical-align:middle}
   td .rng{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-top:3px}
   .seo h3{color:var(--gold)}
   footer{color:var(--muted);letter-spacing:.24em}
@@ -707,7 +707,7 @@ function hiName(star){
 }
 function zoneRange(p){
   const z = TIERS10.find(v=>v.price===p); if(!z) return null;
-  const name = z.base>=80 ? hiName(80)+' → '+TOP[lang] : hiName(z.base);
+  const name = hiName(z.base);
   const img  = z.base>=80 ? 'challenger' : (z.base<30?'master':(z.base<60?'grandmaster':'challenger'));
   return {name, lo:z.lo, hi:z.hi, img};
 }
@@ -897,6 +897,8 @@ function buildRateTable(){
       + z.name+'<span class="rng">'+z.lo+'–'+z.hi+' '+x.starWord+'</span></td>'
       +'<td>'+p+' '+x.perStar+'</td></tr>');
   });
+  rows.push('<tr><td><span class="ic1"><img src="rank-sovereign.png" alt=""></span>'
+    + TOP[lang]+'<span class="rng">'+x.topRank+'</span></td><td>—</td></tr>');
   rows.push('<tr class="grp"><td colspan="2">'+x.grpLegend+'</td></tr>');
   LP_TIERS.forEach(v=>rows.push(
     '<tr><td>'+(v.img?'<span class="ic1"><img src="lp-'+v.img+'.png" alt=""></span>':'')
