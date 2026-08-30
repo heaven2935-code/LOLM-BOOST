@@ -87,7 +87,7 @@
     text-shadow:0 0 16px rgba(255,75,69,.5),0 2px 10px rgba(0,0,0,.9)}
   @media (max-width:380px){
     .ctc .c1{font-size:16px} .ctc .c2{font-size:18px} .stamp{width:56px;height:56px}
-    .emb{width:104px;height:104px}
+    .emb{width:94px;height:94px}
   }
   .quote{color:var(--text-2);font-size:12px;margin-top:8px;letter-spacing:.03em}
 
@@ -243,18 +243,17 @@
 
   /* 分頁：選中只用紅框紅字＋左側紅條 */
   /* 分頁橫幅：整條共用一張底圖 */
-  .tabs{gap:0;padding:0;border:1px solid var(--line);background:var(--card)}
+  .tabs{gap:0;padding:0;border:1px solid var(--line);background:var(--card);margin:0 0 10px}
   .tabs button{display:flex;flex-direction:column;align-items:center;gap:10px;
-    padding:20px 6px 16px;background:transparent !important;border:0 !important;
+    padding:18px 6px 14px;background:transparent !important;border:0 !important;
     box-shadow:none !important;position:relative}
   .tabs button:first-child::after{content:'';position:absolute;right:0;top:16%;bottom:16%;
     width:1px;background:rgba(255,255,255,.14)}
-  .emb{width:124px;height:124px;object-fit:contain;transition:.22s;
-    opacity:.5;filter:grayscale(.5) drop-shadow(0 4px 12px rgba(0,0,0,.75))}
-  .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 16px rgba(255,59,36,.5));
-    transform:scale(1.06)}
+  .emb{width:110px;height:110px;object-fit:contain;transition:.22s;
+    opacity:.5;filter:grayscale(.45) drop-shadow(0 4px 12px rgba(0,0,0,.75))}
+  .tabs button.on .emb{opacity:1;filter:drop-shadow(0 0 16px rgba(255,59,36,.5));transform:scale(1.05)}
   .tabs button{border:1px solid var(--line);background:rgba(8,8,9,.8);letter-spacing:.14em;font-size:12px}
-  .tabs button{color:#fff !important;font-weight:700 !important;font-size:13.5px}
+  .tabs button{color:#fff !important;font-weight:700 !important;font-size:13px}
   .tabs button.on{background:transparent !important;border:0 !important;
     box-shadow:inset 0 -3px 0 var(--gold) !important}
   .tabs button span{color:#fff !important;text-shadow:0 2px 8px rgba(0,0,0,.85)}
@@ -295,6 +294,102 @@
   .goal .t{color:var(--muted);letter-spacing:.12em}
   .seg{background:#17181A}
   .track-legend{color:var(--muted);letter-spacing:.14em}
+
+  .pricebox{margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
+  .qline{font-size:12px;color:var(--muted);letter-spacing:.06em;
+    font-family:"Oswald","Noto Sans TC",sans-serif}
+  .qline b{color:#fff;font-size:19px;margin:0 3px}
+  .qline em{font-style:normal;color:var(--gold);margin-left:6px}
+  .pricebox .money{margin-top:6px}
+  .pricebox .money .val{font-size:40px}
+
+  /* 價目卡片 */
+  .rgroup{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:10.5px;letter-spacing:.24em;
+    color:var(--gold);margin:16px 0 10px}
+  .rswitch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 4px}
+  .rswitch button{display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:11px 6px;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;
+    letter-spacing:.12em;border:1px solid var(--line);background:rgba(10,10,12,.7);
+    color:var(--muted);cursor:pointer}
+  .rswitch img{width:26px;height:26px;object-fit:contain;opacity:.5;
+    filter:grayscale(.5);transition:.2s}
+  .rswitch button.on img{opacity:1;filter:drop-shadow(0 0 10px rgba(255,59,36,.5))}
+  .rswitch button.on{border-color:var(--gold);color:var(--gold);background:rgba(255,59,36,.08)}
+  .rgrp{display:none}
+  .rgrp.on{display:block}
+  .ring3d{position:relative;height:268px;margin:0 -15px 6px;
+    perspective:1150px;overflow:hidden;touch-action:pan-y;cursor:grab}
+  .ring3d:active{cursor:grabbing}
+  .ring{position:absolute;left:50%;top:22px;width:0;height:0;
+    transform-style:preserve-3d;will-change:transform}
+  .rcard{position:absolute;left:-76px;top:0;width:152px;height:206px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    background:rgba(10,10,12,.88);border:1px solid var(--line);
+    padding:18px 12px 14px;text-align:center;
+    backface-visibility:hidden;transition:border-color .2s,box-shadow .2s;
+    user-select:none;-webkit-user-select:none}
+  .rcard.mid{border-color:var(--gold);box-shadow:0 0 34px -14px var(--gold)}
+  .rcard img{width:92px;height:92px;object-fit:contain;
+    filter:drop-shadow(0 4px 14px rgba(0,0,0,.8))}
+  .rcard .rn{font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;font-size:15px;
+    color:#fff;margin-top:8px;letter-spacing:.06em}
+  .rcard .rs{font-size:10.5px;color:var(--muted);margin-top:4px;letter-spacing:.04em}
+  .rcard .rp{font-family:"Oswald",sans-serif;font-size:19px;color:var(--gold);
+    margin-top:auto;padding-top:9px;border-top:1px dashed var(--line-2)}
+  .rcard .rn{min-height:20px}
+  .rcard .rs{min-height:15px}
+  .rcard .rblank{width:92px;height:92px;margin:0 auto;display:grid;place-items:center;
+    border:1px dashed var(--line);color:var(--muted);font-size:22px}
+  .rcard.top{border-color:var(--gold-dim);background:rgba(255,59,36,.06)}
+  .dots{display:flex;justify-content:center;gap:6px;margin:-14px 0 4px}
+  .dots i{width:6px;height:6px;background:var(--line);cursor:pointer;transition:.2s}
+  .dots i.on{background:var(--gold);width:18px}
+  .dlist{display:grid;gap:1px;background:var(--line-2);border:1px solid var(--line-2)}
+  .drow{display:flex;justify-content:space-between;gap:10px;padding:12px 13px;
+    background:rgba(10,10,12,.72);font-size:13px;color:var(--text-2);line-height:1.7}
+  .drow span{flex:1}
+  .drow b{color:var(--gold);font-family:"Oswald",sans-serif;font-size:15px}
+
+  /* 分頁與底部導覽 */
+  .page{display:none}
+  .page.on{display:block}
+  .shell{padding-bottom:96px}
+  .nav{position:fixed;left:0;right:0;bottom:0;z-index:40;display:grid;
+    grid-template-columns:repeat(4,1fr);background:rgba(6,6,8,.94);
+    border-top:1px solid var(--line);backdrop-filter:blur(8px)}
+  .nav button{display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:11px 4px calc(11px + env(safe-area-inset-bottom));border:0;background:none;
+    color:var(--muted);cursor:pointer;font-family:inherit}
+  .nav button span{font-size:16px;line-height:1}
+  .nav button i{font-style:normal;font-size:11px;letter-spacing:.1em;
+    font-family:"Oswald","Noto Sans TC",sans-serif}
+  .nav button.on{color:var(--gold)}
+  .nav button.on span{text-shadow:0 0 14px var(--gold)}
+
+  /* 保障 / 組隊 */
+  .tlist{list-style:none;margin:0;padding:0}
+  .tlist li{padding:11px 0;border-bottom:1px dashed var(--line-2);
+    font-size:13px;line-height:1.75;color:var(--text-2)}
+  .tlist li:last-child{border-bottom:0}
+  .tlist b{color:#fff;font-weight:700}
+  .tbody{font-size:13px;line-height:1.85;color:var(--text-2);margin:0}
+
+  /* 精彩片段 */
+  .ph{background:var(--card);border:1px solid var(--line);padding:16px;position:relative}
+  .ph-k{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:13px;letter-spacing:.2em;
+    color:#fff;margin-bottom:14px}
+  .ph-k::before{content:'';display:inline-block;width:9px;height:9px;background:var(--gold);
+    margin-right:10px;vertical-align:1px}
+  .clipwrap{display:grid;gap:10px}
+  .clip{position:relative;aspect-ratio:16/9;background:#111;border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden}
+  .clip img{width:100%;height:100%;object-fit:cover;opacity:.75}
+  .clip .play{position:absolute;width:52px;height:52px;border:2px solid var(--gold);
+    display:grid;place-items:center;color:var(--gold);font-size:18px;background:rgba(0,0,0,.5)}
+  .clip iframe{width:100%;height:100%;border:0}
+  .clip.empty{color:var(--muted);font-size:12px;letter-spacing:.1em;
+    background:repeating-linear-gradient(45deg,#0E0E10 0 10px,#0B0B0D 10px 20px)}
+  .ph-note{font-size:11.5px;color:var(--muted);margin-top:12px;line-height:1.8}
 
   /* 報價單彈窗 */
   .modal{position:fixed;inset:0;z-index:50;background:rgba(3,3,4,.86);
@@ -391,31 +486,13 @@
 </div>
 <div class="imgnote" id="imgNote"></div>
 
+<div class="page on" id="pgQuote">
+
+
+
 <div class="tabs">
   <button class="on" data-mode="star"><img class="emb" src="emblem-star.png" alt=""><span id="tabStar"></span></button>
   <button data-mode="lp"><img class="emb" src="emblem-lp.png" alt=""><span id="tabLp"></span></button>
-</div>
-
-<div class="stats">
-  <div class="stat"><div class="k" id="kQty"></div><div class="v"><span id="qty">0</span><small id="unit"></small></div></div>
-  <div class="stat"><div class="k" id="kDisc"></div><div class="v" id="discLabel">—</div></div>
-  <div class="stat hero-stat"><div class="k" id="kPay"></div><div class="v" id="heroVal">—</div></div>
-</div>
-
-<div class="card">
-  <div class="card-head"><span class="idx">◈</span><h2 id="hProgress"></h2></div>
-  <div id="starTrackWrap">
-    <div class="track-bar" id="trackBar"></div>
-    <div class="track-legend" id="starLegend"></div>
-  </div>
-  <div id="lpTrackWrap" hidden>
-    <div class="track-bar" id="lpBar"></div>
-    <div class="track-legend" id="lpLegend"></div>
-  </div>
-  <div class="goal">
-    <div class="bar"><i id="goalBar"></i></div>
-    <div class="t" id="goalText">—</div>
-  </div>
 </div>
 
 <section id="panelStar">
@@ -475,9 +552,32 @@
   </div>
 </section>
 
+
+
+<div class="card">
+  <div class="card-head"><span class="idx">◈</span><h2 id="hProgress"></h2></div>
+  <div id="starTrackWrap">
+    <div class="track-bar" id="trackBar"></div>
+    <div class="track-legend" id="starLegend"></div>
+  </div>
+  <div id="lpTrackWrap" hidden>
+    <div class="track-bar" id="lpBar"></div>
+    <div class="track-legend" id="lpLegend"></div>
+  </div>
+  <div class="goal">
+    <div class="bar"><i id="goalBar"></i></div>
+    <div class="t" id="goalText">—</div>
+    <div class="pricebox">
+      <div class="qline">
+        <span id="qLabel2"></span> <b class="num" id="qty">0</b> <span id="unit"></span>
+        <em id="discLabel"></em>
+      </div>
+      <div class="money"><span class="cur">NT$</span><span class="val" id="total">0</span></div>
+    </div>
+  </div>
+</div>
 <div class="quote-card">
   <div class="qlabel" id="qLabel"></div>
-  <div class="money"><span class="cur">NT$</span><span class="val" id="total">0</span></div>
   <div class="breakdown" id="breakdown"></div>
   <div class="discount" id="discount"></div>
   <a class="cta" id="orderBtn" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
@@ -488,10 +588,37 @@
   </div>
 </div>
 
+</div><!-- /計價頁 -->
+
+<div class="page" id="pgClips">
+  <div class="ph">
+    <div class="ph-k" id="clipsTitle"></div>
+    <div class="clipwrap" id="clipWrap"></div>
+    <div class="ph-note" id="clipsNote"></div>
+  </div>
+</div>
+
+<div class="page" id="pgTrust">
+
 <details open>
   <summary id="rateSummary"></summary>
-  <table id="rateTable"></table>
+  <div id="rateTable"></div>
 </details>
+
+<div class="card trust">
+  <div class="card-head"><span class="idx">✔</span><h2 id="trustTitle"></h2></div>
+  <ul class="tlist">
+    <li><b>不掉分保證</b>　代陪期間若段位低於起始點，免費補打回原段位。</li>
+    <li><b>每日進度回報</b>　每場結束以 LINE 回報戰績截圖，隨時掌握進度。</li>
+    <li><b>帳號安全</b>　代陪全程不更動密碼、不綁定裝置、不動用帳號內資源。</li>
+    <li><b>逾期處理</b>　超過約定完成日，每逾一日折抵單價 5%，最高折抵 30%。</li>
+    <li><b>中止退款</b>　中途中止，依已完成星數計費，其餘全額退還。</li>
+    <li><b>資料保密</b>　完工後刪除帳號資訊，不留存、不轉售。</li>
+  </ul>
+</div>
+
+
+
 
 <div class="strip">
   <span class="crown">&#9819;</span> <span id="stripMain"></span>
@@ -500,16 +627,34 @@
 
 <section class="seo">
   <h2>關於 激鬥峽谷 LOLM</h2>
-  <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代練上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
+  <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代陪上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
   <h3>計價方式</h3>
-  <p>積分對戰以「星」為單位計價，鑽石 I 以下每星 120 元，大師區以每 10 顆星為一階，從 150 元起、每階加 25 元；81–100 星統一 350 元。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元；傳奇為最高牌階，不另計價。</p>
+  <p>積分對戰以場次計價，一場勝場（或敗方 SVP）＝一顆星：黑鐵至白金 80 元、翡翠 100 元、鑽石 150 元、大師 200 元、宗師 300 元、菁英至至尊 400 元。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元；傳奇為最高牌階，不另計價。</p>
   <h3>優惠方案</h3>
-  <p>單次下單金額滿 5,000 享 9 折、滿 10,000 享 8.5 折、滿 20,000 享 8 折，系統會自動套用並顯示折扣前後金額。</p>
+  <p>場次優惠：買 6 場送 1 場、買 10 場送 2 場、買 20 場送 5 場，系統自動套用。收費方式為先收費後服務，恕不欠單。</p>
   <h3>常見問題</h3>
   <p><strong>報價會變動嗎？</strong>價格依段位級距固定計算，輸入起訖段位即可看到完整明細。<br>
   <strong>支援哪些語言？</strong>繁體中文、English、Tiếng Việt 三語切換。<br>
   <strong>怎麼下單？</strong>算好金額後按「複製報價」，把內容私訊給我們即可。</p>
 </section>
+
+</div><!-- /保障頁 -->
+
+<div class="page" id="pgTeam">
+  <div class="card">
+    <div class="card-head"><span class="idx">⚑</span><h2 id="teamTitle"></h2></div>
+    <p class="tbody" id="teamBody"></p>
+    <a class="cta" id="teamCta" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
+  </div>
+  <div class="card">
+    <div class="card-head"><span class="idx">✦</span><h2 id="teamTitle2"></h2></div>
+    <ul class="tlist">
+      <li><b>找固定隊</b>　留下段位與慣用位置，配到程度相近的隊友。</li>
+      <li><b>單排陪打</b>　想有人一起排但不代打，可指定時段。</li>
+      <li><b>教學指導</b>　觀戰複盤、出裝與對線建議。</li>
+    </ul>
+  </div>
+</div>
 
 <div class="modal" id="modal" hidden>
   <div class="sheet">
@@ -528,6 +673,13 @@
 </div>
 
 <footer id="foot"></footer>
+
+<nav class="nav">
+  <button class="on" data-page="pgQuote"><span>◧</span><i id="navQuote"></i></button>
+  <button data-page="pgClips"><span>▶</span><i id="navClips"></i></button>
+  <button data-page="pgTrust"><span>✔</span><i id="navTrust"></i></button>
+  <button data-page="pgTeam"><span>⚑</span><i id="navTeam"></i></button>
+</nav>
 
 </div>
 <script>
@@ -551,7 +703,7 @@ const L = {
     tabStar:'積分對戰 · 星數', tabLp:'傳奇積分 · 分數',
     kQty:'需打', kDisc:'優惠', kPay:'應付',
     unitStar:'顆星', unitPt:'分',
-    hProgress:'進度與優惠', hFrom:'起點', hTo:'目標',
+    hProgress:'進度與優惠', hFrom:'目前段位', hTo:'期望段位',
     lRank:'段位', lStar:'星數', lPts:'積分',
     lpStepHint:'200 分一小段，800 分一個牌階',
     pickLogo:'＋ 更換標誌', pickHero:'＋ 更換封面圖',
@@ -570,9 +722,22 @@ const L = {
     grpRanked:'積分對戰', grpLegend:'傳奇積分', grpDisc:'單次下單優惠',
     perStar:'/ 星', perPt:'/ 分', custom:'可自訂', belowDiamondRow:'鑽石 I 以下（含）',
     over:m=>'滿 '+m,
-    stripMain:'單次滿 20,000 直接 8 折', stripEnd:'加賴帶你飛 ›',
+    stripMain:'買 20 場送 5 場 · 先收費後服務', stripEnd:'加賴帶你飛 ›',
     cta:'加賴下單 · 帶你飛',
     preview:'預覽報價單',
+    qLabel2:'需打', freeShort:n=>'贈送 '+n+' 場',
+    perGame:'/ 場', perWin:'勝場 or 敗方 SVP',
+    freeRow:n=>'場次優惠　贈送 '+n+' 場', goalMore:n=>'再 '+n+' 場多送 1 場',
+    starWord2:'場',
+    howTitle:'計價與收費', howCalc:'計價方式：勝場，或敗方 SVP，計算場次',
+    howPay:'收費方式：先收費後服務，恕不欠單',
+    grpDisc2:'場次優惠', p6:'購買 6 場', p10:'購買 10 場', p20:'購買 20 場',
+    navQuote:'計價', navClips:'片段', navTrust:'保障', navTeam:'組隊',
+    clipsTitle:'精彩片段', clipsNote:'影片陸續上架中。想看更多實績或指定段位的上分過程，直接加賴詢問。',
+    clipsEmpty:'影片準備中',
+    trustTitle:'服務保障', teamTitle:'找隊友 · 組隊區',
+    teamBody:'想找程度相近的隊友一起排位？加入 LINE 組隊群，留下你的段位與慣用位置，我們幫你配對。也接受單排陪打與教學指導。',
+    teamCta:'加入組隊群', teamTitle2:'提供的服務',
     topRank:'（最高牌階）', sheetTitle:'報 價 單', close:'關閉',
     prompt:'請選擇起點與目標段位', sheetNote:'本報價依段位級距自動計算，滿額優惠已含。價格如有調整以實際確認為準。',
     sItem:'項目', sQty:'數量', sAmt:'金額', sTotal:'應付總額',
@@ -586,7 +751,7 @@ const L = {
     tabStar:'Ranked · Marks', tabLp:'Legendary · Points',
     kQty:'To play', kDisc:'Discount', kPay:'Total',
     unitStar:'marks', unitPt:'pts',
-    hProgress:'Progress & Discount', hFrom:'From', hTo:'To',
+    hProgress:'Progress & Discount', hFrom:'CURRENT', hTo:'TARGET',
     lRank:'Rank', lStar:'Marks', lPts:'Points',
     lpStepHint:'200 pts per division, 800 pts per tier',
     pickLogo:'+ Replace logo', pickHero:'+ Replace cover',
@@ -605,9 +770,22 @@ const L = {
     grpRanked:'Ranked', grpLegend:'Legendary', grpDisc:'Order discount',
     perStar:'/ mark', perPt:'/ pt', custom:'Custom', belowDiamondRow:'Diamond I and below',
     over:m=>'Over '+m,
-    stripMain:'20% off on orders over 20,000', stripEnd:'Add on LINE ›',
+    stripMain:'Buy 20 games, get 5 free', stripEnd:'Add on LINE ›',
     cta:'ADD LINE TO ORDER',
     preview:'PREVIEW QUOTE',
+    qLabel2:'Games', freeShort:n=>'+'+n+' free',
+    perGame:'/ game', perWin:'Win or SVP loss',
+    freeRow:n=>'Bundle bonus — '+n+' free game(s)', goalMore:n=>n+' more game(s) for +1 free',
+    starWord2:'games',
+    howTitle:'HOW IT WORKS', howCalc:'Counted games: wins, or losses where you get SVP',
+    howPay:'Payment upfront; no credit orders',
+    grpDisc2:'GAME BUNDLES', p6:'Buy 6 games', p10:'Buy 10 games', p20:'Buy 20 games',
+    navQuote:'QUOTE', navClips:'CLIPS', navTrust:'TRUST', navTeam:'TEAM',
+    clipsTitle:'HIGHLIGHTS', clipsNote:'More clips coming soon. Ask on LINE for records of a specific rank range.',
+    clipsEmpty:'Coming soon',
+    trustTitle:'SERVICE GUARANTEE', teamTitle:'FIND TEAMMATES',
+    teamBody:'Looking for teammates at your level? Join the LINE group, tell us your rank and role, and we will match you. Duo and coaching are also available.',
+    teamCta:'JOIN THE GROUP', teamTitle2:'WHAT WE OFFER',
     topRank:'(Top rank)', sheetTitle:'QUOTATION', close:'Close',
     prompt:'Select a start and target rank', sheetNote:'Calculated by rank brackets; order discount included. Final price subject to confirmation.',
     sItem:'Item', sQty:'Qty', sAmt:'Amount', sTotal:'TOTAL',
@@ -621,7 +799,7 @@ const L = {
     tabStar:'Xếp hạng · Sao', tabLp:'Huyền thoại · Điểm',
     kQty:'Cần đánh', kDisc:'Ưu đãi', kPay:'Thanh toán',
     unitStar:'sao', unitPt:'điểm',
-    hProgress:'Tiến độ & Ưu đãi', hFrom:'Bắt đầu', hTo:'Mục tiêu',
+    hProgress:'Tiến độ & Ưu đãi', hFrom:'Hiện tại', hTo:'Mục tiêu',
     lRank:'Bậc', lStar:'Sao', lPts:'Điểm',
     lpStepHint:'200 điểm mỗi bậc nhỏ, 800 điểm mỗi bậc lớn',
     pickLogo:'+ Đổi logo', pickHero:'+ Đổi ảnh bìa',
@@ -640,9 +818,22 @@ const L = {
     grpRanked:'Xếp hạng', grpLegend:'Huyền thoại', grpDisc:'Ưu đãi theo đơn',
     perStar:'/ sao', perPt:'/ điểm', custom:'Tùy chỉnh', belowDiamondRow:'Kim Cương I trở xuống',
     over:m=>'Từ '+m,
-    stripMain:'Đơn từ 20.000 giảm ngay 20%', stripEnd:'Thêm LINE ›',
+    stripMain:'Mua 20 trận tặng 5 trận', stripEnd:'Thêm LINE ›',
     cta:'THÊM LINE ĐỂ ĐẶT',
     preview:'XEM BÁO GIÁ',
+    qLabel2:'Số trận', freeShort:n=>'tặng '+n+' trận',
+    perGame:'/ trận', perWin:'Thắng hoặc thua SVP',
+    freeRow:n=>'Ưu đãi — tặng '+n+' trận', goalMore:n=>'Thêm '+n+' trận được tặng 1',
+    starWord2:'trận',
+    howTitle:'CÁCH TÍNH & THANH TOÁN', howCalc:'Tính trận: thắng, hoặc thua nhưng đạt SVP',
+    howPay:'Thanh toán trước khi bắt đầu, không ghi nợ',
+    grpDisc2:'ƯU ĐÃI THEO TRẬN', p6:'Mua 6 trận', p10:'Mua 10 trận', p20:'Mua 20 trận',
+    navQuote:'BÁO GIÁ', navClips:'CLIP', navTrust:'CAM KẾT', navTeam:'ĐỘI',
+    clipsTitle:'KHOẢNH KHẮC', clipsNote:'Sẽ có thêm clip. Muốn xem thành tích ở bậc cụ thể, nhắn LINE cho chúng tôi.',
+    clipsEmpty:'Sắp ra mắt',
+    trustTitle:'CAM KẾT DỊCH VỤ', teamTitle:'TÌM ĐỒNG ĐỘI',
+    teamBody:'Muốn tìm đồng đội cùng trình? Vào nhóm LINE, để lại bậc và vị trí, chúng tôi ghép cho bạn. Có cả chơi cùng và hướng dẫn.',
+    teamCta:'VÀO NHÓM', teamTitle2:'DỊCH VỤ CUNG CẤP',
     topRank:'(Bậc cao nhất)', sheetTitle:'BÁO GIÁ', close:'Đóng',
     prompt:'Chọn bậc bắt đầu và mục tiêu', sheetNote:'Tính theo bậc; đã gồm ưu đãi theo đơn. Giá cuối theo xác nhận thực tế.',
     sItem:'Hạng mục', sQty:'SL', sAmt:'Số tiền', sTotal:'TỔNG CỘNG',
@@ -683,18 +874,38 @@ HI.forEach(tier=>tier.divs.forEach((r,i)=>{
 OPTIONS.push({n:TOP, div:'', base:LOW_TOTAL, min:100, max:100, high:true, fixed:true, img:TOP.img});
 const optLabel = o => (o.n[lang] + ' ' + o.div).trim();
 
+/* 單價依段位：一場勝場（或敗方 SVP）＝ 一顆星 */
+const LOW_END = (()=>{ let a=[],c=0; LOW.forEach(t=>{ c+=t.marks*4; a.push(c); }); return a; })();
 function priceOfStar(n){
-  if(n <= LOW_TOTAL) return 120;
-  const s = n - LOW_TOTAL;            // 大師區累積星數 1..100
-  if(s > 80) return 350;              // 菁英 I 之後統一 350
-  return 150 + 25 * (Math.ceil(s/10) - 1);
+  if(n <= LOW_TOTAL){
+    if(n <= LOW_END[4]) return 80;    // 黑鐵 → 白金
+    if(n <= LOW_END[5]) return 100;   // 翡翠
+    return 150;                        // 鑽石
+  }
+  const s = n - LOW_TOTAL;             // 大師區累積星數
+  if(s <= 30) return 200;              // 大師
+  if(s <= 60) return 300;              // 宗師
+  return 400;                          // 菁英 → 至尊
 }
-/* 大師區級距：每 10 顆一階，81–100 統一 350 */
-const TIERS10 = [
-  ...Array.from({length:8}, (_,k)=>({price:150+25*k, lo:k*10+1, hi:k*10+10, base:k*10})),
-  {price:350, lo:81, hi:100, base:80}
+/* 價目卡片資料 */
+const TIER_PRICE = {iron:80,bronze:80,silver:80,gold:80,platinum:80,
+  emerald:100,diamond:150,master:200,grandmaster:300,challenger:400,sovereign:400};
+const RATE_CARDS = [
+  {img:'rank-platinum.png',   key:'low',    price:80},
+  {img:'rank-emerald.png',    key:'emerald',price:100},
+  {img:'rank-diamond.png',    key:'diamond',price:150},
+  {img:'rank-master.png',     key:'master', price:200},
+  {img:'rank-grandmaster.png',key:'gm',     price:300},
+  {img:'rank-challenger.png', key:'chal',   price:400}
 ];
-const ZONE = Object.fromEntries(TIERS10.map(z=>[z.price,[z.lo,z.hi]]));
+const PRICE_NAME = {
+  80:  ()=>LOW[0].n[lang]+' → '+LOW[4].n[lang],
+  100: ()=>LOW[5].n[lang],
+  150: ()=>LOW[6].n[lang],
+  200: ()=>HI[0].n[lang],
+  300: ()=>HI[1].n[lang],
+  400: ()=>HI[2].n[lang]+' → '+TOP[lang]
+};
 function hiName(star){
   if(star>=100) return TOP[lang];
   for(const tier of HI){
@@ -705,13 +916,6 @@ function hiName(star){
   }
   return TOP[lang];
 }
-function zoneRange(p){
-  const z = TIERS10.find(v=>v.price===p); if(!z) return null;
-  const name = hiName(z.base);
-  const img  = z.base>=80 ? 'challenger' : (z.base<30?'master':(z.base<60?'grandmaster':'challenger'));
-  return {name, lo:z.lo, hi:z.hi, img};
-}
-const zoneLabel = p => { const z=zoneRange(p); return z ? z.name : t().belowD; };
 
 const LP_TIERS = [
   {n:{zh:'戰士',en:'Warrior',vi:'Chiến Binh'},     lo:0,    hi:800,  rate:6},
@@ -763,16 +967,20 @@ function paint(barId,a,b){
   });
 }
 
-function discountOf(sum){
-  if(sum>=20000) return {rate:.80,key:'d80',min:20000};
-  if(sum>=10000) return {rate:.85,key:'d85',min:10000};
-  if(sum>= 5000) return {rate:.90,key:'d90',min:5000};
-  return {rate:1,key:null,min:0};
+/* 場次優惠：6送1、10送2、20送5 */
+function bundleOf(games){
+  let r=games, free=0;
+  while(r>=25){ free+=5; r-=25; }
+  while(r>=12){ free+=2; r-=12; }
+  while(r>= 7){ free+=1; r-= 7; }
+  return {free, paid:games-free};
 }
-function nextTier(sum){
-  if(sum< 5000) return {need:5000-sum, key:'d90',base:0,    top:5000};
-  if(sum<10000) return {need:10000-sum,key:'d85',base:5000, top:10000};
-  if(sum<20000) return {need:20000-sum,key:'d80',base:10000,top:20000};
+/* 距離下一次多送一場還差幾場 */
+function nextBundle(games){
+  const now=bundleOf(games).free;
+  for(let g=games+1; g<=games+25; g++){
+    if(bundleOf(g).free>now) return {need:g-games, at:g, base:games, top:g};
+  }
   return null;
 }
 
@@ -808,7 +1016,7 @@ function calcStar(){
     const g={}; let total=0;
     for(let n=A.abs+1;n<=B.abs;n++){ const p=priceOfStar(n); g[p]=(g[p]||0)+1; total+=p; }
     return {total, rows:Object.keys(g).sort((x,y)=>x-y).map(p=>
-      ({tag: zoneLabel(+p)+' <b>'+g[p]+' '+t().starWord+'</b> × '+p, amt:g[p]*p}))};
+      ({tag: zoneLabel(+p)+' <b>'+g[p]+' '+t().starWord2+'</b> × '+p, amt:g[p]*p}))};
   }, t().errStar);
 }
 function calcLP(){
@@ -826,13 +1034,12 @@ function calcLP(){
   $('unit').textContent=t().unitPt;
   render(b-a, function(){
     let total=0; const rows=[];
-    LP_TIERS.forEach(x=>{
-      const lo=Math.max(a,x.lo), hi=Math.min(b,x.hi);
+    LP_TIERS.forEach(v=>{
+      if(v.rate===null) return;
+      const lo=Math.max(a,v.lo), hi=Math.min(b,v.hi);
       if(hi<=lo) return;
-      if(x.rate===null) return;
-      const r = x.rate;
-      total += (hi-lo)*r;
-      rows.push({tag:x.n[lang]+' <b>'+(hi-lo)+' '+t().ptWord+'</b> × '+r, amt:(hi-lo)*r});
+      total += (hi-lo)*v.rate;
+      rows.push({tag:v.n[lang]+' <b>'+(hi-lo)+' '+t().ptWord+'</b> × '+v.rate, amt:(hi-lo)*v.rate});
     });
     return {total, rows};
   }, t().errLp);
@@ -843,7 +1050,7 @@ function render(qty, compute, errMsg){
   if(qty<=0){
     LAST=null;
     $('qty').textContent='0'; $('total').textContent='—';
-    $('heroVal').textContent='—'; $('discLabel').textContent='—';
+    $('discLabel').textContent='';
     $('goalBar').style.width='0%'; $('goalText').textContent='—';
     dz.innerHTML='';
     const msg = qty===0 ? t().prompt : errMsg;
@@ -852,32 +1059,33 @@ function render(qty, compute, errMsg){
   }
   const r = compute();
   const total = r.total, rows = r.rows;
-  const d = discountOf(total);
-  const final = Math.round(total*d.rate);
+  const b = bundleOf(qty);
+  const avg = total/qty;
+  const cut = Math.round(avg*b.free);
+  const final = total - cut;
   $('qty').textContent=qty.toLocaleString('en-US');
   $('total').textContent=final.toLocaleString('en-US');
-  $('heroVal').textContent=final.toLocaleString('en-US');
-  $('discLabel').textContent = d.key ? t()[d.key] : t().none;
+  $('discLabel').textContent = b.free ? '· '+t().freeShort(b.free) : '';
   bd.innerHTML = rows.map(x=>
     '<div class="brow"><span class="tag">'+x.tag+'</span><span class="amt">'+x.amt.toLocaleString('en-US')+'</span></div>').join('');
 
   let html='';
-  if(d.key){
-    html += '<div class="brow disc-on"><span class="tag">'+t().discRow(d.min.toLocaleString('en-US'))+'<b>'+t()[d.key]+'</b></span>'
-          + '<span class="amt">−'+(total-final).toLocaleString('en-US')+'</span></div>';
+  if(b.free){
+    html += '<div class="brow disc-on"><span class="tag">'+t().freeRow(b.free)+'</span>'
+          + '<span class="amt">−'+cut.toLocaleString('en-US')+'</span></div>';
     html += '<div class="brow"><span class="tag">'+t().before+'</span><span class="amt strike">'+total.toLocaleString('en-US')+'</span></div>';
   }
   dz.innerHTML=html;
 
   LAST = {qty, rows, total, final, star:(mode==='star'),
-          disc: d.key ? t()[d.key] : null, discMin: d.min,
+          free: b.free, cut,
           from: mode==='star' ? $('fromBadge').textContent : $('lpFromBadge').textContent,
           to:   mode==='star' ? $('toBadge').textContent   : $('lpToBadge').textContent};
 
-  const n = nextTier(total);
+  const n = nextBundle(qty);
   if(n){
-    $('goalBar').style.width = Math.max(4, Math.min(100,(total-n.base)/(n.top-n.base)*100))+'%';
-    $('goalText').textContent = t().goalNext(n.need.toLocaleString('en-US'), t()[n.key]);
+    $('goalBar').style.width = Math.max(4, Math.min(100, qty/n.at*100))+'%';
+    $('goalText').textContent = t().goalMore(n.need);
   }else{
     $('goalBar').style.width='100%';
     $('goalText').textContent=t().goalMax;
@@ -886,29 +1094,54 @@ function render(qty, compute, errMsg){
 const run = () => mode==='star' ? calcStar() : calcLP();
 
 function buildRateTable(){
-  const x=t(), rows=[];
-  rows.push('<tr class="grp"><td colspan="2">'+x.grpRanked+'</td></tr>');
-  rows.push('<tr><td><span class="ic">'
-    + LOW.map(v=>'<img src="rank-'+v.img+'.png" alt="">').join('')
-    + '</span>'+x.belowDiamondRow+'</td><td>120 '+x.perStar+'</td></tr>');
-  TIERS10.map(v=>v.price).forEach(p=>{
-    const z=zoneRange(p);
-    rows.push('<tr><td><span class="ic1"><img src="rank-'+z.img+'.png" alt=""></span>'
-      + z.name+'<span class="rng">'+z.lo+'–'+z.hi+' '+x.starWord+'</span></td>'
-      +'<td>'+p+' '+x.perStar+'</td></tr>');
+  const x=t(), out=[];
+  const card = (img, name, sub, price, top) =>
+    '<div class="rcard'+(top?' top':'')+'">'
+    + (img ? '<img src="'+img+'" alt="">' : '<div class="rblank">★</div>')
+    + '<div class="rn">'+name+'</div>'
+    + '<div class="rs">'+sub+'</div>'
+    + '<div class="rp">'+price+'</div></div>';
+
+  /* 積分對戰 */
+  out.push('<div class="rgrp on" data-g="star"><div class="ring3d"><div class="ring">');
+  RATE_CARDS.forEach(c=>{
+    out.push(card(c.img, PRICE_NAME[c.price](), x.perWin, c.price+' '+x.perGame));
   });
-  rows.push('<tr><td><span class="ic1"><img src="rank-sovereign.png" alt=""></span>'
-    + TOP[lang]+'<span class="rng">'+x.topRank+'</span></td><td>—</td></tr>');
-  rows.push('<tr class="grp"><td colspan="2">'+x.grpLegend+'</td></tr>');
-  LP_TIERS.forEach(v=>rows.push(
-    '<tr><td>'+(v.img?'<span class="ic1"><img src="lp-'+v.img+'.png" alt=""></span>':'')
-    + v.n[lang]+'<span class="rng">'+(v.rate===null? v.lo.toLocaleString('en-US')+' '+x.topRank
-        : v.lo.toLocaleString('en-US')+'–'+v.hi.toLocaleString('en-US')+' '+x.ptWord)+'</span></td>'
-    + '<td>'+(v.rate===null?'—':v.rate+' '+x.perPt)+'</td></tr>'));
-  rows.push('<tr class="grp"><td colspan="2">'+x.grpDisc+'</td></tr>');
-  [[5000,'d90'],[10000,'d85'],[20000,'d80']].forEach(p=>
-    rows.push('<tr><td>'+x.over(p[0].toLocaleString('en-US'))+'</td><td>'+x[p[1]]+'</td></tr>'));
-  $('rateTable').innerHTML = rows.join('');
+  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(RATE_CARDS.length)+'</div></div>');
+
+  /* 傳奇積分 */
+  out.push('<div class="rgrp" data-g="lp"><div class="ring3d"><div class="ring">');
+  LP_TIERS.forEach(v=>{
+    const img = v.img ? 'lp-'+v.img+'.png' : '';
+    out.push(card(img, v.n[lang],
+      v.rate===null ? x.topRank : v.lo.toLocaleString('en-US')+'–'+v.hi.toLocaleString('en-US')+' '+x.ptWord,
+      v.rate===null ? '—' : v.rate+' '+x.perPt, v.rate===null));
+  });
+  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(LP_TIERS.length)+'</div></div>');
+
+
+  /* 切換鍵：放在環形選單下方 */
+  out.push('<div class="rswitch"><button class="on" data-g="star">'
+         + '<img src="emblem-star.png" alt="">'+x.grpRanked+'</button>'
+         + '<button data-g="lp"><img src="emblem-lp.png" alt="">'+x.grpLegend+'</button></div>');
+
+  /* 計價方式 / 優惠 / 收費 */
+  out.push('<div class="rgroup">'+x.howTitle+'</div>');
+  out.push('<div class="dlist">'
+    + '<div class="drow"><span>'+x.howCalc+'</span><b></b></div>'
+    + '<div class="drow"><span>'+x.howPay+'</span><b></b></div></div>');
+  out.push('<div class="rgroup">'+x.grpDisc2+'</div><div class="dlist">'
+    + '<div class="drow"><span>'+x.p6+'</span><b>+1</b></div>'
+    + '<div class="drow"><span>'+x.p10+'</span><b>+2</b></div>'
+    + '<div class="drow"><span>'+x.p20+'</span><b>+5</b></div></div>');
+
+  $('rateTable').innerHTML = out.join('');
+  document.querySelectorAll('.rswitch button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.rswitch button').forEach(y=>y.classList.toggle('on',y===b));
+    document.querySelectorAll('.rgrp').forEach(g=>g.classList.toggle('on', g.dataset.g===b.dataset.g));
+    initRing();
+  }));
+  initRing();
 }
 
 function applyLang(){
@@ -917,7 +1150,6 @@ function applyLang(){
   $('eyebrow').textContent = mode==='star' ? x.eyeStar : x.eyeLp;
   $('tabStar').textContent = x.tabStar;
   $('tabLp').textContent   = x.tabLp;
-  $('kQty').textContent=x.kQty; $('kDisc').textContent=x.kDisc; $('kPay').textContent=x.kPay;
   $('hProgress').textContent=x.hProgress;
   $('hFrom1').textContent=x.hFrom; $('hTo1').textContent=x.hTo;
   $('hFrom2').textContent=x.hFrom; $('hTo2').textContent=x.hTo;
@@ -929,9 +1161,17 @@ function applyLang(){
   $('pickHero').textContent=x.pickHero;
   $('imgNote').textContent=x.imgNote;
   $('qLabel').textContent=x.qLabel;
+  $('qLabel2').textContent=x.qLabel2;
   $('resetBtn').textContent=x.reset;
   $('copyBtn').textContent=x.copy;
   $('previewBtn').textContent=x.preview;
+  $('navQuote').textContent=x.navQuote; $('navClips').textContent=x.navClips;
+  $('navTrust').textContent=x.navTrust; $('navTeam').textContent=x.navTeam;
+  $('clipsTitle').textContent=x.clipsTitle; $('clipsNote').textContent=x.clipsNote;
+  $('trustTitle').textContent=x.trustTitle;
+  $('teamTitle').textContent=x.teamTitle; $('teamTitle2').textContent=x.teamTitle2;
+  $('teamBody').textContent=x.teamBody; $('teamCta').textContent=x.teamCta;
+  buildClips();
   $('rateSummary').textContent=x.rateSummary;
   $('stripMain').textContent=x.stripMain;
   $('stripEnd').textContent=x.stripEnd;
@@ -1014,6 +1254,100 @@ if(HERO_URL){
   document.documentElement.style.setProperty('--pagebg','url("'+HERO_URL+'")');
 }
 
+/* 3D 環形輪播：卡片排成一圈，可拖曳旋轉 */
+function initRing(){
+  document.querySelectorAll('.ring3d').forEach(box=>{
+    const ring  = box.querySelector('.ring');
+    const cards = [...ring.children];
+    const n = cards.length; if(!n) return;
+    const dots = box.nextElementSibling && box.nextElementSibling.classList.contains('dots')
+               ? [...box.nextElementSibling.children] : null;
+    const step = 360/n;
+    const W = 152, GAP = 18;
+    const R = Math.round((W+GAP)/2 / Math.tan(Math.PI/n));
+    let angle = 0, dragging=false, startX=0, startA=0, moved=false;
+
+    cards.forEach((c,k)=>{ c.style.transform = 'rotateY('+(k*step)+'deg) translateZ('+R+'px)'; });
+
+    function apply(anim){
+      ring.style.transition = anim ? 'transform .38s cubic-bezier(.2,.8,.2,1)' : 'none';
+      ring.style.transform  = 'translateZ('+(-R)+'px) rotateY('+(-angle)+'deg)';
+      let cur = ((Math.round(angle/step) % n) + n) % n;
+      cards.forEach((c,k)=>{
+        let d = (((k*step - angle) % 360) + 540) % 360 - 180;
+        const ad = Math.abs(d);
+        c.style.opacity = ad > 105 ? '.10' : String(Math.max(.2, 1 - ad/130));
+        c.style.zIndex  = String(300 - Math.round(ad));
+        c.classList.toggle('mid', ad < step/2);
+      });
+      if(dots) dots.forEach((dt,k)=>dt.classList.toggle('on', k===cur));
+    }
+    function snap(){ angle = Math.round(angle/step)*step; apply(true); }
+
+    box.addEventListener('pointerdown',e=>{
+      dragging=true; moved=false; startX=e.clientX; startA=angle;
+      box.setPointerCapture(e.pointerId);
+    });
+    box.addEventListener('pointermove',e=>{
+      if(!dragging) return;
+      const dx = e.clientX - startX;
+      if(Math.abs(dx)>4) moved=true;
+      angle = startA - dx*0.45;
+      apply(false);
+    });
+    const end=()=>{ if(dragging){ dragging=false; snap(); } };
+    box.addEventListener('pointerup',end);
+    box.addEventListener('pointercancel',end);
+    box.addEventListener('pointerleave',end);
+
+    cards.forEach((c,k)=>c.addEventListener('click',()=>{
+      if(moved) return;
+      let d = (((k*step - angle) % 360) + 540) % 360 - 180;
+      angle += d; apply(true);
+    }));
+    if(dots) dots.forEach((dt,k)=>dt.addEventListener('click',()=>{
+      let d = (((k*step - angle) % 360) + 540) % 360 - 180;
+      angle += d; apply(true);
+    }));
+
+    apply(false); setTimeout(()=>apply(false),60);
+  });
+}
+
+/* 分頁切換 */
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.nav button').forEach(y=>y.classList.toggle('on',y===b));
+  document.querySelectorAll('.page').forEach(pg=>pg.classList.toggle('on', pg.id===b.dataset.page));
+  window.scrollTo({top:0,behavior:'instant'});
+}));
+
+/* 精彩片段：先放縮圖，點了才載入播放器 */
+const CLIPS = [
+  /* 之後把 YouTube 影片 ID 填進來，例如 'dQw4w9WgXcQ' */
+];
+function buildClips(){
+  const w=$('clipWrap'); w.innerHTML='';
+  if(!CLIPS.length){
+    for(let i=0;i<2;i++){
+      const d=document.createElement('div');
+      d.className='clip empty'; d.textContent=t().clipsEmpty;
+      w.appendChild(d);
+    }
+    return;
+  }
+  CLIPS.forEach(id=>{
+    const d=document.createElement('div');
+    d.className='clip';
+    d.innerHTML='<img src="https://i.ytimg.com/vi/'+id+'/hqdefault.jpg" alt="">'
+              + '<span class="play">▶</span>';
+    d.addEventListener('click',()=>{
+      d.innerHTML='<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1" '
+        + 'allow="accelerometer; autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    },{once:true});
+    w.appendChild(d);
+  });
+}
+
 /* 報價單 */
 function openSheet(){
   const x=t();
@@ -1027,9 +1361,9 @@ function openSheet(){
     html += '<div class="srow"><span class="k">'+r.tag.replace(/<\/?b>/g,'')+'</span>'
           + '<span class="v">'+r.amt.toLocaleString('en-US')+'</span></div>';
   });
-  if(LAST.disc){
-    html += '<div class="srow acc"><span class="k">'+x.discRow(LAST.discMin.toLocaleString('en-US'))+LAST.disc+'</span>'
-          + '<span class="v">−'+(LAST.total-LAST.final).toLocaleString('en-US')+'</span></div>';
+  if(LAST.free){
+    html += '<div class="srow acc"><span class="k">'+x.freeRow(LAST.free)+'</span>'
+          + '<span class="v">−'+LAST.cut.toLocaleString('en-US')+'</span></div>';
     html += '<div class="srow"><span class="k">'+x.before+'</span><span class="v">'+LAST.total.toLocaleString('en-US')+'</span></div>';
   }
   html += '<div class="stotal"><span class="k">'+x.sTotal+'</span>'
