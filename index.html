@@ -45,9 +45,9 @@
   body{margin:0;background:transparent}
   body::before{content:'';position:fixed;inset:0;z-index:-2;pointer-events:none;
     background-image:var(--pagebg,none);background-size:cover;background-position:center 12%;
-    background-attachment:scroll;opacity:var(--bgop,.38);filter:saturate(1.18) contrast(1.08)}
+    background-attachment:scroll;opacity:var(--bgop,1);filter:saturate(1.12) contrast(1.04) brightness(1.06)}
   body::after{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
-    background:linear-gradient(180deg,rgba(7,5,5,.06),rgba(7,5,5,.24) 45%,rgba(7,5,5,.48))}
+    background:linear-gradient(180deg,rgba(7,5,5,0),rgba(7,5,5,.06) 40%,rgba(7,5,5,.34))}
   body{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;-webkit-font-smoothing:antialiased}
   .shell{max-width:520px;margin:0 auto;padding:18px 14px 40px;color:var(--text);background:transparent}
 
@@ -57,11 +57,8 @@
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .hero{position:relative;border:0;overflow:hidden;
-    margin:0 0 14px;background:transparent;min-height:52vh}
-  .hero .bg{display:none}
-  .hero .veil{position:absolute;left:0;right:0;bottom:0;height:26%;background:
-    linear-gradient(0deg,rgba(6,6,6,.85),rgba(6,6,6,0))}
+  .bgspace{height:46vh}
+
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
   header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
   .mark{flex:0 0 auto;width:44px;height:44px;border:1px solid var(--gold-dim);border-radius:3px;
@@ -78,9 +75,9 @@
     background:linear-gradient(90deg,var(--gold),var(--gold-lite) 62%,transparent)}
   h1 em{font-style:normal;color:var(--gold-lite);
     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
-  .titleimg{display:block;margin:2px 0 10px;line-height:0}
-  .titleimg img{width:100%;height:auto;display:block;
-    filter:drop-shadow(0 8px 22px rgba(0,0,0,.85))}
+  .titleimg{display:block;margin:-4px 0 0;line-height:0}
+  .titleimg img{width:82%;max-width:340px;height:auto;display:block;
+    filter:drop-shadow(0 6px 18px rgba(0,0,0,.9))}
   .titleimg:active img{transform:translateY(1px)}
   }
   .ctc .c2{font-size:21px;letter-spacing:.01em;color:var(--gold-lite);
@@ -475,9 +472,9 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rk{width:46px;height:46px;margin-left:auto;object-fit:contain;
-    filter:drop-shadow(0 2px 6px rgba(0,0,0,.7))}
-  .card-head .badge{margin-left:8px}
+  .rk{width:64px;height:64px;margin-left:auto;object-fit:contain;
+    filter:drop-shadow(0 3px 10px rgba(0,0,0,.85))}
+  .card-head .badge{margin-left:10px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
   td .ic img{width:26px;height:26px}
   td .ic1{display:inline-block;vertical-align:middle;margin-right:11px}
@@ -500,10 +497,7 @@
   <img src="title.png" alt="激鬥峽谷 LOLM · 加賴帶你飛 0867473723">
 </a>
 
-<div class="hero">
-  <div class="bg" id="heroBg"></div>
-  <div class="veil"></div>
-</div>
+<div class="bgspace"></div>
 
 <div class="page on" id="pgQuote">
 
@@ -745,7 +739,7 @@ const L = {
     kQty:'需打', kDisc:'優惠', kPay:'應付',
     unitStar:'顆星', unitPt:'分',
     hProgress:'進度與優惠', hFrom:'目前段位', hTo:'期望段位',
-    lRank:'段位', lStar:'星數', lPts:'積分',
+    lRank:'段位選擇', lStar:'星數', lPts:'積分',
     lpStepHint:'200 分一小段，800 分一個牌階',
     pickLogo:'＋ 更換標誌', pickHero:'＋ 更換封面圖',
     imgNote:'圖片僅在本次瀏覽有效。要永久套用，把圖檔放進網站資料夾，並修改檔案開頭的 LOGO_URL / HERO_URL。',
@@ -795,7 +789,7 @@ const L = {
     kQty:'To play', kDisc:'Discount', kPay:'Total',
     unitStar:'marks', unitPt:'pts',
     hProgress:'Progress & Discount', hFrom:'CURRENT', hTo:'TARGET',
-    lRank:'Rank', lStar:'Marks', lPts:'Points',
+    lRank:'Select rank', lStar:'Marks', lPts:'Points',
     lpStepHint:'200 pts per division, 800 pts per tier',
     pickLogo:'+ Replace logo', pickHero:'+ Replace cover',
     imgNote:'Images apply to this session only. To keep them, put the files next to this HTML and set LOGO_URL / HERO_URL at the top of the file.',
@@ -845,7 +839,7 @@ const L = {
     kQty:'Cần đánh', kDisc:'Ưu đãi', kPay:'Thanh toán',
     unitStar:'sao', unitPt:'điểm',
     hProgress:'Tiến độ & Ưu đãi', hFrom:'Hiện tại', hTo:'Mục tiêu',
-    lRank:'Bậc', lStar:'Sao', lPts:'Điểm',
+    lRank:'Chọn bậc', lStar:'Sao', lPts:'Điểm',
     lpStepHint:'200 điểm mỗi bậc nhỏ, 800 điểm mỗi bậc lớn',
     pickLogo:'+ Đổi logo', pickHero:'+ Đổi ảnh bìa',
     imgNote:'Ảnh chỉ áp dụng cho phiên này. Để lưu vĩnh viễn, đặt tệp cạnh HTML và sửa LOGO_URL / HERO_URL ở đầu tệp.',
@@ -1292,7 +1286,7 @@ $('copyBtn').addEventListener('click',()=>{
 });
 
 function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img src="'+url+'" alt="logo">' : ''; }
-function setHero(url){ $('heroBg').style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
+function setHero(url){ const el=$('heroBg'); if(el) el.style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
 if(HERO_URL){
