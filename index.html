@@ -23,8 +23,8 @@
 <meta name="twitter:title" content="激鬥峽谷 LOLM｜加賴帶你飛 0867473723#0000">
 <meta name="twitter:description" content="輸入段位即時報價，傳奇積分同步計價，單次滿額最高 8 折。">
 <meta name="twitter:image" content="https://heaven2935-code.github.io/LOLM-BOOST/og.png?v=10">
-<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/icon.png?v=2">
-<link rel="icon" type="image/png" href="https://heaven2935-code.github.io/LOLM-BOOST/icon.png?v=2">
+<link rel="apple-touch-icon" href="https://heaven2935-code.github.io/LOLM-BOOST/icon.png?v=3">
+<link rel="icon" type="image/png" href="https://heaven2935-code.github.io/LOLM-BOOST/icon.png?v=3">
 <meta name="apple-mobile-web-app-title" content="激鬥峽谷LOLM">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -58,12 +58,12 @@
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
   .hero{position:relative;border:0;border-radius:0;overflow:hidden;
-    margin-bottom:14px;background:transparent;min-height:300px;display:flex;align-items:flex-start}
+    margin-bottom:14px;background:transparent;min-height:62vh;display:flex;align-items:flex-end}
   .hero .bg{display:none}
   .hero .veil{position:absolute;inset:0;background:
-    linear-gradient(180deg,rgba(8,8,8,.90),rgba(8,8,8,.42) 42%,rgba(8,8,8,0) 74%)}
+    linear-gradient(180deg,rgba(8,8,8,.55),rgba(8,8,8,0) 26%,rgba(8,8,8,0) 58%,rgba(8,8,8,.88))}
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
-  header{position:relative;z-index:2;display:block;padding:0 2px}
+  header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
   .mark{flex:0 0 auto;width:44px;height:44px;border:1px solid var(--gold-dim);border-radius:3px;
     display:grid;place-items:center;color:var(--gold);font-family:"Oswald",sans-serif;
     font-size:19px;font-weight:700;background:linear-gradient(160deg,#1A160E,#101010);overflow:hidden}
@@ -295,6 +295,23 @@
   .seg{background:#17181A}
   .track-legend{color:var(--muted);letter-spacing:.14em}
 
+  .gwrap{display:flex;align-items:center;gap:16px}
+  .gauge{position:relative;width:132px;height:132px;flex:0 0 auto}
+  .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
+  .gauge circle{fill:none;stroke-width:9}
+  .gauge .gbg{stroke:#1C1E22}
+  .gauge .garc{stroke:var(--gold);stroke-linecap:butt;
+    transition:stroke-dasharray .4s ease,stroke-dashoffset .4s ease,stroke .3s}
+  .gc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;gap:2px}
+  .gc b{font-family:"Oswald",sans-serif;font-size:34px;color:#fff;line-height:1}
+  .gc span{font-size:11px;color:var(--muted);letter-spacing:.14em}
+  .gside{flex:1;min-width:0}
+  .grow{display:flex;justify-content:space-between;gap:8px;padding:7px 0;
+    border-bottom:1px dashed var(--line-2);font-size:11.5px;color:var(--muted);
+    letter-spacing:.08em;font-family:"Oswald","Noto Sans TC",sans-serif}
+  .grow:last-child{border-bottom:0}
+  .grow b{color:#fff;font-weight:600;font-size:12.5px;text-align:right}
   .pricebox{margin-top:14px;padding-top:13px;border-top:1px dashed var(--line)}
   .qline{font-size:12px;color:var(--muted);letter-spacing:.06em;
     font-family:"Oswald","Noto Sans TC",sans-serif}
@@ -306,7 +323,9 @@
   /* 價目卡片 */
   .rgroup{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:10.5px;letter-spacing:.24em;
     color:var(--gold);margin:16px 0 10px}
-  .rswitch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0 4px}
+  .rswitch{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:6px 0 4px}
+  .rtitle{font-family:"Oswald","Noto Sans TC",sans-serif;font-size:11px;letter-spacing:.24em;
+    color:var(--gold);padding:0 4px;white-space:nowrap}
   .rswitch button{display:flex;align-items:center;justify-content:center;gap:8px;
     padding:11px 6px;font-family:"Oswald","Noto Sans TC",sans-serif;font-size:12.5px;
     letter-spacing:.12em;border:1px solid var(--line);background:rgba(10,10,12,.7);
@@ -317,19 +336,19 @@
   .rswitch button.on{border-color:var(--gold);color:var(--gold);background:rgba(255,59,36,.08)}
   .rgrp{display:none}
   .rgrp.on{display:block}
-  .ring3d{position:relative;height:268px;margin:0 -15px 6px;
+  .ring3d{position:relative;height:214px;margin:0 -15px 6px;
     perspective:1150px;overflow:hidden;touch-action:pan-y;cursor:grab}
   .ring3d:active{cursor:grabbing}
   .ring{position:absolute;left:50%;top:22px;width:0;height:0;
     transform-style:preserve-3d;will-change:transform}
-  .rcard{position:absolute;left:-76px;top:0;width:152px;height:206px;
+  .rcard{position:absolute;left:-76px;top:0;width:152px;height:152px;
     display:flex;flex-direction:column;justify-content:space-between;
     background:rgba(10,10,12,.88);border:1px solid var(--line);
     padding:18px 12px 14px;text-align:center;
     backface-visibility:hidden;transition:border-color .2s,box-shadow .2s;
     user-select:none;-webkit-user-select:none}
   .rcard.mid{border-color:var(--gold);box-shadow:0 0 34px -14px var(--gold)}
-  .rcard img{width:92px;height:92px;object-fit:contain;
+  .rcard img{width:104px;height:104px;object-fit:contain;
     filter:drop-shadow(0 4px 14px rgba(0,0,0,.8))}
   .rcard .rn{font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;font-size:15px;
     color:#fff;margin-top:8px;letter-spacing:.06em}
@@ -338,12 +357,15 @@
     margin-top:auto;padding-top:9px;border-top:1px dashed var(--line-2)}
   .rcard .rn{min-height:20px}
   .rcard .rs{min-height:15px}
-  .rcard .rblank{width:92px;height:92px;margin:0 auto;display:grid;place-items:center;
+  .rcard .rblank{width:104px;height:104px;margin:0 auto;display:grid;place-items:center;
     border:1px dashed var(--line);color:var(--muted);font-size:22px}
   .rcard.top{border-color:var(--gold-dim);background:rgba(255,59,36,.06)}
   .dots{display:flex;justify-content:center;gap:6px;margin:-14px 0 4px}
   .dots i{width:6px;height:6px;background:var(--line);cursor:pointer;transition:.2s}
   .dots i.on{background:var(--gold);width:18px}
+  .rinfo{text-align:center;margin:6px 0 2px;font-family:"Oswald","Noto Sans TC",sans-serif;
+    font-size:14px;letter-spacing:.06em;color:#fff;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis}
   .dlist{display:grid;gap:1px;background:var(--line-2);border:1px solid var(--line-2)}
   .drow{display:flex;justify-content:space-between;gap:10px;padding:12px 13px;
     background:rgba(10,10,12,.72);font-size:13px;color:var(--text-2);line-height:1.7}
@@ -421,6 +443,26 @@
     font-size:13px;letter-spacing:.18em;cursor:pointer}
   .sheet .cta{margin-top:14px}
 
+  /* 按鈕組 */
+  .btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;
+    padding:15px 12px;margin-top:10px;cursor:pointer;text-decoration:none;
+    font-family:"Oswald","Noto Sans TC",sans-serif;font-weight:700;font-size:14.5px;
+    letter-spacing:.18em;border:1px solid transparent;position:relative;
+    clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px);
+    transition:.16s}
+  .btn:active{transform:translateY(1px)}
+  .btn-pv{background:linear-gradient(100deg,#20080A,#120607);color:#fff;
+    border-color:var(--gold);box-shadow:inset 0 0 26px -12px var(--gold)}
+  .btn-pv::before{content:'▤';color:var(--gold);font-size:13px}
+  .btn-line{background:linear-gradient(100deg,#06C755,#04A445);color:#04210F;
+    box-shadow:0 6px 26px -10px #06C755}
+  .btn-line::before{content:'LINE';font-size:11px;letter-spacing:.16em;
+    background:#04210F;color:#06C755;padding:3px 7px}
+  .btn-gh{background:rgba(12,12,14,.8);color:var(--text-2);border-color:var(--line);
+    font-size:13px;letter-spacing:.14em;margin-top:0}
+  .btn-gh:active{border-color:var(--gold);color:var(--gold)}
+  .actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}
+
   /* 行動按鈕 */
   .cta{display:flex;align-items:center;justify-content:center;gap:10px;
     margin-top:16px;padding:17px 14px;background:#06C755;color:#04210F;
@@ -469,8 +511,7 @@
   <div class="veil"></div>
   <header>
     <div>
-      <div class="eyebrow" id="eyebrow"></div>
-      <h1>激鬥峽谷 <em>LOLM</em><span class="bar"></span></h1>
+          <h1>激鬥峽谷 <em>LOLM</em><span class="bar"></span></h1>
 
     </div>
   </header>
@@ -556,7 +597,24 @@
 
 <div class="card">
   <div class="card-head"><span class="idx">◈</span><h2 id="hProgress"></h2></div>
-  <div id="starTrackWrap">
+  <div class="gwrap">
+    <div class="gauge">
+      <svg viewBox="0 0 120 120">
+        <circle class="gbg" cx="60" cy="60" r="52"></circle>
+        <circle class="garc" id="gArc" cx="60" cy="60" r="52"></circle>
+      </svg>
+      <div class="gc">
+        <b class="num" id="qty">0</b>
+        <span id="unit"></span>
+      </div>
+    </div>
+    <div class="gside">
+      <div class="grow"><span id="gFromK"></span><b id="gFrom">—</b></div>
+      <div class="grow"><span id="gToK"></span><b id="gTo">—</b></div>
+      <div class="grow"><span id="gFreeK"></span><b id="discLabel">—</b></div>
+    </div>
+  </div>
+  <div id="starTrackWrap" hidden>
     <div class="track-bar" id="trackBar"></div>
     <div class="track-legend" id="starLegend"></div>
   </div>
@@ -565,14 +623,9 @@
     <div class="track-legend" id="lpLegend"></div>
   </div>
   <div class="goal">
-    <div class="bar"><i id="goalBar"></i></div>
-    <div class="t" id="goalText">—</div>
     <div class="pricebox">
-      <div class="qline">
-        <span id="qLabel2"></span> <b class="num" id="qty">0</b> <span id="unit"></span>
-        <em id="discLabel"></em>
-      </div>
       <div class="money"><span class="cur">NT$</span><span class="val" id="total">0</span></div>
+      <div class="t" id="goalText">—</div>
     </div>
   </div>
 </div>
@@ -580,11 +633,11 @@
   <div class="qlabel" id="qLabel"></div>
   <div class="breakdown" id="breakdown"></div>
   <div class="discount" id="discount"></div>
-  <a class="cta" id="orderBtn" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
+  <button class="btn btn-pv" id="previewBtn"></button>
+  <a class="btn btn-line" id="orderBtn" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
   <div class="actions">
-    <button id="resetBtn"></button>
-    <button id="previewBtn"></button>
-    <button class="primary" id="copyBtn"></button>
+    <button class="btn btn-gh" id="copyBtn"></button>
+    <button class="btn btn-gh" id="resetBtn"></button>
   </div>
 </div>
 
@@ -608,6 +661,7 @@
 <div class="card trust">
   <div class="card-head"><span class="idx">✔</span><h2 id="trustTitle"></h2></div>
   <ul class="tlist">
+    <li><b>計價方式</b>　勝場，或敗方 SVP，計算場次。</li>
     <li><b>不掉分保證</b>　代陪期間若段位低於起始點，免費補打回原段位。</li>
     <li><b>每日進度回報</b>　每場結束以 LINE 回報戰績截圖，隨時掌握進度。</li>
     <li><b>帳號安全</b>　代陪全程不更動密碼、不綁定裝置、不動用帳號內資源。</li>
@@ -625,13 +679,22 @@
   <a class="end" id="stripEnd" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
 </div>
 
+<div class="card">
+  <div class="card-head"><span class="idx">$</span><h2 id="payTitle"></h2></div>
+  <ul class="tlist">
+    <li><b>先收費後服務</b>　確認報價後付款，恕不欠單。</li>
+    <li><b>付款方式</b>　銀行轉帳、LINE Pay、街口支付。</li>
+    <li><b>開始時間</b>　款項確認後當日或約定時段開打。</li>
+  </ul>
+</div>
+
 <section class="seo">
   <h2>關於 激鬥峽谷 LOLM</h2>
   <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代陪上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
   <h3>計價方式</h3>
   <p>積分對戰以場次計價，一場勝場（或敗方 SVP）＝一顆星：黑鐵至白金 80 元、翡翠 100 元、鑽石 150 元、大師 200 元、宗師 300 元、菁英至至尊 400 元。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元；傳奇為最高牌階，不另計價。</p>
-  <h3>優惠方案</h3>
-  <p>場次優惠：買 6 場送 1 場、買 10 場送 2 場、買 20 場送 5 場，系統自動套用。收費方式為先收費後服務，恕不欠單。</p>
+  <h3>收費與保障</h3>
+  <p>收費方式為先收費後服務，恕不欠單；付款確認後當日或約定時段開打。代陪期間不掉分保證、每場回報戰績、不更動帳號資料。</p>
   <h3>常見問題</h3>
   <p><strong>報價會變動嗎？</strong>價格依段位級距固定計算，輸入起訖段位即可看到完整明細。<br>
   <strong>支援哪些語言？</strong>繁體中文、English、Tiếng Việt 三語切換。<br>
@@ -722,9 +785,11 @@ const L = {
     grpRanked:'積分對戰', grpLegend:'傳奇積分', grpDisc:'單次下單優惠',
     perStar:'/ 星', perPt:'/ 分', custom:'可自訂', belowDiamondRow:'鑽石 I 以下（含）',
     over:m=>'滿 '+m,
-    stripMain:'買 20 場送 5 場 · 先收費後服務', stripEnd:'加賴帶你飛 ›',
+    stripMain:'先收費後服務 · 不掉分保證', stripEnd:'加賴帶你飛 ›',
     cta:'加賴下單 · 帶你飛',
     preview:'預覽報價單',
+    payTitle:'收費方式', rateWord:'單價表',
+    kDisc2:'贈送',
     qLabel2:'需打', freeShort:n=>'贈送 '+n+' 場',
     perGame:'/ 場', perWin:'勝場 or 敗方 SVP',
     freeRow:n=>'場次優惠　贈送 '+n+' 場', goalMore:n=>'再 '+n+' 場多送 1 場',
@@ -770,9 +835,11 @@ const L = {
     grpRanked:'Ranked', grpLegend:'Legendary', grpDisc:'Order discount',
     perStar:'/ mark', perPt:'/ pt', custom:'Custom', belowDiamondRow:'Diamond I and below',
     over:m=>'Over '+m,
-    stripMain:'Buy 20 games, get 5 free', stripEnd:'Add on LINE ›',
+    stripMain:'Payment upfront · Rank protected', stripEnd:'Add on LINE ›',
     cta:'ADD LINE TO ORDER',
     preview:'PREVIEW QUOTE',
+    payTitle:'PAYMENT', rateWord:'RATE CARD',
+    kDisc2:'Bonus',
     qLabel2:'Games', freeShort:n=>'+'+n+' free',
     perGame:'/ game', perWin:'Win or SVP loss',
     freeRow:n=>'Bundle bonus — '+n+' free game(s)', goalMore:n=>n+' more game(s) for +1 free',
@@ -818,9 +885,11 @@ const L = {
     grpRanked:'Xếp hạng', grpLegend:'Huyền thoại', grpDisc:'Ưu đãi theo đơn',
     perStar:'/ sao', perPt:'/ điểm', custom:'Tùy chỉnh', belowDiamondRow:'Kim Cương I trở xuống',
     over:m=>'Từ '+m,
-    stripMain:'Mua 20 trận tặng 5 trận', stripEnd:'Thêm LINE ›',
+    stripMain:'Thanh toán trước · Bảo đảm không tụt hạng', stripEnd:'Thêm LINE ›',
     cta:'THÊM LINE ĐỂ ĐẶT',
     preview:'XEM BÁO GIÁ',
+    payTitle:'THANH TOÁN', rateWord:'BẢNG GIÁ',
+    kDisc2:'Tặng',
     qLabel2:'Số trận', freeShort:n=>'tặng '+n+' trận',
     perGame:'/ trận', perWin:'Thắng hoặc thua SVP',
     freeRow:n=>'Ưu đãi — tặng '+n+' trận', goalMore:n=>'Thêm '+n+' trận được tặng 1',
@@ -888,6 +957,11 @@ function priceOfStar(n){
   return 400;                          // 菁英 → 至尊
 }
 /* 價目卡片資料 */
+const TIER_COLOR = {iron:'#8E8A84',bronze:'#B57C51',silver:'#AEB8C6',gold:'#E0AC3C',
+  platinum:'#4FD1CE',emerald:'#2FBF8F',diamond:'#6C9BFF',master:'#B07AF7',
+  grandmaster:'#EE6055',challenger:'#F3C74B',sovereign:'#FF7ED4'};
+const LP_COLOR = {commander:'#4FD1CE',guardian:'#B07AF7',vanquisher:'#EE6055',
+  mythic:'#6C9BFF',legend:'#F3C74B'};
 const TIER_PRICE = {iron:80,bronze:80,silver:80,gold:80,platinum:80,
   emerald:100,diamond:150,master:200,grandmaster:300,challenger:400,sovereign:400};
 const RATE_CARDS = [
@@ -1031,6 +1105,9 @@ function calcLP(){
   if(ia) $('lpFromRk').src='lp-'+ia+'.png';
   if(ib) $('lpToRk').src='lp-'+ib+'.png';
   paint('lpBar', Math.min(a,b), Math.max(a,b));
+  PROG = {from:a, to:b, max:LP_MAX,
+          color:LP_COLOR[lpTierOf(b).img]||'#8E8A84',
+          fromTxt:$('lpFromBadge').textContent, toTxt:$('lpToBadge').textContent};
   $('unit').textContent=t().unitPt;
   render(b-a, function(){
     let total=0; const rows=[];
@@ -1044,14 +1121,14 @@ function calcLP(){
     return {total, rows};
   }, t().errLp);
 }
-let LAST = null;
+let LAST = null, PROG = null;
 function render(qty, compute, errMsg){
   const bd=$('breakdown'), dz=$('discount');
   if(qty<=0){
     LAST=null;
     $('qty').textContent='0'; $('total').textContent='—';
     $('discLabel').textContent='';
-    $('goalBar').style.width='0%'; $('goalText').textContent='—';
+    drawGauge(0); $('goalText').textContent='—';
     dz.innerHTML='';
     const msg = qty===0 ? t().prompt : errMsg;
     bd.innerHTML='<div class="brow"><span class="tag">'+msg+'</span><span></span></div>';
@@ -1082,32 +1159,47 @@ function render(qty, compute, errMsg){
           from: mode==='star' ? $('fromBadge').textContent : $('lpFromBadge').textContent,
           to:   mode==='star' ? $('toBadge').textContent   : $('lpToBadge').textContent};
 
+  drawGauge(qty);
   const n = nextBundle(qty);
   if(n){
-    $('goalBar').style.width = Math.max(4, Math.min(100, qty/n.at*100))+'%';
     $('goalText').textContent = t().goalMore(n.need);
   }else{
-    $('goalBar').style.width='100%';
     $('goalText').textContent=t().goalMax;
   }
+}
+const CIRC = 2*Math.PI*52;
+function drawGauge(qty){
+  const arc = $('gArc');
+  if(!PROG || qty<=0){
+    arc.style.strokeDasharray = '0 '+CIRC;
+    $('gFrom').textContent='—'; $('gTo').textContent='—';
+    return;
+  }
+  const span = Math.min(1, (PROG.to-PROG.from)/PROG.max);
+  arc.style.stroke = PROG.color;
+  arc.style.strokeDasharray = (CIRC*span)+' '+CIRC;
+  arc.style.strokeDashoffset = -(CIRC*(PROG.from/PROG.max));
+  $('gFrom').textContent = PROG.fromTxt;
+  $('gTo').textContent   = PROG.toTxt;
 }
 const run = () => mode==='star' ? calcStar() : calcLP();
 
 function buildRateTable(){
   const x=t(), out=[];
   const card = (img, name, sub, price, top) =>
-    '<div class="rcard'+(top?' top':'')+'">'
+    '<div class="rcard'+(top?' top':'')+'" data-info="'+name+'　'+sub+'　'+price+'">'
     + (img ? '<img src="'+img+'" alt="">' : '<div class="rblank">★</div>')
-    + '<div class="rn">'+name+'</div>'
-    + '<div class="rs">'+sub+'</div>'
-    + '<div class="rp">'+price+'</div></div>';
+    + '</div>';
 
   /* 積分對戰 */
   out.push('<div class="rgrp on" data-g="star"><div class="ring3d"><div class="ring">');
+  const RANGE = {80:'1–64', 100:'65–84', 150:'85–108', 200:'1–30', 300:'31–60', 400:'61–100'};
   RATE_CARDS.forEach(c=>{
-    out.push(card(c.img, PRICE_NAME[c.price](), x.perWin, c.price+' '+x.perGame));
+    out.push(card(c.img, PRICE_NAME[c.price](),
+      RANGE[c.price]+' '+x.starWord, c.price+' '+x.perGame));
   });
-  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(RATE_CARDS.length)+'</div></div>');
+  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(RATE_CARDS.length)+'</div>'
+    + '<div class="rinfo"></div></div>');
 
   /* 傳奇積分 */
   out.push('<div class="rgrp" data-g="lp"><div class="ring3d"><div class="ring">');
@@ -1117,23 +1209,15 @@ function buildRateTable(){
       v.rate===null ? x.topRank : v.lo.toLocaleString('en-US')+'–'+v.hi.toLocaleString('en-US')+' '+x.ptWord,
       v.rate===null ? '—' : v.rate+' '+x.perPt, v.rate===null));
   });
-  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(LP_TIERS.length)+'</div></div>');
+  out.push('</div></div><div class="dots">'+'<i></i>'.repeat(LP_TIERS.length)+'</div>'
+    + '<div class="rinfo"></div></div>');
 
 
   /* 切換鍵：放在環形選單下方 */
   out.push('<div class="rswitch"><button class="on" data-g="star">'
          + '<img src="emblem-star.png" alt="">'+x.grpRanked+'</button>'
+         + '<span class="rtitle">'+x.rateWord+'</span>'
          + '<button data-g="lp"><img src="emblem-lp.png" alt="">'+x.grpLegend+'</button></div>');
-
-  /* 計價方式 / 優惠 / 收費 */
-  out.push('<div class="rgroup">'+x.howTitle+'</div>');
-  out.push('<div class="dlist">'
-    + '<div class="drow"><span>'+x.howCalc+'</span><b></b></div>'
-    + '<div class="drow"><span>'+x.howPay+'</span><b></b></div></div>');
-  out.push('<div class="rgroup">'+x.grpDisc2+'</div><div class="dlist">'
-    + '<div class="drow"><span>'+x.p6+'</span><b>+1</b></div>'
-    + '<div class="drow"><span>'+x.p10+'</span><b>+2</b></div>'
-    + '<div class="drow"><span>'+x.p20+'</span><b>+5</b></div></div>');
 
   $('rateTable').innerHTML = out.join('');
   document.querySelectorAll('.rswitch button').forEach(b=>b.addEventListener('click',()=>{
@@ -1147,7 +1231,6 @@ function buildRateTable(){
 function applyLang(){
   document.documentElement.lang = lang==='zh' ? 'zh-Hant' : lang;
   const x=t();
-  $('eyebrow').textContent = mode==='star' ? x.eyeStar : x.eyeLp;
   $('tabStar').textContent = x.tabStar;
   $('tabLp').textContent   = x.tabLp;
   $('hProgress').textContent=x.hProgress;
@@ -1161,7 +1244,7 @@ function applyLang(){
   $('pickHero').textContent=x.pickHero;
   $('imgNote').textContent=x.imgNote;
   $('qLabel').textContent=x.qLabel;
-  $('qLabel2').textContent=x.qLabel2;
+  $('gFromK').textContent=x.hFrom; $('gToK').textContent=x.hTo; $('gFreeK').textContent=x.kDisc2;
   $('resetBtn').textContent=x.reset;
   $('copyBtn').textContent=x.copy;
   $('previewBtn').textContent=x.preview;
@@ -1169,6 +1252,7 @@ function applyLang(){
   $('navTrust').textContent=x.navTrust; $('navTeam').textContent=x.navTeam;
   $('clipsTitle').textContent=x.clipsTitle; $('clipsNote').textContent=x.clipsNote;
   $('trustTitle').textContent=x.trustTitle;
+  $('payTitle').textContent=x.payTitle;
   $('teamTitle').textContent=x.teamTitle; $('teamTitle2').textContent=x.teamTitle2;
   $('teamBody').textContent=x.teamBody; $('teamCta').textContent=x.teamCta;
   buildClips();
@@ -1197,7 +1281,6 @@ document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',
   $('panelLP').hidden   = mode!=='lp';
   $('starTrackWrap').hidden = mode!=='star';
   $('lpTrackWrap').hidden   = mode!=='lp';
-  $('eyebrow').textContent = mode==='star' ? t().eyeStar : t().eyeLp;
   run();
 }));
 document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>{
@@ -1281,6 +1364,8 @@ function initRing(){
         c.classList.toggle('mid', ad < step/2);
       });
       if(dots) dots.forEach((dt,k)=>dt.classList.toggle('on', k===cur));
+      const info = box.parentElement.querySelector('.rinfo');
+      if(info && cards[cur]) info.textContent = cards[cur].dataset.info || '';
     }
     function snap(){ angle = Math.round(angle/step)*step; apply(true); }
 
