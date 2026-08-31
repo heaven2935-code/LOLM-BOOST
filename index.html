@@ -370,6 +370,10 @@
     padding:11px 4px calc(11px + env(safe-area-inset-bottom));border:0;background:none;
     color:var(--muted);cursor:pointer;font-family:inherit}
   .nav button span{font-size:16px;line-height:1}
+  .nav button img{width:30px;height:30px;object-fit:contain;
+    opacity:.45;filter:grayscale(.6);transition:.2s}
+  .nav button.on img{opacity:1;filter:drop-shadow(0 0 10px rgba(255,59,36,.55))}
+  .nav button i{font-size:10px}
   .nav button i{font-style:normal;font-size:11px;letter-spacing:.1em;
     font-family:"Oswald","Noto Sans TC",sans-serif}
   .nav button.on{color:var(--gold)}
@@ -472,8 +476,11 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rk{width:64px;height:64px;margin-left:auto;object-fit:contain;
-    filter:drop-shadow(0 3px 10px rgba(0,0,0,.85))}
+  .rkrow{display:flex;align-items:center;gap:14px}
+  .rkcol{flex:1;min-width:0}
+  .rk{width:112px;height:112px;flex:0 0 auto;object-fit:contain;
+    filter:drop-shadow(0 6px 16px rgba(0,0,0,.85))}
+  @media (max-width:390px){ .rk{width:92px;height:92px} }
   .card-head .badge{margin-left:10px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
   td .ic img{width:26px;height:26px}
@@ -503,10 +510,7 @@
 
 
 
-<div class="tabs">
-  <button class="on" data-mode="star"><img class="emb" src="emblem-star.png" alt=""><span id="tabStar"></span></button>
-  <button data-mode="lp"><img class="emb" src="emblem-lp.png" alt=""><span id="tabLp"></span></button>
-</div>
+
 
 <section id="panelStar">
   <div class="card">
@@ -664,7 +668,7 @@
   <h2>關於 激鬥峽谷 LOLM</h2>
   <p>本站提供《英雄聯盟：激鬥峽谷》（LOLM / Wild Rift）代陪上分的即時計價服務。選擇目前段位與目標段位，系統會自動換算中間所需的星數，並依各段位單價分段計算總金額；傳奇積分（Legendary）也可依牌階分段計價。</p>
   <h3>計價方式</h3>
-  <p>積分對戰以場次計價，一場勝場（或敗方 SVP）＝一顆星：黑鐵至白金 80 元、翡翠 100 元、鑽石 150 元、大師 200 元、宗師 300 元、菁英至至尊 400 元。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元；傳奇為最高牌階，不另計價。</p>
+  <p>積分對戰以場次計價，一場勝場（或敗方 SVP）＝一顆星：黑鐵至白金 80 元、翡翠 100 元、鑽石 150 元、大師 200 元、宗師 300 元、菁英 400 元、至尊 450 元（100 星以上）。傳奇積分以「分」計價，戰士 6 元、指揮官 8 元、守護者 10 元、征服者 12 元、神話 15 元、傳奇 20 元（4000 分以上，上限 7000 分）。</p>
   <h3>收費與保障</h3>
   <p>收費方式為先收費後服務，恕不欠單；付款確認後當日或約定時段開打。代陪期間不掉分保證、每場回報戰績、不更動帳號資料。</p>
   <h3>常見問題</h3>
@@ -674,22 +678,6 @@
 </section>
 
 </div><!-- /保障頁 -->
-
-<div class="page" id="pgTeam">
-  <div class="card">
-    <div class="card-head"><span class="idx">⚑</span><h2 id="teamTitle"></h2></div>
-    <p class="tbody" id="teamBody"></p>
-    <a class="cta" id="teamCta" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener"></a>
-  </div>
-  <div class="card">
-    <div class="card-head"><span class="idx">✦</span><h2 id="teamTitle2"></h2></div>
-    <ul class="tlist">
-      <li><b>找固定隊</b>　留下段位與慣用位置，配到程度相近的隊友。</li>
-      <li><b>單排陪打</b>　想有人一起排但不代打，可指定時段。</li>
-      <li><b>教學指導</b>　觀戰複盤、出裝與對線建議。</li>
-    </ul>
-  </div>
-</div>
 
 <div class="modal" id="modal" hidden>
   <div class="sheet">
@@ -710,10 +698,12 @@
 <footer id="foot"></footer>
 
 <nav class="nav">
-  <button class="on" data-page="pgQuote"><span>◧</span><i id="navQuote"></i></button>
+  <button class="on" data-page="pgQuote" data-mode="star">
+    <img src="emblem-star.png" alt=""><i id="navStar"></i></button>
+  <button data-page="pgQuote" data-mode="lp">
+    <img src="emblem-lp.png" alt=""><i id="navLp"></i></button>
   <button data-page="pgClips"><span>▶</span><i id="navClips"></i></button>
   <button data-page="pgTrust"><span>✔</span><i id="navTrust"></i></button>
-  <button data-page="pgTeam"><span>⚑</span><i id="navTeam"></i></button>
 </nav>
 
 </div>
@@ -740,12 +730,12 @@ const L = {
     unitStar:'顆星', unitPt:'分',
     hProgress:'進度與優惠', hFrom:'目前段位', hTo:'期望段位',
     lRank:'段位選擇', lStar:'星數', lPts:'積分',
-    lpStepHint:'200 分一小段，800 分一個牌階',
+    lpStepHint:'200 分一小段，800 分一個牌階；上限 7000 分',
     pickLogo:'＋ 更換標誌', pickHero:'＋ 更換封面圖',
     imgNote:'圖片僅在本次瀏覽有效。要永久套用，把圖檔放進網站資料夾，並修改檔案開頭的 LOGO_URL / HERO_URL。',
     hintDiv:(a,b,n)=>'此小段 '+a+'–'+b+' 星，滿 '+n+' 顆升段',
     hintHigh:(a,b)=>'此小段範圍 '+a+'–'+b+' 星（大師區累積）',
-    hintTop:'至尊 = 累積 100 星',
+    hintTop:'至尊 100 星起，可續打至 700 星',
     qLabel:'Estimate · 報價',
     reset:'重設', copy:'複製報價', copied:'已複製',
     errStar:'目標段位要高於起點', errLp:'目標積分要高於起點',
@@ -760,6 +750,7 @@ const L = {
     stripMain:'先收費後服務 · 不掉分保證', stripEnd:'加賴帶你飛 ›',
     cta:'加賴下單 · 帶你飛',
     preview:'預覽報價單',
+    navStar:'積分對戰', navLp:'傳奇積分',
     payTitle:'收費方式', rateWord:'單價表',
     kDisc2:'贈送',
     qLabel2:'需打', freeShort:n=>'贈送 '+n+' 場',
@@ -795,7 +786,7 @@ const L = {
     imgNote:'Images apply to this session only. To keep them, put the files next to this HTML and set LOGO_URL / HERO_URL at the top of the file.',
     hintDiv:(a,b,n)=>a+'–'+b+' marks in this division, '+n+' to promote',
     hintHigh:(a,b)=>a+'–'+b+' marks (cumulative from Master)',
-    hintTop:'Sovereign = 100 marks total',
+    hintTop:'Sovereign starts at 100, up to 700 marks',
     qLabel:'Estimate',
     reset:'Reset', copy:'Copy quote', copied:'Copied',
     errStar:'Target rank must be above the start', errLp:'Target points must be above the start',
@@ -810,6 +801,7 @@ const L = {
     stripMain:'Payment upfront · Rank protected', stripEnd:'Add on LINE ›',
     cta:'ADD LINE TO ORDER',
     preview:'PREVIEW QUOTE',
+    navStar:'RANKED', navLp:'LEGEND',
     payTitle:'PAYMENT', rateWord:'RATE CARD',
     kDisc2:'Bonus',
     qLabel2:'Games', freeShort:n=>'+'+n+' free',
@@ -845,7 +837,7 @@ const L = {
     imgNote:'Ảnh chỉ áp dụng cho phiên này. Để lưu vĩnh viễn, đặt tệp cạnh HTML và sửa LOGO_URL / HERO_URL ở đầu tệp.',
     hintDiv:(a,b,n)=>'Bậc này '+a+'–'+b+' sao, đủ '+n+' sao thăng bậc',
     hintHigh:(a,b)=>'Phạm vi '+a+'–'+b+' sao (cộng dồn từ Cao Thủ)',
-    hintTop:'Chí Tôn = tổng 100 sao',
+    hintTop:'Chí Tôn từ 100 sao, tối đa 700 sao',
     qLabel:'Báo giá',
     reset:'Đặt lại', copy:'Sao chép', copied:'Đã sao chép',
     errStar:'Bậc mục tiêu phải cao hơn bậc bắt đầu', errLp:'Điểm mục tiêu phải cao hơn điểm bắt đầu',
@@ -860,6 +852,7 @@ const L = {
     stripMain:'Thanh toán trước · Bảo đảm không tụt hạng', stripEnd:'Thêm LINE ›',
     cta:'THÊM LINE ĐỂ ĐẶT',
     preview:'XEM BÁO GIÁ',
+    navStar:'XẾP HẠNG', navLp:'HUYỀN THOẠI',
     payTitle:'THANH TOÁN', rateWord:'BẢNG GIÁ',
     kDisc2:'Tặng',
     qLabel2:'Số trận', freeShort:n=>'tặng '+n+' trận',
@@ -903,6 +896,7 @@ const HI = [
 const TOP = {zh:'至尊',en:'Sovereign',vi:'Chí Tôn', img:'sovereign'};
 const HI_DIVS = ['III','II','I'];
 const LOW_TOTAL = LOW.reduce((s,x)=>s+x.marks*4,0);
+const MAX_ABS = LOW_TOTAL + 700;
 
 const OPTIONS = [];
 LOW.forEach((tier,ti)=>DIVS.forEach((d,di)=>{
@@ -912,7 +906,7 @@ LOW.forEach((tier,ti)=>DIVS.forEach((d,di)=>{
 HI.forEach(tier=>tier.divs.forEach((r,i)=>{
   OPTIONS.push({n:tier.n, div:HI_DIVS[i], base:LOW_TOTAL, min:r[0], max:r[1], high:true, img:tier.img});
 }));
-OPTIONS.push({n:TOP, div:'', base:LOW_TOTAL, min:100, max:100, high:true, fixed:true, img:TOP.img});
+OPTIONS.push({n:TOP, div:'', base:LOW_TOTAL, min:100, max:700, high:true, img:TOP.img});
 const optLabel = o => (o.n[lang] + ' ' + o.div).trim();
 
 /* 單價依段位：一場勝場（或敗方 SVP）＝ 一顆星 */
@@ -924,9 +918,10 @@ function priceOfStar(n){
     return 150;                        // 鑽石
   }
   const s = n - LOW_TOTAL;             // 大師區累積星數
-  if(s <= 30) return 200;              // 大師
-  if(s <= 60) return 300;              // 宗師
-  return 400;                          // 菁英 → 至尊
+  if(s <= 30)  return 200;             // 大師
+  if(s <= 60)  return 300;             // 宗師
+  if(s <= 100) return 400;             // 菁英
+  return 450;                          // 至尊（100 星以上）
 }
 /* 價目卡片資料 */
 const TIER_COLOR = {iron:'#8E8A84',bronze:'#B57C51',silver:'#AEB8C6',gold:'#E0AC3C',
@@ -942,7 +937,8 @@ const RATE_CARDS = [
   {img:'rank-diamond.png',    key:'diamond',price:150},
   {img:'rank-master.png',     key:'master', price:200},
   {img:'rank-grandmaster.png',key:'gm',     price:300},
-  {img:'rank-challenger.png', key:'chal',   price:400}
+  {img:'rank-challenger.png', key:'chal',   price:400},
+  {img:'rank-sovereign.png',  key:'top',    price:450}
 ];
 const PRICE_NAME = {
   80:  ()=>LOW[0].n[lang]+' → '+LOW[4].n[lang],
@@ -950,8 +946,10 @@ const PRICE_NAME = {
   150: ()=>LOW[6].n[lang],
   200: ()=>HI[0].n[lang],
   300: ()=>HI[1].n[lang],
-  400: ()=>HI[2].n[lang]+' → '+TOP[lang]
+  400: ()=>HI[2].n[lang],
+  450: ()=>TOP[lang]
 };
+const zoneLabel = p => (PRICE_NAME[p] ? PRICE_NAME[p]() : '');
 function hiName(star){
   if(star>=100) return TOP[lang];
   for(const tier of HI){
@@ -969,9 +967,9 @@ const LP_TIERS = [
   {n:{zh:'守護者',en:'Guardian',vi:'Hộ Vệ'},       lo:1600, hi:2400, rate:10, img:'guardian'},
   {n:{zh:'征服者',en:'Vanquisher',vi:'Chinh Phục'},lo:2400, hi:3200, rate:12, img:'vanquisher'},
   {n:{zh:'神話',en:'Mythic',vi:'Thần Thoại'},      lo:3200, hi:4000, rate:15, img:'mythic'},
-  {n:{zh:'傳奇',en:'Legend',vi:'Huyền Thoại'},     lo:4000, hi:4001, rate:null, img:'legend'}
+  {n:{zh:'傳奇',en:'Legend',vi:'Huyền Thoại'},     lo:4000, hi:7000, rate:20, img:'legend'}
 ];
-const LP_MAX = 4000;
+const LP_MAX = 7000;
 const lpTierOf = p => LP_TIERS.find(x=>p>=x.lo && p<x.hi) || LP_TIERS[LP_TIERS.length-1];
 function lpLabel(p){
   const x = lpTierOf(p);
@@ -1057,6 +1055,9 @@ function calcStar(){
   const A=syncSide(fromDiv,fromStar,$('fromHint'),$('fromBadge'),$('fromRk'));
   const B=syncSide(toDiv,toStar,$('toHint'),$('toBadge'),$('toRk'));
   paint('trackBar', Math.min(A.abs,B.abs), Math.max(A.abs,B.abs));
+  PROG = {from:A.abs, to:B.abs, max:MAX_ABS,
+          color:TIER_COLOR[B.o.img]||'#8E8A84',
+          fromTxt:$('fromBadge').textContent, toTxt:$('toBadge').textContent};
   $('unit').textContent=t().unitStar;
   render(B.abs-A.abs, function(){
     const g={}; let total=0;
@@ -1165,7 +1166,7 @@ function buildRateTable(){
 
   /* 積分對戰 */
   out.push('<div class="rgrp on" data-g="star"><div class="swipe">');
-  const RANGE = {80:'1–64', 100:'65–84', 150:'85–108', 200:'1–30', 300:'31–60', 400:'61–100'};
+  const RANGE = {80:'1–64', 100:'65–84', 150:'85–108', 200:'1–30', 300:'31–60', 400:'61–100', 450:'101–700'};
   RATE_CARDS.forEach(c=>{
     out.push(card(c.img, PRICE_NAME[c.price](),
       RANGE[c.price]+' '+x.starWord, c.price+' '+x.perGame));
@@ -1203,8 +1204,6 @@ function buildRateTable(){
 function applyLang(){
   document.documentElement.lang = lang==='zh' ? 'zh-Hant' : lang;
   const x=t();
-  $('tabStar').textContent = x.tabStar;
-  $('tabLp').textContent   = x.tabLp;
   $('hProgress').textContent=x.hProgress;
   $('hFrom1').textContent=x.hFrom; $('hTo1').textContent=x.hTo;
   $('hFrom2').textContent=x.hFrom; $('hTo2').textContent=x.hTo;
@@ -1217,13 +1216,11 @@ function applyLang(){
   $('resetBtn').textContent=x.reset;
   $('copyBtn').textContent=x.copy;
   $('previewBtn').textContent=x.preview;
-  $('navQuote').textContent=x.navQuote; $('navClips').textContent=x.navClips;
-  $('navTrust').textContent=x.navTrust; $('navTeam').textContent=x.navTeam;
+  $('navStar').textContent=x.navStar; $('navLp').textContent=x.navLp; $('navClips').textContent=x.navClips;
+  $('navTrust').textContent=x.navTrust;
   $('clipsTitle').textContent=x.clipsTitle; $('clipsNote').textContent=x.clipsNote;
   $('trustTitle').textContent=x.trustTitle;
   $('payTitle').textContent=x.payTitle;
-  $('teamTitle').textContent=x.teamTitle; $('teamTitle2').textContent=x.teamTitle2;
-  $('teamBody').textContent=x.teamBody; $('teamCta').textContent=x.teamCta;
   buildClips();
   $('rateSummary').textContent=x.rateSummary;
   $('stripMain').textContent=x.stripMain;
@@ -1243,15 +1240,7 @@ document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',
   document.querySelectorAll('.lang button').forEach(y=>y.classList.toggle('on',y===b));
   applyLang();
 }));
-document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
-  mode=b.dataset.mode;
-  document.querySelectorAll('.tabs button').forEach(y=>y.classList.toggle('on',y===b));
-  $('panelStar').hidden = mode!=='star';
-  $('panelLP').hidden   = mode!=='lp';
-  $('starTrackWrap').hidden = mode!=='star';
-  $('lpTrackWrap').hidden   = mode!=='lp';
-  run();
-}));
+
 document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>{
   const el=$(b.dataset.for);
   if(el.disabled) return;
@@ -1327,6 +1316,14 @@ function initRing(){
 document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{
   document.querySelectorAll('.nav button').forEach(y=>y.classList.toggle('on',y===b));
   document.querySelectorAll('.page').forEach(pg=>pg.classList.toggle('on', pg.id===b.dataset.page));
+  if(b.dataset.mode){
+    mode = b.dataset.mode;
+    $('panelStar').hidden = mode!=='star';
+    $('panelLP').hidden   = mode!=='lp';
+    $('starTrackWrap').hidden = mode!=='star';
+    $('lpTrackWrap').hidden   = mode!=='lp';
+    run();
+  }
   window.scrollTo({top:0,behavior:'instant'});
 }));
 
