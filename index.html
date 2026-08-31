@@ -57,7 +57,7 @@
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .bgspace{height:46vh}
+  .bgspace{height:54vh}
 
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
   header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
@@ -76,8 +76,8 @@
   h1 em{font-style:normal;color:var(--gold-lite);
     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
   .titleimg{display:block;margin:-4px 0 0;line-height:0}
-  .titleimg img{width:82%;max-width:340px;height:auto;display:block;
-    filter:drop-shadow(0 6px 18px rgba(0,0,0,.9))}
+  .titleimg img{width:60%;max-width:232px;height:auto;display:block;
+    filter:drop-shadow(0 5px 14px rgba(0,0,0,.9))}
   .titleimg:active img{transform:translateY(1px)}
   }
   .ctc .c2{font-size:21px;letter-spacing:.01em;color:var(--gold-lite);
@@ -297,8 +297,7 @@
   .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
   .gauge circle{fill:none;stroke-width:9}
   .gauge .gbg{stroke:#1C1E22}
-  .gauge .garc{stroke:var(--gold);stroke-linecap:butt;
-    transition:stroke-dasharray .4s ease,stroke-dashoffset .4s ease,stroke .3s}
+  .gauge .garc{stroke-linecap:butt;transition:stroke-dasharray .35s ease}
   .gc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:2px}
   .gc b{font-family:"Oswald",sans-serif;font-size:34px;color:#fff;line-height:1}
@@ -369,11 +368,13 @@
   .nav button{display:flex;flex-direction:column;align-items:center;gap:4px;
     padding:11px 4px calc(11px + env(safe-area-inset-bottom));border:0;background:none;
     color:var(--muted);cursor:pointer;font-family:inherit}
-  .nav button span{font-size:16px;line-height:1}
-  .nav button img{width:30px;height:30px;object-fit:contain;
-    opacity:.45;filter:grayscale(.6);transition:.2s}
+  .nav button span,.nav button img{display:grid;place-items:center;
+    width:34px;height:34px;object-fit:contain}
+  .nav button span{font-size:27px;line-height:1;color:var(--muted)}
+  .nav button img{opacity:.45;filter:grayscale(.6);transition:.2s}
   .nav button.on img{opacity:1;filter:drop-shadow(0 0 10px rgba(255,59,36,.55))}
-  .nav button i{font-size:10px}
+  .nav button.on span{color:var(--gold);text-shadow:0 0 14px var(--gold)}
+  .nav button i{font-size:10.5px}
   .nav button i{font-style:normal;font-size:11px;letter-spacing:.1em;
     font-family:"Oswald","Noto Sans TC",sans-serif}
   .nav button.on{color:var(--gold)}
@@ -476,8 +477,14 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rkrow{display:flex;align-items:center;gap:14px}
-  .rkcol{flex:1;min-width:0}
+  .rkrow{display:flex;align-items:center;gap:12px}
+  .rkcol{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rkcol select{padding:10px 26px 10px 10px;font-size:14.5px}
+  .rkcol .sel::after{right:10px;width:5px;height:5px}
+  .rkcol .stepper{height:42px}
+  .rkcol .stepper button{width:30px;height:40px;font-size:16px}
+  .rkcol .stepper input{font-size:15px}
+  .rkcol label{font-size:9.5px;margin-bottom:5px;letter-spacing:.1em}
   .rk{width:112px;height:112px;flex:0 0 auto;object-fit:contain;
     filter:drop-shadow(0 6px 16px rgba(0,0,0,.85))}
   @media (max-width:390px){ .rk{width:92px;height:92px} }
@@ -575,9 +582,8 @@
   <div class="card-head"><span class="idx">◈</span><h2 id="hProgress"></h2></div>
   <div class="gwrap">
     <div class="gauge">
-      <svg viewBox="0 0 120 120">
+      <svg viewBox="0 0 120 120" id="gSvg">
         <circle class="gbg" cx="60" cy="60" r="52"></circle>
-        <circle class="garc" id="gArc" cx="60" cy="60" r="52"></circle>
       </svg>
       <div class="gc">
         <b class="num" id="qty">0</b>
@@ -929,6 +935,9 @@ const TIER_COLOR = {iron:'#8E8A84',bronze:'#B57C51',silver:'#AEB8C6',gold:'#E0AC
   grandmaster:'#EE6055',challenger:'#F3C74B',sovereign:'#FF7ED4'};
 const LP_COLOR = {commander:'#4FD1CE',guardian:'#B07AF7',vanquisher:'#EE6055',
   mythic:'#6C9BFF',legend:'#F3C74B'};
+const PRICE_COLOR = {80:'#9BA6B2',100:'#2FBF8F',150:'#6C9BFF',
+  200:'#B07AF7',300:'#EE6055',400:'#F3C74B',450:'#FF7ED4'};
+const LPRATE_COLOR = {6:'#8FA6D6',8:'#4FD1CE',10:'#B07AF7',12:'#EE6055',15:'#6C9BFF',20:'#F3C74B'};
 const TIER_PRICE = {iron:80,bronze:80,silver:80,gold:80,platinum:80,
   emerald:100,diamond:150,master:200,grandmaster:300,challenger:400,sovereign:400};
 const RATE_CARDS = [
@@ -1055,9 +1064,13 @@ function calcStar(){
   const A=syncSide(fromDiv,fromStar,$('fromHint'),$('fromBadge'),$('fromRk'));
   const B=syncSide(toDiv,toStar,$('toHint'),$('toBadge'),$('toRk'));
   paint('trackBar', Math.min(A.abs,B.abs), Math.max(A.abs,B.abs));
-  PROG = {from:A.abs, to:B.abs, max:MAX_ABS,
-          color:TIER_COLOR[B.o.img]||'#8E8A84',
-          fromTxt:$('fromBadge').textContent, toTxt:$('toBadge').textContent};
+  const segs=[]; 
+  for(let n=Math.min(A.abs,B.abs)+1; n<=Math.max(A.abs,B.abs); n++){
+    const c = PRICE_COLOR[priceOfStar(n)] || '#8E8A84';
+    if(segs.length && segs[segs.length-1].color===c) segs[segs.length-1].len++;
+    else segs.push({color:c, len:1});
+  }
+  PROG = {segs, fromTxt:$('fromBadge').textContent, toTxt:$('toBadge').textContent};
   $('unit').textContent=t().unitStar;
   render(B.abs-A.abs, function(){
     const g={}; let total=0;
@@ -1078,9 +1091,13 @@ function calcLP(){
   if(ia) $('lpFromRk').src='lp-'+ia+'.png';
   if(ib) $('lpToRk').src='lp-'+ib+'.png';
   paint('lpBar', Math.min(a,b), Math.max(a,b));
-  PROG = {from:a, to:b, max:LP_MAX,
-          color:LP_COLOR[lpTierOf(b).img]||'#8E8A84',
-          fromTxt:$('lpFromBadge').textContent, toTxt:$('lpToBadge').textContent};
+  const segs=[];
+  LP_TIERS.forEach(v=>{
+    if(v.rate===null) return;
+    const lo=Math.max(Math.min(a,b),v.lo), hi=Math.min(Math.max(a,b),v.hi);
+    if(hi>lo) segs.push({color:LPRATE_COLOR[v.rate]||'#8E8A84', len:hi-lo});
+  });
+  PROG = {segs, fromTxt:$('lpFromBadge').textContent, toTxt:$('lpToBadge').textContent};
   $('unit').textContent=t().unitPt;
   render(b-a, function(){
     let total=0; const rows=[];
@@ -1142,16 +1159,25 @@ function render(qty, compute, errMsg){
 }
 const CIRC = 2*Math.PI*52;
 function drawGauge(qty){
-  const arc = $('gArc');
-  if(!PROG || qty<=0){
-    arc.style.strokeDasharray = '0 '+CIRC;
+  const svg = $('gSvg');
+  svg.querySelectorAll('.garc').forEach(el=>el.remove());
+  if(!PROG || !PROG.segs || qty<=0){
     $('gFrom').textContent='—'; $('gTo').textContent='—';
     return;
   }
-  const span = Math.min(1, (PROG.to-PROG.from)/PROG.max);
-  arc.style.stroke = PROG.color;
-  arc.style.strokeDasharray = (CIRC*span)+' '+CIRC;
-  arc.style.strokeDashoffset = -(CIRC*(PROG.from/PROG.max));
+  const total = PROG.segs.reduce((a,v)=>a+v.len,0) || 1;
+  let acc = 0;
+  PROG.segs.forEach(sg=>{
+    const len = CIRC*(sg.len/total);
+    const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    c.setAttribute('class','garc');
+    c.setAttribute('cx','60'); c.setAttribute('cy','60'); c.setAttribute('r','52');
+    c.style.stroke = sg.color;
+    c.style.strokeDasharray = (len-1.5)+' '+CIRC;
+    c.style.strokeDashoffset = -acc;
+    svg.appendChild(c);
+    acc += len;
+  });
   $('gFrom').textContent = PROG.fromTxt;
   $('gTo').textContent   = PROG.toTxt;
 }
