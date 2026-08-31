@@ -75,8 +75,8 @@
     background:linear-gradient(90deg,var(--gold),var(--gold-lite) 62%,transparent)}
   h1 em{font-style:normal;color:var(--gold-lite);
     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
-  .titleimg{display:block;margin:-10px 0 10px;line-height:0}
-  .titleimg img{width:96%;max-width:420px;height:auto;display:block;margin:0 auto;
+  .titleimg{display:block;margin:-14px -4px 12px;line-height:0}
+  .titleimg img{width:100%;max-width:500px;height:auto;display:block;margin:0 auto;
     filter:drop-shadow(0 6px 18px rgba(0,0,0,.9))}
   .titleimg:active img{transform:translateY(1px)}
   }
@@ -477,17 +477,17 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rkrow{display:flex;align-items:center;gap:12px}
-  .rkcol{flex:1;min-width:0;display:grid;grid-template-columns:1fr;gap:10px}
+  .rkrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
+  .rkcol{flex:0 0 56%;max-width:210px;min-width:0;display:grid;grid-template-columns:1fr;gap:10px}
   .rkcol select{padding:10px 26px 10px 10px;font-size:14.5px}
   .rkcol .sel::after{right:10px;width:5px;height:5px}
   .rkcol .stepper{height:42px}
   .rkcol .stepper button{width:30px;height:40px;font-size:16px}
   .rkcol .stepper input{font-size:15px}
   .rkcol label{font-size:9.5px;margin-bottom:5px;letter-spacing:.1em}
-  .rk{width:104px;height:104px;flex:0 0 auto;object-fit:contain;
+  .rk{width:128px;height:128px;flex:0 0 auto;object-fit:contain;
     filter:drop-shadow(0 6px 16px rgba(0,0,0,.85))}
-  @media (max-width:390px){ .rk{width:88px;height:88px} }
+  @media (max-width:390px){ .rk{width:108px;height:108px} }
   .card-head .badge{margin-left:10px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
   td .ic img{width:26px;height:26px}
@@ -1065,7 +1065,11 @@ function syncSide(sel, input, hintEl, badgeEl, rkEl){
   hintEl.textContent = o.fixed ? t().hintTop
     : (o.high ? t().hintHigh(o.min,o.max) : t().hintDiv(o.min,o.max,o.max+1));
   badgeEl.textContent = optLabel(o) + ' · ' + s + '★';
-  if(rkEl && o.img) rkEl.src = 'rank-'+o.img+'.png';
+  if(rkEl){
+    const side = rkEl.id==='fromRk' ? 'from' : 'to';
+    rkEl.src = touched[side] ? 'rank-'+o.img+'.png'
+             : (side==='from' ? 'rank-default-from.png' : 'rank-default-to.png');
+  }
   return {o, abs:o.base+s};
 }
 function calcStar(){
@@ -1282,10 +1286,19 @@ document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('clic
   run();
 }));
 ['fromDiv','toDiv','fromStar','toStar','lpFrom','lpTo'].forEach(id=>{
-  $(id).addEventListener('input',run); $(id).addEventListener('change',run);
+  const mark = ()=>{ if(id.startsWith('from')) touched.from=true;
+                     if(id.startsWith('to'))   touched.to=true; run(); };
+  $(id).addEventListener('input',mark); $(id).addEventListener('change',mark);
 });
+document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('click',()=>{
+  const f=b.dataset.for||'';
+  if(f.startsWith('from')) touched.from=true;
+  if(f.startsWith('to'))   touched.to=true;
+}));
 const DEF_IDX = OPTIONS.findIndex(o=>o.n.en==='Iron'&&o.div==='IV');
+let touched = {from:false, to:false};
 function resetAll(){
+  touched={from:false,to:false};
   fromDiv.value=DEF_IDX; fromStar.value=0;
   toDiv.value=DEF_IDX;   toStar.value=0;
   $('lpFrom').value=0; $('lpTo').value=0;
