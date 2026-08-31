@@ -476,17 +476,6 @@
   td{border-top:1px dashed var(--line-2)}
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
-  .rkrow{display:flex;align-items:center;gap:10px;justify-content:space-between}
-  .rkcol{flex:0 0 56%;max-width:210px;min-width:0;display:grid;grid-template-columns:1fr;gap:10px}
-  .rkcol select{padding:10px 26px 10px 10px;font-size:14.5px}
-  .rkcol .sel::after{right:10px;width:5px;height:5px}
-  .rkcol .stepper{height:42px}
-  .rkcol .stepper button{width:30px;height:40px;font-size:16px}
-  .rkcol .stepper input{font-size:15px}
-  .rkcol label{font-size:9.5px;margin-bottom:5px;letter-spacing:.1em}
-  .rk{width:128px;height:128px;flex:0 0 auto;object-fit:contain;
-    filter:drop-shadow(0 6px 16px rgba(0,0,0,.85))}
-  @media (max-width:390px){ .rk{width:108px;height:108px} }
   .card-head .badge{margin-left:10px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
   td .ic img{width:26px;height:26px}
@@ -522,37 +511,29 @@
 
 <section id="panelStar">
   <div class="card">
-    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2><span class="badge" id="fromBadge">—</span></div>
-    <div class="rkrow">
-      <div class="rkcol">
-        <div><label for="fromDiv" id="lRank1"></label><div class="sel"><select id="fromDiv"></select></div></div>
-        <div><label for="fromStar" id="lStar1"></label>
-          <div class="stepper">
-            <button type="button" data-step="-1" data-for="fromStar">−</button>
-            <input id="fromStar" type="number" inputmode="numeric" value="0">
-            <button type="button" data-step="1" data-for="fromStar">+</button>
-          </div>
-        </div>
-      </div>
-      <img class="rk" id="fromRk" alt="">
+    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2>
+      <img class="rk" id="fromRk" alt=""><span class="badge" id="fromBadge">—</span></div>
+    <label for="fromDiv" id="lRank1"></label>
+    <div class="sel"><select id="fromDiv"></select></div>
+    <label for="fromStar" id="lStar1" style="margin-top:12px"></label>
+    <div class="stepper">
+      <button type="button" data-step="-1" data-for="fromStar">−</button>
+      <input id="fromStar" type="number" inputmode="numeric" value="0">
+      <button type="button" data-step="1" data-for="fromStar">+</button>
     </div>
     <div class="hint" id="fromHint"></div>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2><span class="badge" id="toBadge">—</span></div>
-    <div class="rkrow">
-      <div class="rkcol">
-        <div><label for="toDiv" id="lRank2"></label><div class="sel"><select id="toDiv"></select></div></div>
-        <div><label for="toStar" id="lStar2"></label>
-          <div class="stepper">
-            <button type="button" data-step="-1" data-for="toStar">−</button>
-            <input id="toStar" type="number" inputmode="numeric" value="0">
-            <button type="button" data-step="1" data-for="toStar">+</button>
-          </div>
-        </div>
-      </div>
-      <img class="rk" id="toRk" alt="">
+    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2>
+      <img class="rk" id="toRk" alt=""><span class="badge" id="toBadge">—</span></div>
+    <label for="toDiv" id="lRank2"></label>
+    <div class="sel"><select id="toDiv"></select></div>
+    <label for="toStar" id="lStar2" style="margin-top:12px"></label>
+    <div class="stepper">
+      <button type="button" data-step="-1" data-for="toStar">−</button>
+      <input id="toStar" type="number" inputmode="numeric" value="0">
+      <button type="button" data-step="1" data-for="toStar">+</button>
     </div>
     <div class="hint" id="toHint"></div>
   </div>
@@ -1003,8 +984,8 @@ const LP_MAX = 7000;
 const lpTierOf = p => LP_TIERS.find(x=>p>=x.lo && p<x.hi) || LP_TIERS[LP_TIERS.length-1];
 function lpLabel(p){
   const x = lpTierOf(p);
-  if(x.rate===null) return x.n[lang] + ' · ' + p;
-  return x.n[lang] + ' ' + DIVS[Math.floor((p-x.lo)/200)] + ' · ' + p;
+  const dv = DIVS[Math.floor((p-x.lo)/200)];
+  return x.n[lang] + (dv ? ' '+dv : '') + ' · ' + p;
 }
 
 const LADDER_COLOR = ['iron','bronze','silver','gold','platinum','emerald','diamond',
