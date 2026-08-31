@@ -124,7 +124,7 @@
   .badge{margin-left:auto;font-family:"Oswald",sans-serif;font-size:12px;letter-spacing:.04em;
     color:var(--gold-lite);background:#1A0A0A;border:1px solid var(--gold-dim);padding:4px 10px;border-radius:2px}
 
-  .track-bar{display:flex;gap:2px;height:9px}
+  .track-bar{display:flex;gap:2px;height:11px}
   .seg{position:relative;flex:0 0 auto;overflow:hidden;background:#202020;border-radius:2px}
   .seg b{position:absolute;top:0;bottom:0;left:100%;right:0;background:var(--segc);
     transition:left .3s ease,right .3s ease}
@@ -157,9 +157,7 @@
   select:focus-visible,input:focus-visible,button:focus-visible{outline:1px solid var(--gold);outline-offset:2px}
   .hint{font-size:11px;color:var(--muted);margin-top:9px;letter-spacing:.02em}
 
-  .quote-card{background:linear-gradient(165deg,rgba(24,20,16,.92),rgba(24,24,24,.9));
-    border:1px solid var(--gold-dim);border-radius:4px;padding:17px 16px;margin-bottom:10px;
-    }
+  .qsplit{margin:16px 0 6px;border-top:1px dashed var(--line)}
   .qlabel{font-family:"Oswald",sans-serif;font-size:10px;letter-spacing:.2em;color:var(--muted);text-transform:uppercase}
   .money{display:flex;align-items:baseline;gap:7px;margin-top:9px;color:var(--gold-lite);
     text-shadow:0 0 26px rgba(255,75,69,.40)}
@@ -295,9 +293,10 @@
   .gwrap{display:flex;align-items:center;gap:16px}
   .gauge{position:relative;width:132px;height:132px;flex:0 0 auto}
   .gauge svg{width:100%;height:100%;transform:rotate(-90deg)}
-  .gauge circle{fill:none;stroke-width:9}
-  .gauge .gbg{stroke:#1C1E22}
-  .gauge .garc{stroke-linecap:butt;transition:stroke-dasharray .35s ease}
+  .gauge circle{fill:none;stroke-width:11}
+  .gauge .gbg{stroke:#191B20}
+  .gauge .garc{stroke-linecap:butt;transition:stroke-dasharray .35s ease;
+    filter:drop-shadow(0 0 6px rgba(0,0,0,.6))}
   .gc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;
     justify-content:center;gap:2px}
   .gc b{font-family:"Oswald",sans-serif;font-size:34px;color:#fff;line-height:1}
@@ -618,8 +617,8 @@
       <div class="t" id="goalText">—</div>
     </div>
   </div>
-</div>
-<div class="quote-card">
+
+  <div class="qsplit"></div>
   <div class="qlabel" id="qLabel"></div>
   <div class="breakdown" id="breakdown"></div>
   <div class="discount" id="discount"></div>
@@ -725,7 +724,8 @@
 /* ===== 想永久換圖：把圖檔放到跟這個 HTML 同一個資料夾，
    再把檔名填進下面兩行，例如 'logo.png' / 'cover.jpg' ===== */
 const LOGO_URL = '';
-const HERO_URL = 'cover.jpg';
+const HERO_URL = 'cover.jpg';        // 積分對戰背景
+const HERO_URL_LP = 'cover-lp.jpg';  // 傳奇積分背景
 /* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
 const BG_OPACITY = 1;
 /* 要不要顯示「更換標誌／更換封面圖」那兩顆按鈕：改成 true 就會出現 */
@@ -943,9 +943,22 @@ const TIER_COLOR = {iron:'#8E8A84',bronze:'#B57C51',silver:'#AEB8C6',gold:'#E0AC
   grandmaster:'#EE6055',challenger:'#F3C74B',sovereign:'#FF7ED4'};
 const LP_COLOR = {commander:'#4FD1CE',guardian:'#B07AF7',vanquisher:'#EE6055',
   mythic:'#6C9BFF',legend:'#F3C74B'};
-const PRICE_COLOR = {80:'#9BA6B2',100:'#2FBF8F',150:'#6C9BFF',
-  200:'#B07AF7',300:'#EE6055',400:'#F3C74B',450:'#FF7ED4'};
+/* 依實際段位取色（黑鐵→至尊） */
+function tierKeyOfStar(n){
+  if(n <= LOW_TOTAL){
+    let c=0;
+    for(const t of LOW){ c += t.marks*4; if(n<=c) return t.img; }
+    return 'diamond';
+  }
+  const s2 = n - LOW_TOTAL;
+  if(s2 <= 30) return 'master';
+  if(s2 <= 60) return 'grandmaster';
+  if(s2 <= 100) return 'challenger';
+  return 'sovereign';
+}
 const LPRATE_COLOR = {6:'#8FA6D6',8:'#4FD1CE',10:'#B07AF7',12:'#EE6055',15:'#6C9BFF',20:'#F3C74B'};
+const LP_TIER_COLOR = {commander:'#4FD1CE',guardian:'#B07AF7',vanquisher:'#EE6055',
+  mythic:'#6C9BFF',legend:'#F3C74B'};
 const TIER_PRICE = {iron:80,bronze:80,silver:80,gold:80,platinum:80,
   emerald:100,diamond:150,master:200,grandmaster:300,challenger:400,sovereign:400};
 const RATE_CARDS = [
@@ -994,15 +1007,15 @@ function lpLabel(p){
   return x.n[lang] + ' ' + DIVS[Math.floor((p-x.lo)/200)] + ' · ' + p;
 }
 
-const GOLD = ['#4A3B26','#5A4830','#6B563A','#7C6444','#8D724E','#9E8058','#AF8E62',
-              '#C09C6C','#D1AA76','#E2B880','#F0C892'];
+const LADDER_COLOR = ['iron','bronze','silver','gold','platinum','emerald','diamond',
+  'master','grandmaster','challenger','sovereign'].map(k=>TIER_COLOR[k]);
 function buildBar(barId, segs){
   const bar=$(barId); bar.innerHTML='';
   const span = segs[segs.length-1].start + segs[segs.length-1].len;
   segs.forEach((s,i)=>{
     const el=document.createElement('div');
     el.className='seg'; el.style.flexBasis=(s.len/span*100)+'%';
-    el.style.setProperty('--segc', GOLD[Math.round(i/(segs.length-1)*(GOLD.length-1))]);
+    el.style.setProperty('--segc', s.color || LADDER_COLOR[Math.min(i,LADDER_COLOR.length-1)]);
     el.innerHTML='<b></b>';
     el.dataset.start=s.start; el.dataset.len=s.len;
     bar.appendChild(el);
@@ -1016,7 +1029,7 @@ function buildTracks(){
   segs.push({start:LOW_TOTAL+59, len:40});
   segs.push({start:LOW_TOTAL+99, len:1});
   buildBar('trackBar', segs);
-  buildBar('lpBar', LP_TIERS.filter(x=>x.hi-x.lo>1).map(x=>({start:x.lo, len:x.hi-x.lo})));
+  buildBar('lpBar', LP_TIERS.filter(x=>x.hi-x.lo>1).map(x=>({start:x.lo, len:x.hi-x.lo, color:LP_TIER_COLOR[x.img]||'#8FA6D6'})));
 }
 function paint(barId,a,b){
   [...$(barId).children].forEach(el=>{
@@ -1078,7 +1091,7 @@ function calcStar(){
   paint('trackBar', Math.min(A.abs,B.abs), Math.max(A.abs,B.abs));
   const segs=[]; 
   for(let n=Math.min(A.abs,B.abs)+1; n<=Math.max(A.abs,B.abs); n++){
-    const c = PRICE_COLOR[priceOfStar(n)] || '#8E8A84';
+    const c = TIER_COLOR[tierKeyOfStar(n)] || '#8E8A84';
     if(segs.length && segs[segs.length-1].color===c) segs[segs.length-1].len++;
     else segs.push({color:c, len:1});
   }
@@ -1107,7 +1120,7 @@ function calcLP(){
   LP_TIERS.forEach(v=>{
     if(v.rate===null) return;
     const lo=Math.max(Math.min(a,b),v.lo), hi=Math.min(Math.max(a,b),v.hi);
-    if(hi>lo) segs.push({color:LPRATE_COLOR[v.rate]||'#8E8A84', len:hi-lo});
+    if(hi>lo) segs.push({color:LP_TIER_COLOR[v.img]||'#8FA6D6', len:hi-lo});
   });
   PROG = {segs, fromTxt:$('lpFromBadge').textContent, toTxt:$('lpToBadge').textContent};
   $('unit').textContent=t().unitPt;
@@ -1323,12 +1336,14 @@ $('copyBtn').addEventListener('click',()=>{
 
 function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img src="'+url+'" alt="logo">' : ''; }
 function setHero(url){ const el=$('heroBg'); if(el) el.style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
+function setBg(m){
+  const u = (m==='lp' ? HERO_URL_LP : HERO_URL);
+  document.documentElement.style.setProperty('--pagebg','url("'+u+'")');
+}
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
-if(HERO_URL){
-  setHero(HERO_URL);
-  document.documentElement.style.setProperty('--pagebg','url("'+HERO_URL+'")');
-}
+setBg(mode);
+if(HERO_URL) setHero(HERO_URL);
 
 /* 左右滑動卡片 */
 function initRing(){
@@ -1369,6 +1384,7 @@ document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',(
     $('panelLP').hidden   = mode!=='lp';
     $('starTrackWrap').hidden = mode!=='star';
     $('lpTrackWrap').hidden   = mode!=='lp';
+    setBg(mode);
     run();
   }
   window.scrollTo({top:0,behavior:'instant'});
