@@ -57,7 +57,7 @@
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .bgspace{height:50vh}
+  .bgspace{height:0}
 
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
   header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
@@ -138,7 +138,13 @@
 
   label{display:block;font-family:"Oswald",sans-serif;font-size:10px;color:var(--muted);
     margin-bottom:7px;letter-spacing:.16em;text-transform:uppercase}
-  .field{display:grid;grid-template-columns:1.45fr 1fr;gap:9px;align-items:end}
+  .field{display:grid;grid-template-columns:1.35fr 1fr;gap:9px;align-items:end}
+  .field>div{min-width:0}
+  .field label{margin-bottom:7px}
+  .field select{font-size:15px;padding:13px 27px 13px 11px}
+  .field .sel::after{right:11px}
+  .field .stepper button{width:32px}
+  .field .stepper input{font-size:16px}
   .sel{position:relative}
   .sel::after{content:'';position:absolute;right:13px;top:50%;width:6px;height:6px;
     border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
@@ -513,13 +519,19 @@
   <div class="card">
     <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2>
       <img class="rk" id="fromRk" alt=""><span class="badge" id="fromBadge">—</span></div>
-    <label for="fromDiv" id="lRank1"></label>
-    <div class="sel"><select id="fromDiv"></select></div>
-    <label for="fromStar" id="lStar1" style="margin-top:12px"></label>
-    <div class="stepper">
-      <button type="button" data-step="-1" data-for="fromStar">−</button>
-      <input id="fromStar" type="number" inputmode="numeric" value="0">
-      <button type="button" data-step="1" data-for="fromStar">+</button>
+    <div class="field">
+      <div>
+        <label for="fromDiv" id="lRank1"></label>
+        <div class="sel"><select id="fromDiv"></select></div>
+      </div>
+      <div>
+        <label for="fromStar" id="lStar1"></label>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-for="fromStar">−</button>
+          <input id="fromStar" type="number" inputmode="numeric" value="0">
+          <button type="button" data-step="1" data-for="fromStar">+</button>
+        </div>
+      </div>
     </div>
     <div class="hint" id="fromHint"></div>
   </div>
@@ -527,13 +539,19 @@
   <div class="card">
     <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2>
       <img class="rk" id="toRk" alt=""><span class="badge" id="toBadge">—</span></div>
-    <label for="toDiv" id="lRank2"></label>
-    <div class="sel"><select id="toDiv"></select></div>
-    <label for="toStar" id="lStar2" style="margin-top:12px"></label>
-    <div class="stepper">
-      <button type="button" data-step="-1" data-for="toStar">−</button>
-      <input id="toStar" type="number" inputmode="numeric" value="0">
-      <button type="button" data-step="1" data-for="toStar">+</button>
+    <div class="field">
+      <div>
+        <label for="toDiv" id="lRank2"></label>
+        <div class="sel"><select id="toDiv"></select></div>
+      </div>
+      <div>
+        <label for="toStar" id="lStar2"></label>
+        <div class="stepper">
+          <button type="button" data-step="-1" data-for="toStar">−</button>
+          <input id="toStar" type="number" inputmode="numeric" value="0">
+          <button type="button" data-step="1" data-for="toStar">+</button>
+        </div>
+      </div>
     </div>
     <div class="hint" id="toHint"></div>
   </div>
@@ -705,8 +723,10 @@
 /* ===== 想永久換圖：把圖檔放到跟這個 HTML 同一個資料夾，
    再把檔名填進下面兩行，例如 'logo.png' / 'cover.jpg' ===== */
 const LOGO_URL = '';
-const HERO_URL = 'cover.jpg';        // 積分對戰背景
-const HERO_URL_LP = 'cover-lp.jpg';  // 傳奇積分背景
+/* 背景改為全深色：留空字串＝不放圖。
+   之後想換回照片，把檔名填回去即可（例如 'cover.jpg' / 'cover-lp.jpg'） */
+const HERO_URL = '';        // 積分對戰背景
+const HERO_URL_LP = '';     // 傳奇積分背景
 /* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
 const BG_OPACITY = 1;
 /* 要不要顯示「更換標誌／更換封面圖」那兩顆按鈕：改成 true 就會出現 */
@@ -1061,8 +1081,8 @@ function syncSide(sel, input, hintEl, badgeEl, rkEl){
   badgeEl.textContent = optLabel(o) + ' · ' + s + '★';
   if(rkEl){
     const side = rkEl.id==='fromRk' ? 'from' : 'to';
-    rkEl.src = touched[side] ? 'rank-'+o.img+'.png'
-             : (side==='from' ? 'rank-default-from.png' : 'rank-default-to.png');
+    if(touched[side]){ rkEl.style.display=''; rkEl.src='rank-'+o.img+'.png'; }
+    else { rkEl.style.display='none'; rkEl.removeAttribute('src'); }
   }
   return {o, abs:o.base+s};
 }
@@ -1319,7 +1339,7 @@ function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img 
 function setHero(url){ const el=$('heroBg'); if(el) el.style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
 function setBg(m){
   const u = (m==='lp' ? HERO_URL_LP : HERO_URL);
-  document.documentElement.style.setProperty('--pagebg','url("'+u+'")');
+  document.documentElement.style.setProperty('--pagebg', u ? 'url("'+u+'")' : 'none');
 }
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
