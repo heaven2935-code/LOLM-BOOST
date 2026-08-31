@@ -57,7 +57,7 @@
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .bgspace{height:54vh}
+  .bgspace{height:50vh}
 
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
   header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
@@ -75,9 +75,9 @@
     background:linear-gradient(90deg,var(--gold),var(--gold-lite) 62%,transparent)}
   h1 em{font-style:normal;color:var(--gold-lite);
     text-shadow:0 2px 12px rgba(0,0,0,.9),0 0 20px rgba(255,75,69,.45)}
-  .titleimg{display:block;margin:-4px 0 0;line-height:0}
-  .titleimg img{width:60%;max-width:232px;height:auto;display:block;
-    filter:drop-shadow(0 5px 14px rgba(0,0,0,.9))}
+  .titleimg{display:block;margin:-10px 0 10px;line-height:0}
+  .titleimg img{width:96%;max-width:420px;height:auto;display:block;margin:0 auto;
+    filter:drop-shadow(0 6px 18px rgba(0,0,0,.9))}
   .titleimg:active img{transform:translateY(1px)}
   }
   .ctc .c2{font-size:21px;letter-spacing:.01em;color:var(--gold-lite);
@@ -369,7 +369,7 @@
     padding:11px 4px calc(11px + env(safe-area-inset-bottom));border:0;background:none;
     color:var(--muted);cursor:pointer;font-family:inherit}
   .nav button span,.nav button img{display:grid;place-items:center;
-    width:34px;height:34px;object-fit:contain}
+    width:36px;height:36px;object-fit:contain}
   .nav button span{font-size:27px;line-height:1;color:var(--muted)}
   .nav button img{opacity:.45;filter:grayscale(.6);transition:.2s}
   .nav button.on img{opacity:1;filter:drop-shadow(0 0 10px rgba(255,59,36,.55))}
@@ -478,16 +478,16 @@
   td:last-child{color:#fff}
   .grp td{color:var(--gold);letter-spacing:.24em}
   .rkrow{display:flex;align-items:center;gap:12px}
-  .rkcol{flex:1;min-width:0;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .rkcol{flex:1;min-width:0;display:grid;grid-template-columns:1fr;gap:10px}
   .rkcol select{padding:10px 26px 10px 10px;font-size:14.5px}
   .rkcol .sel::after{right:10px;width:5px;height:5px}
   .rkcol .stepper{height:42px}
   .rkcol .stepper button{width:30px;height:40px;font-size:16px}
   .rkcol .stepper input{font-size:15px}
   .rkcol label{font-size:9.5px;margin-bottom:5px;letter-spacing:.1em}
-  .rk{width:112px;height:112px;flex:0 0 auto;object-fit:contain;
+  .rk{width:104px;height:104px;flex:0 0 auto;object-fit:contain;
     filter:drop-shadow(0 6px 16px rgba(0,0,0,.85))}
-  @media (max-width:390px){ .rk{width:92px;height:92px} }
+  @media (max-width:390px){ .rk{width:88px;height:88px} }
   .card-head .badge{margin-left:10px}
   td .ic{display:inline-flex;gap:2px;vertical-align:middle;margin-right:8px}
   td .ic img{width:26px;height:26px}
@@ -507,11 +507,13 @@
   <button data-lang="vi">VI</button>
 </div>
 
+
+
+<div class="bgspace"></div>
+
 <a class="titleimg" href="https://line.me/ti/p/rlOEgOZYxo" target="_blank" rel="noopener">
   <img src="title.png" alt="激鬥峽谷 LOLM · 加賴帶你飛 0867473723">
 </a>
-
-<div class="bgspace"></div>
 
 <div class="page on" id="pgQuote">
 
@@ -521,31 +523,37 @@
 
 <section id="panelStar">
   <div class="card">
-    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2><img class="rk" id="fromRk" alt=""><span class="badge" id="fromBadge">—</span></div>
-    <div class="field">
-      <div><label for="fromDiv" id="lRank1"></label><div class="sel"><select id="fromDiv"></select></div></div>
-      <div><label for="fromStar" id="lStar1"></label>
-        <div class="stepper">
-          <button type="button" data-step="-1" data-for="fromStar">−</button>
-          <input id="fromStar" type="number" inputmode="numeric" value="0">
-          <button type="button" data-step="1" data-for="fromStar">+</button>
+    <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2><span class="badge" id="fromBadge">—</span></div>
+    <div class="rkrow">
+      <div class="rkcol">
+        <div><label for="fromDiv" id="lRank1"></label><div class="sel"><select id="fromDiv"></select></div></div>
+        <div><label for="fromStar" id="lStar1"></label>
+          <div class="stepper">
+            <button type="button" data-step="-1" data-for="fromStar">−</button>
+            <input id="fromStar" type="number" inputmode="numeric" value="0">
+            <button type="button" data-step="1" data-for="fromStar">+</button>
+          </div>
         </div>
       </div>
+      <img class="rk" id="fromRk" alt="">
     </div>
     <div class="hint" id="fromHint"></div>
   </div>
 
   <div class="card">
-    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2><img class="rk" id="toRk" alt=""><span class="badge" id="toBadge">—</span></div>
-    <div class="field">
-      <div><label for="toDiv" id="lRank2"></label><div class="sel"><select id="toDiv"></select></div></div>
-      <div><label for="toStar" id="lStar2"></label>
-        <div class="stepper">
-          <button type="button" data-step="-1" data-for="toStar">−</button>
-          <input id="toStar" type="number" inputmode="numeric" value="5">
-          <button type="button" data-step="1" data-for="toStar">+</button>
+    <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2><span class="badge" id="toBadge">—</span></div>
+    <div class="rkrow">
+      <div class="rkcol">
+        <div><label for="toDiv" id="lRank2"></label><div class="sel"><select id="toDiv"></select></div></div>
+        <div><label for="toStar" id="lStar2"></label>
+          <div class="stepper">
+            <button type="button" data-step="-1" data-for="toStar">−</button>
+            <input id="toStar" type="number" inputmode="numeric" value="0">
+            <button type="button" data-step="1" data-for="toStar">+</button>
+          </div>
         </div>
       </div>
+      <img class="rk" id="toRk" alt="">
     </div>
     <div class="hint" id="toHint"></div>
   </div>
@@ -705,9 +713,9 @@
 
 <nav class="nav">
   <button class="on" data-page="pgQuote" data-mode="star">
-    <img src="emblem-star.png" alt=""><i id="navStar"></i></button>
+    <img src="nav-star.png" alt=""><i id="navStar"></i></button>
   <button data-page="pgQuote" data-mode="lp">
-    <img src="emblem-lp.png" alt=""><i id="navLp"></i></button>
+    <img src="nav-lp.png" alt=""><i id="navLp"></i></button>
   <button data-page="pgClips"><span>▶</span><i id="navClips"></i></button>
   <button data-page="pgTrust"><span>✔</span><i id="navTrust"></i></button>
 </nav>
