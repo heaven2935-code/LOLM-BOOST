@@ -57,7 +57,7 @@
     color:var(--muted);cursor:pointer;transition:.16s}
   .lang button.on{border-color:var(--gold);background:#1A0A0A;color:#FF4B45}
 
-  .bgspace{height:0}
+  .bgspace{height:50vh}
 
   header .eyebrow,header h1,header .quote,header .lidline{text-shadow:0 2px 10px rgba(0,0,0,.85)}
   header{position:relative;z-index:2;display:block;padding:0 2px 6px;width:100%}
@@ -138,13 +138,7 @@
 
   label{display:block;font-family:"Oswald",sans-serif;font-size:10px;color:var(--muted);
     margin-bottom:7px;letter-spacing:.16em;text-transform:uppercase}
-  .field{display:grid;grid-template-columns:1.35fr 1fr;gap:9px;align-items:end}
-  .field>div{min-width:0}
-  .field label{margin-bottom:7px}
-  .field select{font-size:15px;padding:13px 27px 13px 11px}
-  .field .sel::after{right:11px}
-  .field .stepper button{width:32px}
-  .field .stepper input{font-size:16px}
+  .field{display:grid;grid-template-columns:1.45fr 1fr;gap:9px;align-items:end}
   .sel{position:relative}
   .sel::after{content:'';position:absolute;right:13px;top:50%;width:6px;height:6px;
     border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);
@@ -490,6 +484,30 @@
   td .rng{display:block;font-size:10.5px;color:var(--muted);letter-spacing:.08em;margin-top:3px}
   .seo h3{color:var(--gold)}
   footer{color:var(--muted);letter-spacing:.24em}
+
+  /* ===== 主頁插畫牆 ===== */
+  .gal{position:relative;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
+    padding:8px calc(50% - 66px) 16px;margin:0 -14px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gal::-webkit-scrollbar{display:none}
+  .gcard{flex:0 0 160px;height:240px;scroll-snap-align:center;position:relative;overflow:hidden;
+    background:#0B0B0D;border:1px solid var(--line);cursor:pointer;transition:.25s;
+    filter:brightness(.5) saturate(.85);transform:scale(.92);user-select:none;-webkit-user-select:none}
+  .gcard img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
+  .gcard.mid{filter:none;transform:none;border-color:var(--gold);
+    box-shadow:0 0 34px -12px var(--gold)}
+  .gcard.mid::before,.gcard.mid::after{content:'';position:absolute;width:11px;height:11px;
+    border:1.5px solid var(--gold);z-index:1}
+  .gcard.mid::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .gcard.mid::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
+  .gdots{position:relative;z-index:1;display:flex;justify-content:center;gap:6px;margin:-4px 0 16px}
+  .gdots i{width:6px;height:6px;background:var(--line);cursor:pointer;transition:.2s}
+  .gdots i.on{background:var(--gold);width:18px}
+  .artbox{position:fixed;inset:0;z-index:60;background:rgba(3,3,4,.94);display:flex;
+    align-items:center;justify-content:center;padding:18px 14px;cursor:pointer}
+  .artbox[hidden]{display:none}
+  .artbox img{max-width:100%;max-height:100%;display:block;border:1px solid var(--gold-dim);
+    box-shadow:0 20px 60px -20px #000}
 </style>
 </head>
 <body>
@@ -511,6 +529,9 @@
 
 <div class="page on" id="pgQuote">
 
+<div class="gal" id="gal"></div>
+<div class="gdots" id="galDots"></div>
+
 
 
 
@@ -519,19 +540,13 @@
   <div class="card">
     <div class="card-head"><span class="idx">01</span><h2 id="hFrom1"></h2>
       <img class="rk" id="fromRk" alt=""><span class="badge" id="fromBadge">—</span></div>
-    <div class="field">
-      <div>
-        <label for="fromDiv" id="lRank1"></label>
-        <div class="sel"><select id="fromDiv"></select></div>
-      </div>
-      <div>
-        <label for="fromStar" id="lStar1"></label>
-        <div class="stepper">
-          <button type="button" data-step="-1" data-for="fromStar">−</button>
-          <input id="fromStar" type="number" inputmode="numeric" value="0">
-          <button type="button" data-step="1" data-for="fromStar">+</button>
-        </div>
-      </div>
+    <label for="fromDiv" id="lRank1"></label>
+    <div class="sel"><select id="fromDiv"></select></div>
+    <label for="fromStar" id="lStar1" style="margin-top:12px"></label>
+    <div class="stepper">
+      <button type="button" data-step="-1" data-for="fromStar">−</button>
+      <input id="fromStar" type="number" inputmode="numeric" value="0">
+      <button type="button" data-step="1" data-for="fromStar">+</button>
     </div>
     <div class="hint" id="fromHint"></div>
   </div>
@@ -539,19 +554,13 @@
   <div class="card">
     <div class="card-head"><span class="idx">02</span><h2 id="hTo1"></h2>
       <img class="rk" id="toRk" alt=""><span class="badge" id="toBadge">—</span></div>
-    <div class="field">
-      <div>
-        <label for="toDiv" id="lRank2"></label>
-        <div class="sel"><select id="toDiv"></select></div>
-      </div>
-      <div>
-        <label for="toStar" id="lStar2"></label>
-        <div class="stepper">
-          <button type="button" data-step="-1" data-for="toStar">−</button>
-          <input id="toStar" type="number" inputmode="numeric" value="0">
-          <button type="button" data-step="1" data-for="toStar">+</button>
-        </div>
-      </div>
+    <label for="toDiv" id="lRank2"></label>
+    <div class="sel"><select id="toDiv"></select></div>
+    <label for="toStar" id="lStar2" style="margin-top:12px"></label>
+    <div class="stepper">
+      <button type="button" data-step="-1" data-for="toStar">−</button>
+      <input id="toStar" type="number" inputmode="numeric" value="0">
+      <button type="button" data-step="1" data-for="toStar">+</button>
     </div>
     <div class="hint" id="toHint"></div>
   </div>
@@ -707,6 +716,8 @@
   </div>
 </div>
 
+<div class="artbox" id="artBox" hidden><img id="artBig" alt=""></div>
+
 <footer id="foot"></footer>
 
 <nav class="nav">
@@ -723,10 +734,8 @@
 /* ===== 想永久換圖：把圖檔放到跟這個 HTML 同一個資料夾，
    再把檔名填進下面兩行，例如 'logo.png' / 'cover.jpg' ===== */
 const LOGO_URL = '';
-/* 背景改為全深色：留空字串＝不放圖。
-   之後想換回照片，把檔名填回去即可（例如 'cover.jpg' / 'cover-lp.jpg'） */
-const HERO_URL = '';        // 積分對戰背景
-const HERO_URL_LP = '';     // 傳奇積分背景
+const HERO_URL = 'cover.jpg';        // 積分對戰背景
+const HERO_URL_LP = 'cover-lp.jpg';  // 傳奇積分背景
 /* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
 const BG_OPACITY = 1;
 /* 要不要顯示「更換標誌／更換封面圖」那兩顆按鈕：改成 true 就會出現 */
@@ -1081,8 +1090,8 @@ function syncSide(sel, input, hintEl, badgeEl, rkEl){
   badgeEl.textContent = optLabel(o) + ' · ' + s + '★';
   if(rkEl){
     const side = rkEl.id==='fromRk' ? 'from' : 'to';
-    if(touched[side]){ rkEl.style.display=''; rkEl.src='rank-'+o.img+'.png'; }
-    else { rkEl.style.display='none'; rkEl.removeAttribute('src'); }
+    rkEl.src = touched[side] ? 'rank-'+o.img+'.png'
+             : (side==='from' ? 'rank-default-from.png' : 'rank-default-to.png');
   }
   return {o, abs:o.base+s};
 }
@@ -1339,7 +1348,7 @@ function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img 
 function setHero(url){ const el=$('heroBg'); if(el) el.style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
 function setBg(m){
   const u = (m==='lp' ? HERO_URL_LP : HERO_URL);
-  document.documentElement.style.setProperty('--pagebg', u ? 'url("'+u+'")' : 'none');
+  document.documentElement.style.setProperty('--pagebg','url("'+u+'")');
 }
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
@@ -1450,12 +1459,60 @@ $('closeBtn').addEventListener('click',()=>{ $('modal').hidden = true; });
 $('modal').addEventListener('click',e=>{ if(e.target===$('modal')) $('modal').hidden=true; });
 $('sheetCopy').addEventListener('click',()=>$('copyBtn').click());
 
+/* ===== 主頁插畫牆：圖檔 art-名稱.jpg 與 index.html 放同一層；
+   要增減或換順序，改下面這一行即可 ===== */
+const ARTS = ['zed','ahri','akali','evelynn','vayne','ashe','sona','janna'];
+const ART_AUTO_MS = 3600;   // 自動輪播間隔（毫秒），改成 0 就不自動播
+function initGallery(){
+  const box=$('gal'), dotBox=$('galDots');
+  if(!box || !ARTS.length) return;
+  box.innerHTML = ARTS.map((k,i)=>'<div class="gcard"><img src="art-'+k+'.jpg" alt="'
+    + k.toUpperCase()+'"'+(i>2?' loading="lazy"':'')+' decoding="async"></div>').join('');
+  dotBox.innerHTML = '<i></i>'.repeat(ARTS.length);
+  const cards=[...box.children], dots=[...dotBox.children];
+  let cur=0, auto=ART_AUTO_MS>0;
+  const go = i => box.scrollTo({left: cards[i].offsetLeft + cards[i].offsetWidth/2 - box.clientWidth/2,
+                                behavior:'smooth'});
+  function upd(){
+    if(!box.clientWidth) return;
+    const mid = box.scrollLeft + box.clientWidth/2;
+    let best=0, bd=1e9;
+    cards.forEach((c,i)=>{
+      const d = Math.abs(c.offsetLeft + c.offsetWidth/2 - mid);
+      if(d<bd){ bd=d; best=i; }
+    });
+    cur=best;
+    cards.forEach((c,i)=>c.classList.toggle('mid', i===best));
+    dots.forEach((d,i)=>d.classList.toggle('on', i===best));
+  }
+  box.addEventListener('scroll',()=>requestAnimationFrame(upd),{passive:true});
+  window.addEventListener('resize',upd);
+  ['touchstart','pointerdown','wheel'].forEach(ev=>
+    box.addEventListener(ev,()=>{ auto=false; },{passive:true}));
+  cards.forEach((c,i)=>c.addEventListener('click',()=>{
+    auto=false;
+    if(i!==cur){ go(i); return; }
+    $('artBig').src = 'art-'+ARTS[i]+'.jpg';
+    $('artBox').hidden = false;
+  }));
+  dots.forEach((d,i)=>d.addEventListener('click',()=>{ auto=false; go(i); }));
+  $('artBox').addEventListener('click',()=>{ $('artBox').hidden = true; });
+  if(ART_AUTO_MS>0) setInterval(()=>{
+    if(!auto || document.hidden || !box.clientWidth) return;
+    const r = box.getBoundingClientRect();
+    if(r.bottom<0 || r.top>window.innerHeight) return;
+    go((cur+1) % cards.length);
+  }, ART_AUTO_MS);
+  upd(); setTimeout(upd,80);
+}
+
 buildTracks();
 fillSelects();
 fromDiv.value=DEF_IDX; toDiv.value=DEF_IDX;
 fromStar.value=0; toStar.value=0;
 $('lpFrom').value=0; $('lpTo').value=0;
 applyLang();
+initGallery();
 </script>
 </body>
 </html>
