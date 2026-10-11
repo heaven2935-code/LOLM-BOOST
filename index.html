@@ -485,22 +485,23 @@
   .seo h3{color:var(--gold)}
   footer{color:var(--muted);letter-spacing:.24em}
 
-  /* ===== 主頁插畫牆 ===== */
+  /* ===== 主頁插畫牆（海報接近整個畫面寬） ===== */
   .gal{position:relative;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
-    padding:8px calc(50% - 66px) 16px;margin:0 -14px;
+    padding:8px 0 18px;margin:0 -14px;
     -webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gal::-webkit-scrollbar{display:none}
-  .gcard{flex:0 0 160px;height:240px;scroll-snap-align:center;position:relative;overflow:hidden;
+  .gal::before,.gal::after{content:'';flex:0 0 10px}
+  .gcard{flex:0 0 calc(100% - 40px);aspect-ratio:2/3;scroll-snap-align:center;position:relative;overflow:hidden;
     background:#0B0B0D;border:1px solid var(--line);cursor:pointer;transition:.25s;
-    filter:brightness(.5) saturate(.85);transform:scale(.92);user-select:none;-webkit-user-select:none}
+    filter:brightness(.45) saturate(.85);user-select:none;-webkit-user-select:none}
   .gcard img{width:100%;height:100%;object-fit:cover;display:block;pointer-events:none}
-  .gcard.mid{filter:none;transform:none;border-color:var(--gold);
+  .gcard.mid{filter:none;border-color:var(--gold);
     box-shadow:0 0 34px -12px var(--gold)}
   .gcard.mid::before,.gcard.mid::after{content:'';position:absolute;width:11px;height:11px;
     border:1.5px solid var(--gold);z-index:1}
   .gcard.mid::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
   .gcard.mid::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-  .gdots{position:relative;z-index:1;display:flex;justify-content:center;gap:6px;margin:-4px 0 16px}
+  .gdots{position:relative;z-index:1;display:flex;justify-content:center;gap:6px;margin:-6px 0 18px}
   .gdots i{width:6px;height:6px;background:var(--line);cursor:pointer;transition:.2s}
   .gdots i.on{background:var(--gold);width:18px}
   .artbox{position:fixed;inset:0;z-index:60;background:rgba(3,3,4,.94);display:flex;
@@ -508,6 +509,18 @@
   .artbox[hidden]{display:none}
   .artbox img{max-width:100%;max-height:100%;display:block;border:1px solid var(--gold-dim);
     box-shadow:0 20px 60px -20px #000}
+
+  /* ===== 全黑背景（USE_BG = false 時生效） ===== */
+  html.nobg{background:#000}
+  html.nobg .bgspace{height:4px}
+  html.nobg .titleimg{margin-top:0}
+
+  /* ===== 段位徽章：放大，獨立一列置中 ===== */
+  .card-head{flex-wrap:wrap}
+  .card-head .badge{margin-left:auto}
+  img.rk{order:9;flex:0 0 100%;width:100%;height:190px;object-fit:contain;margin:12px 0 2px;
+    filter:drop-shadow(0 8px 20px rgba(0,0,0,.7))}
+  img.rk:not([src]){display:none}
 </style>
 </head>
 <body>
@@ -738,6 +751,10 @@ const HERO_URL = 'cover.jpg';        // 積分對戰背景
 const HERO_URL_LP = 'cover-lp.jpg';  // 傳奇積分背景
 /* 背景濃度 0（全黑）～ 1（原圖），太亮會看不清字，建議 0.25～0.5 */
 const BG_OPACITY = 1;
+/* 背景圖開關：false = 全黑背景（不載入 cover.jpg / cover-lp.jpg）；改回 true 就恢復原本的背景圖 */
+const USE_BG = false;
+/* 未選段位時要不要顯示波羅預設圖：false = 直接顯示預設段位（至尊）的徽章 */
+const SHOW_DEFAULT_PORO = false;
 /* 要不要顯示「更換標誌／更換封面圖」那兩顆按鈕：改成 true 就會出現 */
 const SHOW_PICKER = false;
 
@@ -1090,7 +1107,7 @@ function syncSide(sel, input, hintEl, badgeEl, rkEl){
   badgeEl.textContent = optLabel(o) + ' · ' + s + '★';
   if(rkEl){
     const side = rkEl.id==='fromRk' ? 'from' : 'to';
-    rkEl.src = touched[side] ? 'rank-'+o.img+'.png'
+    rkEl.src = (touched[side] || !SHOW_DEFAULT_PORO) ? 'rank-'+o.img+'.png'
              : (side==='from' ? 'rank-default-from.png' : 'rank-default-to.png');
   }
   return {o, abs:o.base+s};
@@ -1123,6 +1140,8 @@ function calcLP(){
   const ia=lpTierOf(a).img, ib=lpTierOf(b).img;
   $('lpFromRk').style.visibility = ia ? 'visible':'hidden';
   $('lpToRk').style.visibility   = ib ? 'visible':'hidden';
+  $('lpFromRk').style.display = ia ? '' : 'none';
+  $('lpToRk').style.display   = ib ? '' : 'none';
   if(ia) $('lpFromRk').src='lp-'+ia+'.png';
   if(ib) $('lpToRk').src='lp-'+ib+'.png';
   paint('lpBar', Math.min(a,b), Math.max(a,b));
@@ -1318,7 +1337,7 @@ document.querySelectorAll('.stepper button').forEach(b=>b.addEventListener('clic
   if(f.startsWith('from')) touched.from=true;
   if(f.startsWith('to'))   touched.to=true;
 }));
-const DEF_IDX = OPTIONS.findIndex(o=>o.n.en==='Iron'&&o.div==='IV');
+const DEF_IDX = OPTIONS.findIndex(o=>o.n.en==='Sovereign');   // 預設段位：至尊
 let touched = {from:false, to:false};
 function resetAll(){
   touched={from:false,to:false};
@@ -1348,7 +1367,8 @@ function setLogo(url){ const el=$('markBox'); if(el) el.innerHTML = url ? '<img 
 function setHero(url){ const el=$('heroBg'); if(el) el.style.backgroundImage = url ? 'url("'+url+'")' : 'none'; }
 function setBg(m){
   const u = (m==='lp' ? HERO_URL_LP : HERO_URL);
-  document.documentElement.style.setProperty('--pagebg','url("'+u+'")');
+  document.documentElement.classList.toggle('nobg', !USE_BG);
+  document.documentElement.style.setProperty('--pagebg', (USE_BG && u) ? 'url("'+u+'")' : 'none');
 }
 if(LOGO_URL) setLogo(LOGO_URL);
 document.documentElement.style.setProperty('--bgop', BG_OPACITY);
